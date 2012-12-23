@@ -81,7 +81,7 @@ my
 
 # name/version information
 my $name = "Perl Audio Converter";
-my $version = "4.0.5";
+my $version = "4.0.5+dse-0.0.20121223";
 
 # If this option is set, messages/errors will be displayed via kdialog
 my $gui = '';
