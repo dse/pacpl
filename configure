@@ -3110,7 +3110,8 @@ ac_perl_modules="Switch
 			Audio::WMA
 			MP3::Tag
 			MP4::Info
-			Audio::FLAC::Header"
+			Audio::FLAC::Header
+			String::ShellQuote"
 # Make sure we have perl
 if test -z "$PERL"; then
 # Extract the first word of "perl", so it can be a program name with args.
