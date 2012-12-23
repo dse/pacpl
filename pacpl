@@ -40,28 +40,28 @@ use CDDB_get qw(get_cddb);
 # non-encoder/decoder related options
 my 
 (
-   $to,
-   $recursive,
-   $preserve,
-   $rip,
-   $help,
-   $longhelp,
-   $verbose,
-   $verinfo,
-   $dryrun,
-   $delete,
-   $keep,
-   $overwrite,
-   $formats,
-   $topdir,
-   $only,
-   $first_run,
+ $to,
+ $recursive,
+ $preserve,
+ $rip,
+ $help,
+ $longhelp,
+ $verbose,
+ $verinfo,
+ $dryrun,
+ $delete,
+ $keep,
+ $overwrite,
+ $formats,
+ $topdir,
+ $only,
+ $first_run,
 
-   @file,
-   @dir,
+ @file,
+ @dir,
 
-   %run,
-   %lang,
+ %run,
+ %lang,
 );
 
 my $silent = "> /dev/null 2>&1";
@@ -69,14 +69,14 @@ my $silent = "> /dev/null 2>&1";
 # tagging options
 my
 (
-   $title,
-   $track,
-   $artist,
-   $album,
-   $comment,
-   $year,
-   $genre,
-   $taginfo,
+ $title,
+ $track,
+ $artist,
+ $album,
+ $comment,
+ $year,
+ $genre,
+ $taginfo,
 );
 
 # name/version information
@@ -92,40 +92,40 @@ my $debug = 0;
 # default configuration.
 my %config = (
 
-               IMPORTM      => 0,
+              IMPORTM      => 0,
 
-               DEFOPTS      => 1,
-               EOPTS        => '',
-               DOPTS        => '',
-               NOPTS        => '',
+              DEFOPTS      => 1,
+              EOPTS        => '',
+              DOPTS        => '',
+              NOPTS        => '',
 
-               BITRATE      => 128,
-               FREQ         => 44100,
-               CHANNELS     => 2,
-               EFFECT       => '',
-               FCOMP        => 2,
-               PCOMP        => 3,
-               ACOMP        => 3000,
-               OGGQUAL      => 3,
-               SPXQUAL      => 8,
-               AACQUAL      => 3,
-               MPCQUAL      => 'radio',
-               OFMODE       => 'normal',
-               OFOPT        => 'fast',
-               BRATIO       => 2,
-               BQUANL       => 1.0,
-               BPSIZE       => 128,
+              BITRATE      => 128,
+              FREQ         => 44100,
+              CHANNELS     => 2,
+              EFFECT       => '',
+              FCOMP        => 2,
+              PCOMP        => 3,
+              ACOMP        => 3000,
+              OGGQUAL      => 3,
+              SPXQUAL      => 8,
+              AACQUAL      => 3,
+              MPCQUAL      => 'radio',
+              OFMODE       => 'normal',
+              OFOPT        => 'fast',
+              BRATIO       => 2,
+              BQUANL       => 1.0,
+              BPSIZE       => 128,
 
-               USE_CDDB     => 1,
-               CDDB_HOST    => 'freedb.freedb.org',
-               CDDB_PORT    => 8880,
-               CDDB_MODE    => 'cddb',
-               CDDB_INPUT   => 1,
-               DEVICE       => '/dev/cdrom',
-               NSCHEME      => '%ar - %ti',
+              USE_CDDB     => 1,
+              CDDB_HOST    => 'freedb.freedb.org',
+              CDDB_PORT    => 8880,
+              CDDB_MODE    => 'cddb',
+              CDDB_INPUT   => 1,
+              DEVICE       => '/dev/cdrom',
+              NSCHEME      => '%ar - %ti',
 
-               KDE_DIR      => 1,
-               KDE_OPTS     => 1,
+              KDE_DIR      => 1,
+              KDE_OPTS     => 1,
 
              );
 
@@ -141,9 +141,9 @@ load_lang();
 
 # try to load configuration file in this order...
 my @conf_locations = ( 
-                       "$ENV{HOME}/.pacplrc",   # Local
-                       "$conf_path/pacpl.conf", # Global
-                       "$ENV{PWD}/pacpl.conf",  # Current Directory
+                      "$ENV{HOME}/.pacplrc",    # Local
+                      "$conf_path/pacpl.conf",  # Global
+                      "$ENV{PWD}/pacpl.conf",   # Current Directory
                      );
 
 # try to load conf file from one of the above locations
@@ -162,7 +162,7 @@ if ($conf_file and -e $conf_file) {
     open(CONF, "$conf_file") or die "$lang{opening_file} $conf_file - $!\n";
 
     my @conf_opts = <CONF>;
-       @conf_opts = grep(!/^#|^$/, @conf_opts);
+    @conf_opts    = grep(!/^#|^$/, @conf_opts);
 
     close(CONF);
 
@@ -170,8 +170,8 @@ if ($conf_file and -e $conf_file) {
     foreach (@conf_opts) {
         chomp;
         my ($k, $v) = split(/\s+=\s+/);
-            $config{$k} = $v if exists($config{$k}) and $v;
-            print "$lang{debug} $k = $v\n" if $debug and exists($config{$k});
+        $config{$k} = $v if exists($config{$k}) and $v;
+        print "$lang{debug} $k = $v\n" if $debug and exists($config{$k});
     }
 }
 
@@ -183,44 +183,44 @@ sub load_codecs {
     open(CODECS, "$codecs_conf") or die "$lang{opening_file} $codecs_conf - $!\n";
         
     my @codecs = <CODECS>;
-       @codecs = grep(!/^$|^#/, @codecs);
+    @codecs    = grep(!/^$|^#/, @codecs);
        
     close(CODECS);
         
-       foreach (@codecs) {
+    foreach (@codecs) {
         
-            chomp;
-            my ($k, $v) = split(/\s+=\s+/);
-            my ($e, $d) = split(/,/, $v);
-            
-                $k =~ tr/A-Z/a-z/;
-            
-                $run{$k}{DEFAULT_ENCODER} = $e if (exists($run{$k}{DEFAULT_ENCODER}));
-                $run{$k}{DEFAULT_DECODER} = $d if (exists($run{$k}{DEFAULT_DECODER}));
-       }
+        chomp;
+        my ($k, $v) = split(/\s+=\s+/);
+        my ($e, $d) = split(/,/, $v);
+        
+        $k =~ tr/A-Z/a-z/;
+        
+        $run{$k}{DEFAULT_ENCODER} = $e if (exists($run{$k}{DEFAULT_ENCODER}));
+        $run{$k}{DEFAULT_DECODER} = $d if (exists($run{$k}{DEFAULT_DECODER}));
+    }
 }
 
 # load po file and store in %lang hash
 sub load_lang {
 
-    my $po = "$po_dir/$ENV{LANG}.po";
-       $po =~ s/\.UTF-8//i      if $po =~ /UTF-8/i; 
-       $po =~ s/\.utf8//i       if $po =~ /utf8/i;  
-       $po =~ s/_\w+//          if not -e $po;      
-       $po = "$po_dir/en_US.po" if not -e $po;      
+    my $po =  "$po_dir/$ENV{LANG}.po";
+    $po    =~ s/\.UTF-8//i       if $po =~ /UTF-8/i; 
+    $po    =~ s/\.utf8//i        if $po =~ /utf8/i;  
+    $po    =~ s/_\w+//           if not -e $po;      
+    $po    =  "$po_dir/en_US.po" if not -e $po;      
        
     open(LANG, "< $po") or die "error: could not open - $po\n$!\n";
     
     my @data = <LANG>;
-       @data = grep(!/^#|^$/, @data);
+    @data    = grep(!/^#|^$/, @data);
        
     close(LANG);
     
     foreach (@data) {
-         chomp;    
-         s/=/__EQ__/;
-         my ($k, $v) = split(/\s+__EQ__\s+/, $_);
-         $lang{$k} = $v;
+        chomp;    
+        s/=/__EQ__/;
+        my ($k, $v) = split(/\s+__EQ__\s+/, $_);
+        $lang{$k} = $v;
     }
     
 }
@@ -290,66 +290,66 @@ my $decoder;
 # command line options
 GetOptions
 ( 
-	't|to=s'      => \$to,
-	'r|recursive' => \$recursive,
-	'p|preserve'  => \$preserve,
-	'h|help'      => \$help,
-	'l|longhelp'  => \$longhelp,
-	'v|verbose'   => \$verbose,
-	'f|formats'   => \$formats,
-	'o|only=s'    => \$only,
-	'k|keep'      => \$keep,
+ 't|to=s'      => \$to,
+ 'r|recursive' => \$recursive,
+ 'p|preserve'  => \$preserve,
+ 'h|help'      => \$help,
+ 'l|longhelp'  => \$longhelp,
+ 'v|verbose'   => \$verbose,
+ 'f|formats'   => \$formats,
+ 'o|only=s'    => \$only,
+ 'k|keep'      => \$keep,
 
-	'taginfo'     => \$taginfo,
+ 'taginfo'     => \$taginfo,
 
-	'version'     => \$verinfo,
-	'dryrun'      => \$dryrun,
-	'delete'      => \$delete,
-	'overwrite'   => \$overwrite,
-	'normalize'   => \$normalize,
-	'encoder=s'   => \$my_encoder,
-	'decoder=s'   => \$my_decoder,
+ 'version'     => \$verinfo,
+ 'dryrun'      => \$dryrun,
+ 'delete'      => \$delete,
+ 'overwrite'   => \$overwrite,
+ 'normalize'   => \$normalize,
+ 'encoder=s'   => \$my_encoder,
+ 'decoder=s'   => \$my_decoder,
 	
-	'title=s'     => \$title,
-	'track=n'     => \$track,
-	'artist=s'    => \$artist,
-	'album=s'     => \$album,
-	'comment=s'   => \$comment,
-	'year=n'      => \$year,
-	'genre=s'     => \$genre,
+ 'title=s'     => \$title,
+ 'track=n'     => \$track,
+ 'artist=s'    => \$artist,
+ 'album=s'     => \$album,
+ 'comment=s'   => \$comment,
+ 'year=n'      => \$year,
+ 'genre=s'     => \$genre,
 	
-	'gui'         => \$gui,
+ 'gui'         => \$gui,
 
-	'eopts=s'     => \$eopts,
-	'dopts=s'     => \$dopts,
-	'defopts=n'   => \$defopts,
-	'nopts=s'     => \$nopts,
-	'outfile=s'   => \$outfile,
-	'outdir=s'    => \$outdir,
+ 'eopts=s'     => \$eopts,
+ 'dopts=s'     => \$dopts,
+ 'defopts=n'   => \$defopts,
+ 'nopts=s'     => \$nopts,
+ 'outfile=s'   => \$outfile,
+ 'outdir=s'    => \$outdir,
 
-	'bitrate=n'   => \$bitrate,
-	'freq=n'      => \$freq,
-	'channels=n'  => \$channels,
-	'effect=s'    => \$effect,
-	'fcomp=n'     => \$fcomp,
-	'acomp=n'     => \$acomp,
-	'pcomp=n'     => \$pcomp,
-	'oggqual=n'   => \$oggqual,
-	'spxqual=n'   => \$spxqual,
-	'aacqual=n'   => \$aacqual,
-	'mpcqual=s'   => \$mpcqual,
-	'ofmode=s'    => \$ofmode,
-	'ofopt=s'     => \$ofopt,
-	'bratio=n'    => \$bratio,
-	'bquanl=n'    => \$bquanl,
-	'bpsize=n'    => \$bpsize,
+ 'bitrate=n'   => \$bitrate,
+ 'freq=n'      => \$freq,
+ 'channels=n'  => \$channels,
+ 'effect=s'    => \$effect,
+ 'fcomp=n'     => \$fcomp,
+ 'acomp=n'     => \$acomp,
+ 'pcomp=n'     => \$pcomp,
+ 'oggqual=n'   => \$oggqual,
+ 'spxqual=n'   => \$spxqual,
+ 'aacqual=n'   => \$aacqual,
+ 'mpcqual=s'   => \$mpcqual,
+ 'ofmode=s'    => \$ofmode,
+ 'ofopt=s'     => \$ofopt,
+ 'bratio=n'    => \$bratio,
+ 'bquanl=n'    => \$bquanl,
+ 'bpsize=n'    => \$bpsize,
 	
-        'rip=s'       => \$rip,
-	'nocddb'      => \$nocddb,
-	'noinput'     => \$noinput,
-	'device=s'    => \$device,
-	'nscheme=s'   => \$nscheme,
-	'cdinfo'      => \$cdinfo,
+ 'rip=s'       => \$rip,
+ 'nocddb'      => \$nocddb,
+ 'noinput'     => \$noinput,
+ 'device=s'    => \$device,
+ 'nscheme=s'   => \$nscheme,
+ 'cdinfo'      => \$cdinfo,
 );
 
 $silent = '' if $verbose;
@@ -360,57 +360,57 @@ my $opts;
 %run = (
 
         raw => {
-
+                
                 DEFAULT_ENCODER => "sox",
                 DEFAULT_DECODER => "sox",
                 
                 ENCODER => {
-                              sox => {
-                                      NAME => "sox",
-                                      ESTR => sub { 
-                                                    $opts = "-r $freq -c $channels" if $defopts == 1;
-                                                    $opts = '' if $defopts == 0;
-                                                    "%i $opts $eopts %o $effect" 
-                                                  },
+                            sox => {
+                                    NAME => "sox",
+                                    ESTR => sub { 
+                                        $opts = "-r $freq -c $channels" if $defopts == 1;
+                                        $opts = '' if $defopts == 0;
+                                        "%i $opts $eopts %o $effect" 
+                                    },
                                     
-                                      PROMPT => {
-                                                  FREQ     => 1,
-                                                  CHANNELS => 1,
-                                                },
-                                     },
+                                    PROMPT => {
+                                               FREQ     => 1,
+                                               CHANNELS => 1,
+                                              },
+                                   },
                            },
-                           
+                
                 DECODER => {
-                              sox => {
-                                        NAME => "sox",
-                                        DSTR => sub { "-w -s -r $freq -c $channels $dopts %i %o" },
-                                     },
+                            sox => {
+                                    NAME => "sox",
+                                    DSTR => sub { "-w -s -r $freq -c $channels $dopts %i %o" },
+                                   },
                            },
-
+                
                 TAGS    => {
-                             READ   => 0,
-                             WRITE  => 0,
-                             MODULE => undef,
+                            READ   => 0,
+                            WRITE  => 0,
+                            MODULE => undef,
                            },
                },
-
+        
         ram => {
-
+                
                 DEFAULT_ENCODER => undef,
                 DEFAULT_DECODER => "ffmpeg",
                 
                 DECODER => {
-                              ffmpeg => {
-                                          NAME => "ffmpeg",
-                                          DSTR => sub { "$dopts -y -i %i %o" },
-                                          PROMPT => { NONE => 0 },
-                                        },
+                            ffmpeg => {
+                                       NAME => "ffmpeg",
+                                       DSTR => sub { "$dopts -y -i %i %o" },
+                                       PROMPT => { NONE => 0 },
+                                      },
                            },
                             
                 TAGS    => {
-                             READ   => 0,
-                             WRITE  => 0,
-                             MODULE => undef,
+                            READ   => 0,
+                            WRITE  => 0,
+                            MODULE => undef,
                            },
                },
 
@@ -420,70 +420,70 @@ my $opts;
                 DEFAULT_DECODER => "mplayer",
                 
                 ENCODER => {
-                              ffmpeg => {
-                                          NAME => "ffmpeg",
-                                          ESTR => sub { 
-                                                        $opts = "-ab $bitrate -ar $freq -ac $channels" if $defopts == 1;
-                                                        $opts = '' if $defopts == 0;
-                                                        "$eopts -y -i %i $opts %o"
-                                                      },
+                            ffmpeg => {
+                                       NAME => "ffmpeg",
+                                       ESTR => sub { 
+                                           $opts = "-ab $bitrate -ar $freq -ac $channels" if $defopts == 1;
+                                           $opts = '' if $defopts == 0;
+                                           "$eopts -y -i %i $opts %o"
+                                       },
                                           
-                                          PROMPT => {
-                                                      BITRATE  => 1,
-                                                      FREQ     => 1,
-                                                      CHANNELS => 1,
-                                                    },
-                                        },
+                                       PROMPT => {
+                                                  BITRATE  => 1,
+                                                  FREQ     => 1,
+                                                  CHANNELS => 1,
+                                                 },
+                                      },
                            },
                            
                 DECODER => {
-                             mplayer => {
-                                          NAME => "mplayer",
-                                          DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
-                                        },
+                            mplayer => {
+                                        NAME => "mplayer",
+                                        DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
+                                       },
                            },
 
                 TAGS    => {
-                             READ   => 0,
-                             WRITE  => 0,
-                             MODULE => undef,
+                            READ   => 0,
+                            WRITE  => 0,
+                            MODULE => undef,
                            },
                },
                
-         rm => {
+        rm => {
         
-                 DEFAULT_ENCODER => 'ffmpeg',
-                 DEFAULT_DECODER => 'mplayer',
+               DEFAULT_ENCODER => 'ffmpeg',
+               DEFAULT_DECODER => 'mplayer',
                  
-                 ENCODER => {
-                              ffmpeg => {
-                                          NAME => 'ffmpeg',
-                                          ESTR => sub { 
-                                                        $opts = "-ar $freq -ac $channels" if $defopts == 1;
-                                                        $opts = '' if $defopts == 0;
-                                                        "$eopts -y -i %i $opts %o" 
-                                                      },
+               ENCODER => {
+                           ffmpeg => {
+                                      NAME => 'ffmpeg',
+                                      ESTR => sub { 
+                                          $opts = "-ar $freq -ac $channels" if $defopts == 1;
+                                          $opts = '' if $defopts == 0;
+                                          "$eopts -y -i %i $opts %o" 
+                                      },
                                           
-                                          PROMPT => {
-                                                      FREQ     => 1,
-                                                      CHANNELS => 1,
-                                                    },
-                                        },
-                           },
+                                      PROMPT => {
+                                                 FREQ     => 1,
+                                                 CHANNELS => 1,
+                                                },
+                                     },
+                          },
                            
-                DECODER => {
-                             mplayer => {
-                                          NAME => 'mplayer',
-                                          DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
-                                        },
-                           },
+               DECODER => {
+                           mplayer => {
+                                       NAME => 'mplayer',
+                                       DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
+                                      },
+                          },
  
-                   TAGS => {
-                             READ   => 0,
-                             WRITE  => 0,
-                             MODULE => undef,
-                           },
-               },
+               TAGS => {
+                        READ   => 0,
+                        WRITE  => 0,
+                        MODULE => undef,
+                       },
+              },
                
         mp3 => {
 
@@ -491,108 +491,108 @@ my $opts;
                 DEFAULT_DECODER => "lame",
                 
                 ENCODER => {
-                              lame => {
-                                        NAME => "lame",
-                                        ESTR => sub { 
-                                                      $opts = "--resample $freq -b $bitrate -h" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "$eopts $opts %i %o" 
-                                                    },
+                            lame => {
+                                     NAME => "lame",
+                                     ESTR => sub { 
+                                         $opts = "--resample $freq -b $bitrate -h" if $defopts == 1;
+                                         $opts = '' if $defopts == 0;
+                                         "$eopts $opts %i %o" 
+                                     },
                                       
-                                        PROMPT => {
-                                                    BITRATE => 1,
-                                                    FREQ    => 1,
-                                                  },
-                                      },
+                                     PROMPT => {
+                                                BITRATE => 1,
+                                                FREQ    => 1,
+                                               },
+                                    },
 
-                          bladeenc => {
-                                        NAME => "bladeenc",
-                                        ESTR => sub { 
-                                                      $opts = "-br $bitrate" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "$eopts $opts %i %o" 
-                                                    },                                                    
-                                        PROMPT => { BITRATE => 1 },
-                                      },
+                            bladeenc => {
+                                         NAME => "bladeenc",
+                                         ESTR => sub { 
+                                             $opts = "-br $bitrate" if $defopts == 1;
+                                             $opts = '' if $defopts == 0;
+                                             "$eopts $opts %i %o" 
+                                         },                                                    
+                                         PROMPT => { BITRATE => 1 },
+                                        },
 
-                              gogo => {
-                                        NAME => "gogo",
-                                        ESTR => sub { 
-                                                      $opts = "-b $bitrate" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "$eopts $opts %i %o" 
-                                                    },
+                            gogo => {
+                                     NAME => "gogo",
+                                     ESTR => sub { 
+                                         $opts = "-b $bitrate" if $defopts == 1;
+                                         $opts = '' if $defopts == 0;
+                                         "$eopts $opts %i %o" 
+                                     },
                                         
-                                        PROMPT => { BITRATE => 1 },
-                                      },
+                                     PROMPT => { BITRATE => 1 },
+                                    },
 
-                           toolame => {
+                            toolame => {
                                         NAME => "toolame",
                                         ESTR => sub { 
-                                                      $opts = "-b $bitrate" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "$eopts $opts %i %o" 
-                                                    },
+                                            $opts = "-b $bitrate" if $defopts == 1;
+                                            $opts = '' if $defopts == 0;
+                                            "$eopts $opts %i %o" 
+                                        },
                                         
                                         PROMPT => { BITRATE => 1 },
-                                      },
+                                       },
 
                             ffmpeg => {
-                                        NAME => "ffmpeg",
-                                        ESTR => sub { 
-                                                      $opts = "-ab $bitrate.k -ar $freq -ac $channels" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "$eopts -y -i %i $opts %o" 
-                                                    },
+                                       NAME => "ffmpeg",
+                                       ESTR => sub { 
+                                           $opts = "-ab $bitrate.k -ar $freq -ac $channels" if $defopts == 1;
+                                           $opts = '' if $defopts == 0;
+                                           "$eopts -y -i %i $opts %o" 
+                                       },
                                         
-                                        PROMPT => {
-                                                    BITRATE  => 1,
-                                                    FREQ     => 1,
-                                                    CHANNELS => 1,
-                                                  },
+                                       PROMPT => {
+                                                  BITRATE  => 1,
+                                                  FREQ     => 1,
+                                                  CHANNELS => 1,
+                                                 },
                                       },
  
-                               sox => {
-                                        NAME => "sox",
-                                        ESTR => sub { 
-                                                      $opts = "-r $freq -c $channels" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "%i $eopts $opts %o" 
-                                                    },
+                            sox => {
+                                    NAME => "sox",
+                                    ESTR => sub { 
+                                        $opts = "-r $freq -c $channels" if $defopts == 1;
+                                        $opts = '' if $defopts == 0;
+                                        "%i $eopts $opts %o" 
+                                    },
                                         
-                                        PROMPT => {
-                                                    FREQ     => 1,
-                                                    CHANNELS => 1,
-                                                  },
-                                      },
+                                    PROMPT => {
+                                               FREQ     => 1,
+                                               CHANNELS => 1,
+                                              },
+                                   },
                            },
                             
                 DECODER => {
-                              lame => { 
-                                        NAME => "lame",
-                                        DSTR => sub { "$dopts --decode %i %o" },
-                                      },
+                            lame => { 
+                                     NAME => "lame",
+                                     DSTR => sub { "$dopts --decode %i %o" },
+                                    },
                              
                             ffmpeg => {
-                                        NAME => "ffmpeg",
-                                        DSTR => sub { "$dopts -y -i %i %o" },
+                                       NAME => "ffmpeg",
+                                       DSTR => sub { "$dopts -y -i %i %o" },
                                       },
 
-                           mplayer => {
+                            mplayer => {
                                         NAME => "mplayer",
                                         DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
-                                      },
+                                       },
 
-                               sox => {
-                                        NAME => "sox",
-                                        DSTR => sub { "%i $dopts %o" },
-                                      },
+                            sox => {
+                                    NAME => "sox",
+                                    DSTR => sub { "%i $dopts %o" },
+                                   },
                            },
 
                 TAGS    => {
-                             READ   => 1,
-                             WRITE  => 1,
-                             MODULE => "MP3::Tag",
+                            READ   => 1,
+                            WRITE  => 1,
+                            MODULE => "MP3::Tag",
                            },
                },
 
@@ -602,864 +602,864 @@ my $opts;
                 DEFAULT_DECODER => "oggdec",
                 
                 ENCODER => {
-                              oggenc => {
-                                          NAME => "oggenc",
-                                          ESTR => sub { 
-                                                        $opts = "--resample $freq -q $oggqual" if $defopts == 1;
-                                                        $opts = '' if $defopts == 0;
-                                                        "$eopts $opts %i -o %o" 
-                                                      },
+                            oggenc => {
+                                       NAME => "oggenc",
+                                       ESTR => sub { 
+                                           $opts = "--resample $freq -q $oggqual" if $defopts == 1;
+                                           $opts = '' if $defopts == 0;
+                                           "$eopts $opts %i -o %o" 
+                                       },
                                         
-                                          PROMPT => {
-                                                      FREQ    => 1,
-                                                      OGGQUAL => 1,
-                                                    },
-                                        },
+                                       PROMPT => {
+                                                  FREQ    => 1,
+                                                  OGGQUAL => 1,
+                                                 },
+                                      },
 
-                              ffmpeg => {
-                                          NAME => "ffmpeg",
-                                          ESTR => sub { 
-                                                        $opts = "-ab $bitrate.k -ar $freq -ac $channels" if $defopts == 1;
-                                                        $opts = '' if $defopts == 0;
-                                                        "$eopts -y -i %i $opts %o" 
-                                                      },
+                            ffmpeg => {
+                                       NAME => "ffmpeg",
+                                       ESTR => sub { 
+                                           $opts = "-ab $bitrate.k -ar $freq -ac $channels" if $defopts == 1;
+                                           $opts = '' if $defopts == 0;
+                                           "$eopts -y -i %i $opts %o" 
+                                       },
                                           
-                                          PROMPT => {
-                                                      BITRATE  => 1,
-                                                      FREQ     => 1,
-                                                      CHANNELS => 1,
-                                                    },
-                                        },
+                                       PROMPT => {
+                                                  BITRATE  => 1,
+                                                  FREQ     => 1,
+                                                  CHANNELS => 1,
+                                                 },
+                                      },
 
-                                 sox => {
-                                          NAME => "sox",
-                                          ESTR => sub { 
-                                                        $opts = "-r $freq -c $channels" if $defopts == 1;
-                                                        $opts = '' if $defopts == 0;
-                                                        "%i $eopts $opts %o" 
-                                                      },
+                            sox => {
+                                    NAME => "sox",
+                                    ESTR => sub { 
+                                        $opts = "-r $freq -c $channels" if $defopts == 1;
+                                        $opts = '' if $defopts == 0;
+                                        "%i $eopts $opts %o" 
+                                    },
                                           
-                                          PROMPT => {
-                                                      FREQ     => 1,
-                                                      CHANNELS => 1,
-                                                    },
-                                        },
+                                    PROMPT => {
+                                               FREQ     => 1,
+                                               CHANNELS => 1,
+                                              },
+                                   },
                            },
                            
                 DECODER => {
-                              oggdec => {
-                                          NAME => "oggdec",
-                                          DSTR => sub { "$dopts %i --output %o" },
-                                        },
+                            oggdec => {
+                                       NAME => "oggdec",
+                                       DSTR => sub { "$dopts %i --output %o" },
+                                      },
 
-                              ffmpeg => {
-                                          NAME => "ffmpeg",
-                                          DSTR => sub { "$dopts -y -i %i %o" },
-                                        },
+                            ffmpeg => {
+                                       NAME => "ffmpeg",
+                                       DSTR => sub { "$dopts -y -i %i %o" },
+                                      },
 
-                             mplayer => {
-                                          NAME => "mplayer",
-                                          DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
-                                        },
+                            mplayer => {
+                                        NAME => "mplayer",
+                                        DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
+                                       },
 
-                                 sox => {
-                                          NAME => "sox",
-                                          DSTR => sub { "%i $dopts %o" },
-                                        },
+                            sox => {
+                                    NAME => "sox",
+                                    DSTR => sub { "%i $dopts %o" },
+                                   },
                            },
 
                 TAGS    => {
-                             READ   => 1,
-                             WRITE  => 1,
-                             MODULE => "Ogg::Vorbis::Header",
+                            READ   => 1,
+                            WRITE  => 1,
+                            MODULE => "Ogg::Vorbis::Header",
                            },
                },
        
-       spx  => {
+        spx  => {
        
-                DEFAULT_ENCODER => "speexenc",
-                DEFAULT_DECODER => "speexdec",
+                 DEFAULT_ENCODER => "speexenc",
+                 DEFAULT_DECODER => "speexdec",
                 
-                ENCODER => {
-                              speexenc => {
-                                            NAME => "speexenc",
-                                            ESTR => sub { 
-                                                          $opts = "--quality $spxqual" if $defopts == 1;
-                                                          $opts = '' if $defopts == 0;
-                                                          "$eopts $opts %i %o" 
-                                                        },
-                                            PROMPT => { SPXQUAL => 1 },
+                 ENCODER => {
+                             speexenc => {
+                                          NAME => "speexenc",
+                                          ESTR => sub { 
+                                              $opts = "--quality $spxqual" if $defopts == 1;
+                                              $opts = '' if $defopts == 0;
+                                              "$eopts $opts %i %o" 
                                           },
-                           },
+                                          PROMPT => { SPXQUAL => 1 },
+                                         },
+                            },
                            
-                DECODER => {
-                              speexdec => {
-                                            NAME => "speexdec",
-                                            DSTR => sub { "$dopts %i %o" },
-                                          },
-                           },
+                 DECODER => {
+                             speexdec => {
+                                          NAME => "speexdec",
+                                          DSTR => sub { "$dopts %i %o" },
+                                         },
+                            },
                 
-                TAGS    => {
+                 TAGS    => {
                              READ   => 1,
                              WRITE  => 1,
                              MODULE => undef,
-                           },
-               },
+                            },
+                },
 
-       flac => {
+        flac => {
 
-                DEFAULT_ENCODER => "flac",
-                DEFAULT_DECODER => "flac",
+                 DEFAULT_ENCODER => "flac",
+                 DEFAULT_DECODER => "flac",
                 
-                ENCODER => {
-                              flac => {
-                                        NAME => "flac",
-                                        ESTR => sub { 
-                                                      $opts = "-$fcomp" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "$eopts -f $opts %i -o %o" 
-                                                    },
-                                        PROMPT => { FCOMP => 1 },
+                 ENCODER => {
+                             flac => {
+                                      NAME => "flac",
+                                      ESTR => sub { 
+                                          $opts = "-$fcomp" if $defopts == 1;
+                                          $opts = '' if $defopts == 0;
+                                          "$eopts -f $opts %i -o %o" 
                                       },
+                                      PROMPT => { FCOMP => 1 },
+                                     },
 
                              flake => {
-                                        NAME => "flake",
-                                        ESTR => sub {
-                                                      $opts = "-$fcomp" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "$eopts $opts %i -o %o"
-                                                     },
-                                        PROMPT => { FCOMP => 1 },
+                                       NAME => "flake",
+                                       ESTR => sub {
+                                           $opts = "-$fcomp" if $defopts == 1;
+                                           $opts = '' if $defopts == 0;
+                                           "$eopts $opts %i -o %o"
+                                       },
+                                       PROMPT => { FCOMP => 1 },
                                       },
                                     
-                            ffmpeg => {
+                             ffmpeg => {
                                         NAME => "ffmpeg",
                                         ESTR => sub { 
-                                                      $opts = "-ab $bitrate.k -ar $freq -ac $channels" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "$eopts -y -i %i $opts %o" 
-                                                    },
+                                            $opts = "-ab $bitrate.k -ar $freq -ac $channels" if $defopts == 1;
+                                            $opts = '' if $defopts == 0;
+                                            "$eopts -y -i %i $opts %o" 
+                                        },
                                         
-                                      PROMPT => {
-                                                    BITRATE  => 1,
-                                                    FREQ     => 1,
-                                                    CHANNELS => 1,
-                                                 },
-                                      },
-                           },
+                                        PROMPT => {
+                                                   BITRATE  => 1,
+                                                   FREQ     => 1,
+                                                   CHANNELS => 1,
+                                                  },
+                                       },
+                            },
 
-                DECODER => {
-                              flac => {
-                                        NAME => "flac",
-                                        DSTR => sub { "$dopts -f -d %i -o %o" },
-                                      },
+                 DECODER => {
+                             flac => {
+                                      NAME => "flac",
+                                      DSTR => sub { "$dopts -f -d %i -o %o" },
+                                     },
                                     
-                            ffmpeg => {
+                             ffmpeg => {
                                         NAME => "ffmpeg",
                                         DSTR => sub { "$dopts -y -i %i %o" },
-                                      },
+                                       },
 
-                           mplayer => {
-                                        NAME => "mplayer",
-                                        DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
-                                      },
-                           },
+                             mplayer => {
+                                         NAME => "mplayer",
+                                         DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
+                                        },
+                            },
 
-                TAGS    => {
+                 TAGS    => {
                              READ   => 1,
                              WRITE  => 1,
                              MODULE => "Audio::FLAC::Header",
-                           },
-               },
+                            },
+                },
 
-       fla  => {
+        fla  => {
 
-                DEFAULT_ENCODER => "flac",
-                DEFAULT_DECODER => "flac",
+                 DEFAULT_ENCODER => "flac",
+                 DEFAULT_DECODER => "flac",
                 
-                ENCODER => {
-                              flac => {
-                                        NAME => "flac",
-                                        ESTR => sub { 
-                                                      $opts = "-$fcomp" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "$eopts -f $opts %i -o %o" 
-                                                    },
-                                        PROMPT => { FCOMP => 1 },
+                 ENCODER => {
+                             flac => {
+                                      NAME => "flac",
+                                      ESTR => sub { 
+                                          $opts = "-$fcomp" if $defopts == 1;
+                                          $opts = '' if $defopts == 0;
+                                          "$eopts -f $opts %i -o %o" 
                                       },
-                           },
+                                      PROMPT => { FCOMP => 1 },
+                                     },
+                            },
                            
-                DECODER => {
-                              flac => {
-                                        NAME => "flac",
-                                        DSTR => sub { "$dopts -f -d %i -o %o" },
-                                      },
+                 DECODER => {
+                             flac => {
+                                      NAME => "flac",
+                                      DSTR => sub { "$dopts -f -d %i -o %o" },
+                                     },
 
-                           mplayer => {
-                                        NAME => "mplayer",
-                                        DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
-                                      },
-                           },
+                             mplayer => {
+                                         NAME => "mplayer",
+                                         DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
+                                        },
+                            },
 
-                TAGS    => {
+                 TAGS    => {
                              READ   => 1,
                              WRITE  => 1,
                              MODULE => "Audio::FLAC::Header",
-                           },
-               },
+                            },
+                },
 
-       ape  => {
+        ape  => {
 
-                DEFAULT_ENCODER => "mac",
-                DEFAULT_DECODER => "mac",
+                 DEFAULT_ENCODER => "mac",
+                 DEFAULT_DECODER => "mac",
                 
-                ENCODER => {
-                              mac => {
-                                        NAME => "mac",
+                 ENCODER => {
+                             mac => {
+                                     NAME => "mac",
+                                     ESTR => sub { 
+                                         $opts = "-c$acomp" if $defopts == 1;
+                                         $opts = '' if $defopts == 0;
+                                         "%i %o $opts $eopts" 
+                                     },
+                                     PROMPT => { ACOMP => 1 },
+                                    },
+                            },
+                
+                 DECODER => {
+                             mac => {
+                                     NAME => "mac",
+                                     DSTR => sub { "%i %o -d $dopts" },
+                                    },
+                            },
+
+                 TAGS    => {
+                             READ   => 0,
+                             WRITE  => 0,
+                             MODULE => undef,
+                            },
+                },
+
+        bonk  => {
+
+                  DEFAULT_ENCODER => "bonk",
+                  DEFAULT_DECODER => "bonk",
+                
+                  ENCODER => {
+                              bonk => {
+                                       NAME => "bonk",
+                                       ESTR => sub { 
+                                           $opts = "-q $bquanl -b $bratio -s $bpsize" if $defopts == 1;
+                                           $opts = '' if $defopts == 0;
+                                           "encode $eopts $opts %i -o %o" 
+                                       },
+                                        
+                                       PROMPT => {
+                                                  BQUANL => 1,
+                                                  BRATIO => 1,
+                                                  BPSIZE => 1,
+                                                 },
+                                      },
+                             },
+                
+                  DECODER => {
+                              bonk => {
+                                       NAME => "bonk",
+                                       DSTR => sub { "decode %i -o %o" },
+                                      },
+                             },
+
+                  TAGS    => {
+                              READ   => 0,
+                              WRITE  => 0,
+                              MODULE => undef,
+                             },
+                 },
+
+        shn  => {
+
+                 DEFAULT_ENCODER => "shorten",
+                 DEFAULT_DECODER => "shorten",
+                
+                 ENCODER => {
+                             shorten => {
+                                         NAME => "shorten",
+                                         ESTR => sub { 
+                                             $opts = "-c $channels" if $defopts == 1;
+                                             $opts = '' if $defopts == 0;
+                                             "$eopts $opts %i %o" 
+                                         },
+                                         PROMPT => { CHANNELS => 1 },
+                                        },
+                            },
+                
+                 DECODER => {
+                             shorten => {
+                                         NAME => "shorten",
+                                         DSTR => sub { "-x %i %o" },
+                                        },
+                            },
+
+                 TAGS    => {
+                             READ   => 0,
+                             WRITE  => 0,
+                             MODULE => undef,
+                            },
+                },
+
+        aac  => {
+
+                 DEFAULT_ENCODER => "faac",
+                 DEFAULT_DECODER => "faad",
+                
+                 ENCODER => {
+                             faac => {
+                                      NAME => "faac",
+                                      ESTR => sub { 
+                                          $opts = "-q $aacqual" if $defopts == 1;
+                                          $opts = '' if $defopts == 0;
+                                          "$eopts $opts %i -o %o" 
+                                      },
+                                      PROMPT => { AACQUAL => 1 },
+                                     },
+                                      
+                             ffmpeg => {
+                                        NAME => "ffmpeg",
                                         ESTR => sub { 
-                                                      $opts = "-c$acomp" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "%i %o $opts $eopts" 
-                                                    },
-                                        PROMPT => { ACOMP => 1 },
+                                            $opts = "-ab $bitrate.k -ar $freq -ac $channels" if $defopts == 1;
+                                            $opts = '' if $defopts == 0;
+                                            "$eopts -y -i %i $opts %o" 
+                                        },
+                                        
+                                        PROMPT => {
+                                                   BITRATE  => 1,
+                                                   FREQ     => 1,
+                                                   CHANNELS => 1,
+                                                  },
+                                       },
+                            },
+                           
+                 DECODER => {
+                             faad => {
+                                      NAME => "faad",
+                                      DSTR => sub { "$dopts -o %i %o" },
+                                     },
+                              
+                             ffmpeg => {
+                                        NAME => "ffmpeg",
+                                        DSTR => sub { "$dopts -y -i %i %o" },
+                                       },
+
+                             mplayer => {
+                                         NAME => "mplayer",
+                                         DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
+                                        },
+                            },
+
+                 TAGS    => {
+                             READ   => 0,
+                             WRITE  => 0,
+                             MODULE => undef,
+                            },
+                },
+
+        mp4  => {
+
+                 DEFAULT_ENCODER => "faac",
+                 DEFAULT_DECODER => "faad",
+                
+                 ENCODER => {
+                
+                             faac => {
+                                      NAME => "faac",
+                                      ESTR => sub { 
+                                          $opts = "-q $aacqual" if $defopts == 1;
+                                          $opts = '' if $defopts == 0;
+                                          "$eopts -w $opts %i -o %o" 
+                                      },
+                                      PROMPT => { AACQUAL => 1 },
+                                     },
+
+                             ffmpeg => {
+                                        NAME => "ffmpeg",
+                                        ESTR => sub { 
+                                            $opts = "-ab $bitrate.k -ar $freq -ac $channels" if $defopts == 1;
+                                            $opts = '' if $defopts == 0;
+                                            "$eopts -y -i %i $opts %o" 
+                                        },
+                                      
+                                        PROMPT => {
+                                                   BITRATE  => 1,
+                                                   FREQ     => 1,
+                                                   CHANNELS => 1,
+                                                  },
+                                       },
+                            },
+                             
+                 DECODER => {
+
+                             faad => {
+                                      NAME => "faad",
+                                      DSTR => sub { "$dopts -o %o %i" },
+                                     },
+
+                             ffmpeg => { 
+                                        NAME => "ffmpeg",
+                                        DSTR => sub { "$dopts -y -i %i %o" },
+                                       },
+
+                             mplayer => {
+                                         NAME => "mplayer",
+                                         DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
+                                        },
+                            },
+
+                 TAGS    => {
+                             READ   => 1,
+                             WRITE  => 1,
+                             MODULE => "MP4::Info",
+                            },
+                },
+
+        m4a  => {
+
+                 DEFAULT_ENCODER => "faac",
+                 DEFAULT_DECODER => "faad",
+                
+                 ENCODER => {
+                  
+                             faac => {
+                                      NAME => "faac",
+                                      ESTR => sub { 
+                                          $opts = "-q $aacqual" if $defopts == 1;
+                                          $opts = '' if $defopts == 0;
+                                          "$eopts -w $opts %i -o %o" 
+                                      },
+                                      PROMPT => { AACQUAL => 1 },
+                                     },
+
+                             ffmpeg => {
+                                        NAME => "ffmpeg",
+                                        ESTR => sub { 
+                                            $opts = "-ab $bitrate.k -ar $freq -ac $channels" if $defopts == 1;
+                                            $opts = '' if $defopts == 0;
+                                            "$eopts -y -i %i $opts %o" 
+                                        },
+                                      
+                                        PROMPT => {
+                                                   BITRATE  => 1,
+                                                   FREQ     => 1,
+                                                   CHANNELS => 1,
+                                                  },
+                                       },
+                            },
+                
+                 DECODER => {
+
+                             faad => {
+                                      NAME => "faad",
+                                      DSTR => sub { "$dopts -o %o %i" },
+                                     },
+                                       
+                             ffmpeg => {
+                                        NAME => "ffmpeg", 
+                                        DSTR => sub { "$dopts -y -i %i %o" },
+                                       },
+
+                             mplayer => {
+                                         NAME => "mplayer",
+                                         DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
+                                        },
+                                      
+                            },
+
+                 ESTR    => sub { "$eopts -w -q $aacqual %i -o %o" },
+
+                 TAGS    => {
+                             READ   => 1,
+                             WRITE  => 1,
+                             MODULE => "MP4::Info",
+                            },
+                },
+
+        m4b  => {
+       
+                 DEFAULT_ENCODER => "faac",
+                 DEFAULT_DECODER => "faad",
+                
+                 ENCODER => {
+                           
+                             faac => {
+                                      NAME => "faac",
+                                      ESTR => sub {
+                                          $opts = "-q $aacqual" if $defopts == 1;
+                                          $opts = '' if $defopts == 0;
+                                          "$eopts -w $opts %i -o %o"
+                                      },
+
+                                      PROMPT => { AACQUAL => 1 },
+                                     },
+ 
+                            },
+
+                 DECODER => {
+                             faad => {
+                                      NAME => "faad",
+                                      DSTR => sub { "$dopts -o %o %i" },
+                                     },
+
+                             mplayer => {
+                                         NAME => "mplayer",
+                                         DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
+                                        },
+                            },
+
+                 ESTR    => sub { "$eopts -w -q $aacqual %i -o %o" },
+                
+                 TAGS    => {
+                             READ   => 0,
+                             WRITE  => 1,
+                             MODULE => undef,
+                            },
+                },
+                             
+        mpc  => {
+
+                 DEFAULT_ENCODER => "mppenc",
+                 DEFAULT_DECODER => "mppdec",
+                
+                 ENCODER => {
+
+                             mppenc => {
+                                        NAME => "mppenc",
+                                        ESTR => sub { 
+                                            $opts = "--$mpcqual" if $defopts == 1;
+                                            $opts = '' if $defopts == 0;
+                                            "$eopts --overwrite $opts %i %o" 
+                                        },
+                                        PROMPT => { MPCQUAL => 1 },
+                                       },
+                            },
+                
+                 DECODER => {
+
+                             mppdec => {
+                                        NAME => "mppdec",
+                                        DSTR => sub { "$dopts %i %o" },
+                                       },
+
+                             mplayer => {
+                                         NAME => "mplayer",
+                                         DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
+                                        },
+                            },
+
+                 TAGS    => {
+                             READ   => 1,
+                             WRITE  => 1,
+                             MODULE => "Audio::Musepack",
+                            },
+
+                 PROMPT  => {
+                             MPCQUAL => 1,
+                            },
+                },
+
+        mpp  => {
+
+                 DEFAULT_ENCODER => "mppenc",
+                 DEFAULT_DECODER => "mppdec",
+                
+                 ENCODER => {
+
+                             mppenc => {
+                                        NAME => "mppenc",
+                                        ESTR => sub { 
+                                            $opts = "--$mpcqual" if $defopts == 1;
+                                            $opts = '' if $defopts == 0;
+                                            "$eopts --overwrite $opts %i %o" 
+                                        },
+                                        PROMPT => { MPCQUAL => 1 },
+                                       },
+                            },
+                
+                 DECODER => {
+
+                             mppdec => {
+                                        NAME => "mppdec",
+                                        DSTR => sub { "$dopts %i %o" },
+                                       },
+
+                             mplayer => {
+                                         NAME => "mplayer",
+                                         DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
+                                        },
+                            },
+
+                 TAGS    => {
+                             READ   => 1,
+                             WRITE  => 1,
+                             MODULE => "Audio::Musepack",
+                            },
+                },
+
+        ofr  => {
+
+                 DEFAULT_ENCODER => "ofr",
+                 DEFAULT_DECODER => "ofr",
+                
+                 ENCODER => {
+                             ofr => {
+                                     NAME => "ofr",
+                                     ESTR => sub { 
+                                         $opts = "--mode $ofmode --optimize $ofopt" if $defopts == 1;
+                                         $opts = '' if $defopts == 0;
+                                         "$eopts --overwrite $opts %i --output %o" 
+                                     },
+                                        
+                                     PROMPT => {
+                                                OFMODE => 1,
+                                                OFOPT  => 1,
+                                               },
+                                    },
+                            },
+                           
+                 DECODER => {
+                             ofr => {
+                                     NAME => "ofr",
+                                     DSTR => sub { "$dopts --overwrite --decode %i --output %o" },
+                                    },
+                            },
+
+                 TAGS    => {
+                             READ   => 0,
+                             WRITE  => 0,
+                             MODULE => undef,
+                            },
+                },
+
+        ofs  => {
+
+                 DEFAULT_ENCODER => "ofs",
+                 DEFAULT_DECODER => "ofs",
+                
+                 ENCODER => {
+                             ofs => {
+                                     NAME => "ofs",
+                                     ESTR => sub { 
+                                         $opts = "--mode $ofmode --optimize $ofopt" if $defopts == 1;
+                                         $opts = '' if $defopts == 0;
+                                         "$eopts --overwrite $opts %i --output %o" 
+                                     },
+                                    
+                                     PROMPT => {
+                                                OFMODE => 1,
+                                                OFOPT  => 1,
+                                               },
+                                    },
+                            },
+                
+                 DECODER => {
+                             ofs => {
+                                     NAME => "ofs",
+                                     DSTR => sub { "$dopts --overwrite --decode %i --output %o" },
+                                    },
+                            },
+
+                 TAGS    => {
+                             READ   => 0,
+                             WRITE  => 0,
+                             MODULE => undef,
+                            },
+                },
+
+        pac  => {
+
+                 DEFAULT_ENCODER => "lpac",
+                 DEFAULT_DECODER => "lpac",
+                
+                 ENCODER => {
+                             lpac => {
+                                      NAME => "lpac",
+                                      ESTR => sub { 
+                                          $opts = "-$pcomp" if $defopts == 1;
+                                          $opts = '' if $defopts == 0;
+                                          "$eopts -v $opts %i %o" 
+                                      },
+                                      
+                                      PROMPT => { PCOMP => 1 },
                                      },
                             },
                 
-                DECODER => {
-                              mac => {
-                                        NAME => "mac",
-                                        DSTR => sub { "%i %o -d $dopts" },
+                 DECODER => {
+                             lpac => {
+                                      NAME => "lpac",
+                                      DSTR => sub { "$dopts -x %i - > %o" },
                                      },
-                           },
+                            },
 
-                TAGS    => {
+                 TAGS    => {
                              READ   => 0,
                              WRITE  => 0,
                              MODULE => undef,
-                           },
-               },
+                            },
+                },
 
-      bonk  => {
+        lpac => {
 
-                DEFAULT_ENCODER => "bonk",
-                DEFAULT_DECODER => "bonk",
+                 DEFAULT_ENCODER => "lpac",
+                 DEFAULT_DECODER => "lpac",
                 
-                ENCODER => {
-                              bonk => {
-                                        NAME => "bonk",
-                                        ESTR => sub { 
-                                                      $opts = "-q $bquanl -b $bratio -s $bpsize" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "encode $eopts $opts %i -o %o" 
-                                                    },
-                                        
-                                        PROMPT => {
-                                                    BQUANL => 1,
-                                                    BRATIO => 1,
-                                                    BPSIZE => 1,
-                                                  },
-                                      },
-                           },
-                
-                DECODER => {
-                              bonk => {
-                                        NAME => "bonk",
-                                        DSTR => sub { "decode %i -o %o" },
-                                      },
-                           },
-
-                TAGS    => {
-                             READ   => 0,
-                             WRITE  => 0,
-                             MODULE => undef,
-                           },
-               },
-
-       shn  => {
-
-                DEFAULT_ENCODER => "shorten",
-                DEFAULT_DECODER => "shorten",
-                
-                ENCODER => {
-                              shorten => {
-                                            NAME => "shorten",
-                                            ESTR => sub { 
-                                                          $opts = "-c $channels" if $defopts == 1;
-                                                          $opts = '' if $defopts == 0;
-                                                          "$eopts $opts %i %o" 
-                                                        },
-                                            PROMPT => { CHANNELS => 1 },
-                                         },
-                           },
-                
-                DECODER => {
-                              shorten => {
-                                            NAME => "shorten",
-                                            DSTR => sub { "-x %i %o" },
-                                         },
-                           },
-
-                TAGS    => {
-                             READ   => 0,
-                             WRITE  => 0,
-                             MODULE => undef,
-                           },
-               },
-
-       aac  => {
-
-                DEFAULT_ENCODER => "faac",
-                DEFAULT_DECODER => "faad",
-                
-                ENCODER => {
-                              faac => {
-                                        NAME => "faac",
-                                        ESTR => sub { 
-                                                      $opts = "-q $aacqual" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "$eopts $opts %i -o %o" 
-                                                    },
-                                        PROMPT => { AACQUAL => 1 },
+                 ENCODER => {
+                             lpac => {
+                                      NAME => "lpac",
+                                      ESTR => sub { 
+                                          $opts = "-$pcomp" if $defopts == 1;
+                                          $opts = '' if $defopts == 0;
+                                          "$eopts -v $opts %i %o" 
                                       },
                                       
-                            ffmpeg => {
-                                        NAME => "ffmpeg",
-                                        ESTR => sub { 
-                                                      $opts = "-ab $bitrate.k -ar $freq -ac $channels" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "$eopts -y -i %i $opts %o" 
-                                                    },
-                                        
-                                        PROMPT => {
-                                                    BITRATE  => 1,
-                                                    FREQ     => 1,
-                                                    CHANNELS => 1,
-                                                  },
-                                      },
-                           },
-                           
-                DECODER => {
-                              faad => {
-                                        NAME => "faad",
-                                        DSTR => sub { "$dopts -o %i %o" },
-                                      },
-                              
-                            ffmpeg => {
+                                      PROMPT => { PCOMP => 1 },
+                                     },
+                            },
+                
+                 DECODER => {
+                             lpac => {
+                                      NAME => "lpac",
+                                      DSTR => sub { "$dopts -x %i - > %o" },
+                                     },
+                            },
+
+                 TAGS    => {
+                             READ   => 0,
+                             WRITE  => 0,
+                             MODULE => undef,
+                            },
+                },
+
+        tta  => {
+
+                 DEFAULT_ENCODER => "ttaenc",
+                 DEFAULT_DECODER => "ttaenc",
+                
+                 ENCODER => {
+                             ttaenc => {
+                                        NAME => "ttaenc",
+                                        ESTR => sub { "$eopts -e %i -o %o" },
+                                       },
+                            },
+                
+                 DECODER => {
+                             ttaenc => {
+                                        NAME => "ttaenc",
+                                        DSTR => sub { "$dopts -d %i -o %o" },
+                                       },
+
+                             ffmpeg => {
                                         NAME => "ffmpeg",
                                         DSTR => sub { "$dopts -y -i %i %o" },
-                                      },
-
-                           mplayer => {
-                                        NAME => "mplayer",
-                                        DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
-                                      },
-                           },
-
-                TAGS    => {
-                             READ   => 0,
-                             WRITE  => 0,
-                             MODULE => undef,
-                           },
-               },
-
-       mp4  => {
-
-                DEFAULT_ENCODER => "faac",
-                DEFAULT_DECODER => "faad",
-                
-                ENCODER => {
-                
-                            faac => {
-                                      NAME => "faac",
-                                      ESTR => sub { 
-                                                    $opts = "-q $aacqual" if $defopts == 1;
-                                                    $opts = '' if $defopts == 0;
-                                                    "$eopts -w $opts %i -o %o" 
-                                                  },
-                                      PROMPT => { AACQUAL => 1 },
-                                    },
-
-                          ffmpeg => {
-                                      NAME => "ffmpeg",
-                                      ESTR => sub { 
-                                                    $opts = "-ab $bitrate.k -ar $freq -ac $channels" if $defopts == 1;
-                                                    $opts = '' if $defopts == 0;
-                                                    "$eopts -y -i %i $opts %o" 
-                                                  },
-                                      
-                                      PROMPT => {
-                                                  BITRATE  => 1,
-                                                  FREQ     => 1,
-                                                  CHANNELS => 1,
-                                                },
-                                    },
-                           },
-                             
-                DECODER => {
-
-                            faad => {
-                                      NAME => "faad",
-                                      DSTR => sub { "$dopts -o %o %i" },
-                                    },
-
-                          ffmpeg => { 
-                                      NAME => "ffmpeg",
-                                      DSTR => sub { "$dopts -y -i %i %o" },
-                                    },
-
-                         mplayer => {
-                                      NAME => "mplayer",
-                                      DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
-                                    },
-                           },
-
-                TAGS    => {
-                             READ   => 1,
-                             WRITE  => 1,
-                             MODULE => "MP4::Info",
-                           },
-               },
-
-       m4a  => {
-
-                DEFAULT_ENCODER => "faac",
-                DEFAULT_DECODER => "faad",
-                
-                ENCODER => {
-                  
-                            faac => {
-                                      NAME => "faac",
-                                      ESTR => sub { 
-                                                    $opts = "-q $aacqual" if $defopts == 1;
-                                                    $opts = '' if $defopts == 0;
-                                                    "$eopts -w $opts %i -o %o" 
-                                                  },
-                                      PROMPT => { AACQUAL => 1 },
-                                    },
-
-                          ffmpeg => {
-                                      NAME => "ffmpeg",
-                                      ESTR => sub { 
-                                                    $opts = "-ab $bitrate.k -ar $freq -ac $channels" if $defopts == 1;
-                                                    $opts = '' if $defopts == 0;
-                                                    "$eopts -y -i %i $opts %o" 
-                                                  },
-                                      
-                                      PROMPT => {
-                                                  BITRATE  => 1,
-                                                  FREQ     => 1,
-                                                  CHANNELS => 1,
-                                                },
-                                    },
-                           },
-                
-                DECODER => {
-
-                             faad => {
-                                       NAME => "faad",
-                                       DSTR => sub { "$dopts -o %o %i" },
-                                     },
-                                       
-                           ffmpeg => {
-                                       NAME => "ffmpeg", 
-                                       DSTR => sub { "$dopts -y -i %i %o" },
-                                     },
-
-                          mplayer => {
-                                       NAME => "mplayer",
-                                       DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
-                                     },
-                                      
-                           },
-
-                ESTR    => sub { "$eopts -w -q $aacqual %i -o %o" },
-
-                TAGS    => {
-                             READ   => 1,
-                             WRITE  => 1,
-                             MODULE => "MP4::Info",
-                           },
-               },
-
-       m4b  => {
-       
-                DEFAULT_ENCODER => "faac",
-                DEFAULT_DECODER => "faad",
-                
-                ENCODER => {
-                           
-                            faac => {
-                                      NAME => "faac",
-                                      ESTR => sub {
-                                                    $opts = "-q $aacqual" if $defopts == 1;
-                                                    $opts = '' if $defopts == 0;
-                                                    "$eopts -w $opts %i -o %o"
-                                                  },
-
-                                      PROMPT => { AACQUAL => 1 },
-                                    },
- 
-                           },
-
-                DECODER => {
-                             faad => {
-                                       NAME => "faad",
-                                       DSTR => sub { "$dopts -o %o %i" },
-                                     },
-
-                          mplayer => {
-                                       NAME => "mplayer",
-                                       DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
-                                     },
-                           },
-
-                ESTR    => sub { "$eopts -w -q $aacqual %i -o %o" },
-                
-                TAGS    => {
-                             READ   => 0,
-                             WRITE  => 1,
-                             MODULE => undef,
-                           },
-               },
-                             
-       mpc  => {
-
-                DEFAULT_ENCODER => "mppenc",
-                DEFAULT_DECODER => "mppdec",
-                
-                ENCODER => {
-
-                            mppenc => {
-                                        NAME => "mppenc",
-                                        ESTR => sub { 
-                                                      $opts = "--$mpcqual" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "$eopts --overwrite $opts %i %o" 
-                                                    },
-                                        PROMPT => { MPCQUAL => 1 },
-                                      },
-                           },
-                
-                DECODER => {
-
-                            mppdec => {
-                                        NAME => "mppdec",
-                                        DSTR => sub { "$dopts %i %o" },
-                                      },
-
-                           mplayer => {
-                                        NAME => "mplayer",
-                                        DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
-                                      },
-                           },
-
-                TAGS    => {
-                             READ   => 1,
-                             WRITE  => 1,
-                             MODULE => "Audio::Musepack",
-                           },
-
-                PROMPT  => {
-                             MPCQUAL => 1,
-                           },
-               },
-
-       mpp  => {
-
-                DEFAULT_ENCODER => "mppenc",
-                DEFAULT_DECODER => "mppdec",
-                
-                ENCODER => {
-
-                            mppenc => {
-                                        NAME => "mppenc",
-                                        ESTR => sub { 
-                                                      $opts = "--$mpcqual" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "$eopts --overwrite $opts %i %o" 
-                                                    },
-                                        PROMPT => { MPCQUAL => 1 },
-                                      },
-                           },
-                
-                DECODER => {
-
-                            mppdec => {
-                                        NAME => "mppdec",
-                                        DSTR => sub { "$dopts %i %o" },
-                                      },
-
-                           mplayer => {
-                                        NAME => "mplayer",
-                                        DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
-                                      },
-                           },
-
-                TAGS    => {
-                             READ   => 1,
-                             WRITE  => 1,
-                             MODULE => "Audio::Musepack",
-                           },
-               },
-
-       ofr  => {
-
-                DEFAULT_ENCODER => "ofr",
-                DEFAULT_DECODER => "ofr",
-                
-                ENCODER => {
-                              ofr => {
-                                        NAME => "ofr",
-                                        ESTR => sub { 
-                                                      $opts = "--mode $ofmode --optimize $ofopt" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "$eopts --overwrite $opts %i --output %o" 
-                                                    },
-                                        
-                                        PROMPT => {
-                                                    OFMODE => 1,
-                                                    OFOPT  => 1,
-                                                  },
-                                     },
-                           },
-                           
-                DECODER => {
-                              ofr => {
-                                        NAME => "ofr",
-                                        DSTR => sub { "$dopts --overwrite --decode %i --output %o" },
-                                     },
-                           },
-
-                TAGS    => {
-                             READ   => 0,
-                             WRITE  => 0,
-                             MODULE => undef,
-                           },
-               },
-
-       ofs  => {
-
-                DEFAULT_ENCODER => "ofs",
-                DEFAULT_DECODER => "ofs",
-                
-                ENCODER => {
-                              ofs => {
-                                        NAME => "ofs",
-                                        ESTR => sub { 
-                                                      $opts = "--mode $ofmode --optimize $ofopt" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "$eopts --overwrite $opts %i --output %o" 
-                                                    },
-                                    
-                                        PROMPT => {
-                                                    OFMODE => 1,
-                                                    OFOPT  => 1,
-                                                  },
-                                     },
-                           },
-                
-                DECODER => {
-                              ofs => {
-                                        NAME => "ofs",
-                                        DSTR => sub { "$dopts --overwrite --decode %i --output %o" },
-                                     },
-                           },
-
-                TAGS    => {
-                             READ   => 0,
-                             WRITE  => 0,
-                             MODULE => undef,
-                           },
-               },
-
-       pac  => {
-
-                DEFAULT_ENCODER => "lpac",
-                DEFAULT_DECODER => "lpac",
-                
-                ENCODER => {
-                              lpac => {
-                                        NAME => "lpac",
-                                        ESTR => sub { 
-                                                      $opts = "-$pcomp" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "$eopts -v $opts %i %o" 
-                                                    },
-                                      
-                                        PROMPT => { PCOMP => 1 },
-                                      },
-                           },
-                
-                DECODER => {
-                              lpac => {
-                                        NAME => "lpac",
-                                        DSTR => sub { "$dopts -x %i - > %o" },
-                                      },
-                           },
-
-                TAGS    => {
-                             READ   => 0,
-                             WRITE  => 0,
-                             MODULE => undef,
-                           },
-               },
-
-       lpac => {
-
-                DEFAULT_ENCODER => "lpac",
-                DEFAULT_DECODER => "lpac",
-                
-                ENCODER => {
-                              lpac => {
-                                        NAME => "lpac",
-                                        ESTR => sub { 
-                                                      $opts = "-$pcomp" if $defopts == 1;
-                                                      $opts = '' if $defopts == 0;
-                                                      "$eopts -v $opts %i %o" 
-                                                    },
-                                      
-                                        PROMPT => { PCOMP => 1 },
-                                      },
-                           },
-                
-                DECODER => {
-                              lpac => {
-                                        NAME => "lpac",
-                                        DSTR => sub { "$dopts -x %i - > %o" },
-                                      },
-                           },
-
-                TAGS    => {
-                             READ   => 0,
-                             WRITE  => 0,
-                             MODULE => undef,
-                           },
-               },
-
-       tta  => {
-
-                DEFAULT_ENCODER => "ttaenc",
-                DEFAULT_DECODER => "ttaenc",
-                
-                ENCODER => {
-                              ttaenc => {
-                                          NAME => "ttaenc",
-                                          ESTR => sub { "$eopts -e %i -o %o" },
-                                        },
-                           },
-                
-                DECODER => {
-                              ttaenc => {
-                                          NAME => "ttaenc",
-                                          DSTR => sub { "$dopts -d %i -o %o" },
-                                        },
-
-                              ffmpeg => {
-                                          NAME => "ffmpeg",
-                                          DSTR => sub { "$dopts -y -i %i %o" },
-                                        },
+                                       },
 
                              mplayer => {
-                                          NAME => "mplayer",
-                                          DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
+                                         NAME => "mplayer",
+                                         DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
                                         },
-                           },
+                            },
                                         
-                TAGS    => {
+                 TAGS    => {
                              READ   => 0,
                              WRITE  => 0,
                              MODULE => undef,
-                           },
-               },
+                            },
+                },
 
-       la   => {
+        la   => {
 
-                DEFAULT_ENCODER => "la",
-                DEFAULT_DECODER => "la",
+                 DEFAULT_ENCODER => "la",
+                 DEFAULT_DECODER => "la",
                 
-                ENCODER => {
-                              la => {
-                                      NAME => "la",
-                                      ESTR => sub { "-overwrite $eopts %i %o" },
-                                    },
-                           },
+                 ENCODER => {
+                             la => {
+                                    NAME => "la",
+                                    ESTR => sub { "-overwrite $eopts %i %o" },
+                                   },
+                            },
                 
-                DECODER => {
-                              la => {
-                                      NAME => "la",
-                                      ESTR => sub { "-console $dopts %i > %o" },
-                                    },
-                           },
+                 DECODER => {
+                             la => {
+                                    NAME => "la",
+                                    ESTR => sub { "-console $dopts %i > %o" },
+                                   },
+                            },
 
-                TAGS    => {
+                 TAGS    => {
                              READ   => 0,
                              WRITE  => 0,
                              MODULE => undef,
-                           },
-               },
+                            },
+                },
 
-       wv   => {
+        wv   => {
 
-                DEFAULT_ENCODER => "wavpack",
-                DEFAULT_DECODER => "wvunpack",
+                 DEFAULT_ENCODER => "wavpack",
+                 DEFAULT_DECODER => "wvunpack",
                 
-                ENCODER => {
-                              wavpack => {
-                                           NAME => "wavpack",
-                                           ESTR => sub { "$eopts -y %i -o %o" },
+                 ENCODER => {
+                             wavpack => {
+                                         NAME => "wavpack",
+                                         ESTR => sub { "$eopts -y %i -o %o" },
+                                        },
+                            },
+                
+                 DECODER => {
+                             wvunpack => {
+                                          NAME => "wvunpack",
+                                          DSTR => sub { "$dopts -y %i -o %o" },
                                          },
-                           },
-                
-                DECODER => {
-                              wvunpack => {
-                                            NAME => "wvunpack",
-                                            DSTR => sub { "$dopts -y %i -o %o" },
-                                          },
 
-                                ffmpeg => {
-                                            NAME => "ffmpeg",
-                                            DSTR => sub { "$dopts -y -i %i %o" },
-                                          },
+                             ffmpeg => {
+                                        NAME => "ffmpeg",
+                                        DSTR => sub { "$dopts -y -i %i %o" },
+                                       },
 
-                               mplayer => {
-                                            NAME => "mplayer",
-                                            DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
-                                          },
-                           },
+                             mplayer => {
+                                         NAME => "mplayer",
+                                         DSTR => sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" },
+                                        },
+                            },
 
-                TAGS    => {
+                 TAGS    => {
                              READ   => 1,
                              WRITE  => 1,
                              MODULE => "Audio::APETags",
-                           },
-               },
+                            },
+                },
 
-       wav  => {
+        wav  => {
 
-                DEFAULT_ENCODER => "mv",
-                DEFAULT_DECODER => "cp",
+                 DEFAULT_ENCODER => "mv",
+                 DEFAULT_DECODER => "cp",
                 
-                ENCODER => {
-                              mv => {
-                                      NAME => "mv",
-                                      ESTR => sub { "%i %o" },
-                                    },
-                           },
+                 ENCODER => {
+                             mv => {
+                                    NAME => "mv",
+                                    ESTR => sub { "%i %o" },
+                                   },
+                            },
                            
-                DECODER => {
-                              cp => {
-                                      NAME => "cp",
-                                      DSTR => sub { "%i %o" },
-                                    }
-                           },
+                 DECODER => {
+                             cp => {
+                                    NAME => "cp",
+                                    DSTR => sub { "%i %o" },
+                                   }
+                            },
 
-                TAGS    => {
+                 TAGS    => {
                              READ   => 0,
                              WRITE  => 0,
                              MODULE => undef,
-                           },
-               },
-);
+                            },
+                },
+       );
 
 
 # supported ffmpeg formats
@@ -1467,19 +1467,19 @@ my @ffmpeg_codecs = ( "ra", "wma", "mp2", "mmf" );
 
 foreach (@ffmpeg_codecs) {
 
-   $run{$_}{DEFAULT_ENCODER}        = "ffmpeg";
-   $run{$_}{DEFAULT_DECODER}        = "ffmpeg";
-   $run{$_}{ENCODER}{ffmpeg}{NAME}  = "ffmpeg";
-   $run{$_}{DECODER}{ffmpeg}{NAME}  = "ffmpeg";
-   $run{$_}{ENCODER}{ffmpeg}{ESTR}  = sub { "$eopts -y -i %i -ab $bitrate.k -ar $freq -ac $channels %o" };
-   $run{$_}{DECODER}{ffmpeg}{DSTR}  = sub { "$dopts -y -i %i %o" };
-   $run{$_}{TAGS}{READ}             = 0;
-   $run{$_}{TAGS}{WRITE}            = 0;
-   $run{$_}{TAGS}{MODULE}           = undef;
+    $run{$_}{DEFAULT_ENCODER}        = "ffmpeg";
+    $run{$_}{DEFAULT_DECODER}        = "ffmpeg";
+    $run{$_}{ENCODER}{ffmpeg}{NAME}  = "ffmpeg";
+    $run{$_}{DECODER}{ffmpeg}{NAME}  = "ffmpeg";
+    $run{$_}{ENCODER}{ffmpeg}{ESTR}  = sub { "$eopts -y -i %i -ab $bitrate.k -ar $freq -ac $channels %o" };
+    $run{$_}{DECODER}{ffmpeg}{DSTR}  = sub { "$dopts -y -i %i %o" };
+    $run{$_}{TAGS}{READ}             = 0;
+    $run{$_}{TAGS}{WRITE}            = 0;
+    $run{$_}{TAGS}{MODULE}           = undef;
 
-   $run{$_}{ENCODER}{ffmpeg}{PROMPT}{BITRATE}  = 1;
-   $run{$_}{ENCODER}{ffmpeg}{PROMPT}{FREQ}     = 1;
-   $run{$_}{ENCODER}{ffmpeg}{PROMPT}{CHANNELS} = 1;
+    $run{$_}{ENCODER}{ffmpeg}{PROMPT}{BITRATE}  = 1;
+    $run{$_}{ENCODER}{ffmpeg}{PROMPT}{FREQ}     = 1;
+    $run{$_}{ENCODER}{ffmpeg}{PROMPT}{CHANNELS} = 1;
 
 }
 
@@ -1489,43 +1489,43 @@ $run{wma}{TAGS}{MODULE} = "Audio::WMA";
    
 # supported video to audio types
 my @movie_codecs = ( 
-                     "rv",    "asf",   "avi",   "divx",  
-                     "mkv",   "mpg",   "mpeg",  "mov",   
-                     "ogm",   "qt",    "vcd",   "vob",   
-                     "wmv",   "flv",   "svcd",  "m4v",   
-                     "nsv",   "nuv",   "psp",   "smk",
+                    "rv",    "asf",   "avi",   "divx",  
+                    "mkv",   "mpg",   "mpeg",  "mov",   
+                    "ogm",   "qt",    "vcd",   "vob",   
+                    "wmv",   "flv",   "svcd",  "m4v",   
+                    "nsv",   "nuv",   "psp",   "smk",
                    );
 
 foreach (@movie_codecs) {
 
-   $run{$_}{DEFAULT_ENCODER}        = undef;
-   $run{$_}{DEFAULT_DECODER}        = "mplayer";
-   $run{$_}{DECODER}{mplayer}{NAME} = "mplayer";
-   $run{$_}{DECODER}{ffmpeg}{NAME}  = "ffmpeg";
-   $run{$_}{DECODER}{mplayer}{DSTR} = sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" };
-   $run{$_}{DECODER}{ffmpeg}{DSTR}  = sub { "$dopts -i %i %o"; };
-   $run{$_}{TAGS}{READ}             = 0;
-   $run{$_}{TAGS}{WRITE}            = 0;
-   $run{$_}{TAGS}{MODULE}           = undef;
+    $run{$_}{DEFAULT_ENCODER}        = undef;
+    $run{$_}{DEFAULT_DECODER}        = "mplayer";
+    $run{$_}{DECODER}{mplayer}{NAME} = "mplayer";
+    $run{$_}{DECODER}{ffmpeg}{NAME}  = "ffmpeg";
+    $run{$_}{DECODER}{mplayer}{DSTR} = sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" };
+    $run{$_}{DECODER}{ffmpeg}{DSTR}  = sub { "$dopts -i %i %o"; };
+    $run{$_}{TAGS}{READ}             = 0;
+    $run{$_}{TAGS}{WRITE}            = 0;
+    $run{$_}{TAGS}{MODULE}           = undef;
 }
 
 # supported sndfile-convert formats
 my @sndfile = ( 
-                "pvf",  "caf",  "sf",  "paf",   "fap", "sd2", 
-                "mat4", "mat5", "mat", "ircam", "w64", "nist",
+               "pvf",  "caf",  "sf",  "paf",   "fap", "sd2", 
+               "mat4", "mat5", "mat", "ircam", "w64", "nist",
               );
 
 foreach (@sndfile) {
      
-   $run{$_}{DEFAULT_ENCODER}                  = "sndfile-convert";
-   $run{$_}{DEFAULT_DECODER}                  = "sndfile-convert";
-   $run{$_}{ENCODER}{"sndfile-convert"}{NAME} = "sndfile-convert";
-   $run{$_}{DECODER}{"sndfile-convert"}{NAME} = "sndfile-convert";
-   $run{$_}{ENCODER}{"sndfile-convert"}{ESTR} = sub { "$eopts %i %o" };
-   $run{$_}{DECODER}{"sndfile-convert"}{DSTR} = sub { "$dopts %i %o" };
-   $run{$_}{TAGS}{READ}                       = 0;
-   $run{$_}{TAGS}{WRITE}                      = 0;
-   $run{$_}{TAGS}{MODULE}                     = undef;
+    $run{$_}{DEFAULT_ENCODER}                  = "sndfile-convert";
+    $run{$_}{DEFAULT_DECODER}                  = "sndfile-convert";
+    $run{$_}{ENCODER}{"sndfile-convert"}{NAME} = "sndfile-convert";
+    $run{$_}{DECODER}{"sndfile-convert"}{NAME} = "sndfile-convert";
+    $run{$_}{ENCODER}{"sndfile-convert"}{ESTR} = sub { "$eopts %i %o" };
+    $run{$_}{DECODER}{"sndfile-convert"}{DSTR} = sub { "$dopts %i %o" };
+    $run{$_}{TAGS}{READ}                       = 0;
+    $run{$_}{TAGS}{WRITE}                      = 0;
+    $run{$_}{TAGS}{MODULE}                     = undef;
 }
               
 # supported sox formats
@@ -1533,18 +1533,18 @@ my @sox_codecs = ( "aiff", "aif", "au", "snd", "voc", "smp", "avr", "cdr" );
 
 foreach (@sox_codecs) {
 
-   $run{$_}{DEFAULT_ENCODER}    = "sox";
-   $run{$_}{DEFAULT_DECODER}    = "sox";
-   $run{$_}{ENCODER}{sox}{NAME} = "sox";
-   $run{$_}{DECODER}{sox}{NAME} = "sox";
-   $run{$_}{ENCODER}{sox}{ESTR} = sub { "%i -r $freq -c $channels $eopts %o $effect" };
-   $run{$_}{DECODER}{sox}{DSTR} = sub { "%i $dopts %o" };
-   $run{$_}{TAGS}{READ}         = 0;
-   $run{$_}{TAGS}{WRITE}        = 0;
-   $run{$_}{TAGS}{MODULE}       = undef;
+    $run{$_}{DEFAULT_ENCODER}    = "sox";
+    $run{$_}{DEFAULT_DECODER}    = "sox";
+    $run{$_}{ENCODER}{sox}{NAME} = "sox";
+    $run{$_}{DECODER}{sox}{NAME} = "sox";
+    $run{$_}{ENCODER}{sox}{ESTR} = sub { "%i -r $freq -c $channels $eopts %o $effect" };
+    $run{$_}{DECODER}{sox}{DSTR} = sub { "%i $dopts %o" };
+    $run{$_}{TAGS}{READ}         = 0;
+    $run{$_}{TAGS}{WRITE}        = 0;
+    $run{$_}{TAGS}{MODULE}       = undef;
 
-   $run{$_}{ENCODER}{sox}{PROMPT}{FREQ}     = 1;
-   $run{$_}{ENCODER}{sox}{PROMPT}{CHANNELS} = 1;
+    $run{$_}{ENCODER}{sox}{PROMPT}{FREQ}     = 1;
+    $run{$_}{ENCODER}{sox}{PROMPT}{CHANNELS} = 1;
 
 }
 
@@ -1561,121 +1561,121 @@ my $first_message   = 1;
 # process all files and directories
 sub proc_input {
 
-   $to =~ tr/A-Z/a-z/;
+    $to =~ tr/A-Z/a-z/;
    
-   perror("bad_input","") unless(exists($run{$to}));
+    perror("bad_input","") unless(exists($run{$to}));
    
-   # process all files first
-   if (@file) {
+    # process all files first
+    if (@file) {
 
-       foreach my $i (sort(@file)) {
+        foreach my $i (sort(@file)) {
        
-               my ($file, $dir, $ext) = fileparse("$i", qr/\.[^.]*/);
+            my ($file, $dir, $ext) = fileparse("$i", qr/\.[^.]*/);
 
-                   $ext    =~ s/^\.//;
-                   $dir    =  rel2abs($dir);
-                   $outdir =  $dir if not defined($out_dir) and not $preserve;
-                   $outdir =  $out_dir if $preserve;
+            $ext    =~ s/^\.//;
+            $dir    =  rel2abs($dir);
+            $outdir =  $dir if not defined($out_dir) and not $preserve;
+            $outdir =  $out_dir if $preserve;
 
-               my  $if  = $ext;
-                   $if  =~ tr/A-Z/a-z/;
+            my $if =  $ext;
+            $if    =~ tr/A-Z/a-z/;
+            
+            $only =~ tr/A-Z/a-z/ if $only;
                    
-                   $only =~ tr/A-Z/a-z/ if $only;
-                   
-              next if $only and $if ne $only;
+            next if $only and $if ne $only;
               
-                   $encoder = $my_encoder if defined($my_encoder);
-                   $decoder = $my_decoder if defined($my_decoder);
+            $encoder = $my_encoder if defined($my_encoder);
+            $decoder = $my_decoder if defined($my_decoder);
                    
-                   $encoder = $run{$to}{DEFAULT_ENCODER} if not $my_encoder;
-                   $decoder = $run{$if}{DEFAULT_DECODER} if not $my_decoder;
+            $encoder = $run{$to}{DEFAULT_ENCODER} if not $my_encoder;
+            $decoder = $run{$if}{DEFAULT_DECODER} if not $my_decoder;
                                       
-               if (check_input($file,$dir,$if) == 0) {
+            if (check_input($file,$dir,$if) == 0) {
                    
-                   pnotice("unk_encoder","$file.$ext",1), next unless(exists($run{$to}{ENCODER}{$encoder}));
-                   pnotice("unk_decoder","$file.$ext",1), next unless(exists($run{$if}{DECODER}{$decoder}));
+                pnotice("unk_encoder","$file.$ext",1), next unless(exists($run{$to}{ENCODER}{$encoder}));
+                pnotice("unk_decoder","$file.$ext",1), next unless(exists($run{$if}{DECODER}{$decoder}));
               
-                   get_visual_opts($to,$outdir) if $gui and not defined($first_run) and `which kdialog 2>/dev/null`;
+                get_visual_opts($to,$outdir) if $gui and not defined($first_run) and `which kdialog 2>/dev/null`;
                    
-                   $first_run = 1;
+                $first_run = 1;
                    
-                   perror("multi_out","")       if (defined($out_name) and $#file gt 0 or defined($out_name) and @dir);
-                   perror("no_outdir","")       if (not -e $outdir and not -d $outdir);
+                perror("multi_out","")       if (defined($out_name) and $#file gt 0 or defined($out_name) and @dir);
+                perror("no_outdir","")       if (not -e $outdir and not -d $outdir);
 
-                   $outfile = "$file" if not $out_name;
+                $outfile = "$file" if not $out_name;
 
-                   if ($keep and $if eq $to) {
-                       system("cp -v \"$dir/$file.$ext\" \"$outdir/$outfile.$ext\"") if $outdir ne $dir and not -e "$outdir/$outfile.$ext";
-                       next if $outdir eq $dir;
-                   } 
+                if ($keep and $if eq $to) {
+                    system("cp -v \"$dir/$file.$ext\" \"$outdir/$outfile.$ext\"") if $outdir ne $dir and not -e "$outdir/$outfile.$ext";
+                    next if $outdir eq $dir;
+                } 
                    
-                   else {
-                       convert("$dir/$file","$outdir/$outfile","$ext","$file","$outfile");
-                   }
+                else {
+                    convert("$dir/$file","$outdir/$outfile","$ext","$file","$outfile");
+                }
                  
-               }
-       }
-   }
+            }
+        }
+    }
 
-   # now the directories (this includes --recursive and --preserve)
-   if (@dir) {
+    # now the directories (this includes --recursive and --preserve)
+    if (@dir) {
 
-    my @tmp_dir = @dir;
-       undef(@dir);
-       $topdir = $tmp_dir[0];
+        my @tmp_dir = @dir;
+        undef(@dir);
+        $topdir = $tmp_dir[0];
 
-    if (not $recursive) {
+        if (not $recursive) {
 
-        undef(@file);
+            undef(@file);
         
-        foreach my $d (@tmp_dir) {
+            foreach my $d (@tmp_dir) {
 
                 opendir(DIR, "$d") or perror("opening_dir","$d: $!");
-             my @dir_files = readdir(DIR);
+                my @dir_files = readdir(DIR);
                 closedir(DIR);
                 
                 perror("empty_dir","$d") if $#dir_files <= 1;
 
                 foreach my $f (@dir_files) {
 
-                     if (not -d $f and not -d "$d/$f") {
-                         push(@file, "$d/$f");
-                         undef($out_name);
-                     }
-               }
-       }
+                    if (not -d $f and not -d "$d/$f") {
+                        push(@file, "$d/$f");
+                        undef($out_name);
+                    }
+                }
+            }
        
-       proc_input();
-       return 0;
+            proc_input();
+            return 0;
 
-    } 
+        } 
 
-    elsif ($recursive) {
+        elsif ($recursive) {
 
-             if (not $preserve) {
+            if (not $preserve) {
                  
-                 undef(@file);
+                undef(@file);
 
-                 foreach my $r (@tmp_dir) {
+                foreach my $r (@tmp_dir) {
 
-                         $r = rel2abs($r);
+                    $r = rel2abs($r);
 
-                         find ( sub {
-                                      my $rfile = $File::Find::name;
-                                         push(@file, $rfile) if not -d $rfile;
-                                    }, $r
-                              );
-                 }
+                    find ( sub {
+                               my $rfile = $File::Find::name;
+                               push(@file, $rfile) if not -d $rfile;
+                           }, $r
+                         );
+                }
                  
-                 proc_input();
-                 return 0;
+                proc_input();
+                return 0;
 
-             } elsif ($preserve) {
-                      $topdir = rel2abs($topdir);
-                      find ({wanted => \&preserve_struct, no_chdir => 1, follow => 0}, $topdir);
-                      return 0;
-               }
-      }
+            } elsif ($preserve) {
+                $topdir = rel2abs($topdir);
+                find ({wanted => \&preserve_struct, no_chdir => 1, follow => 0}, $topdir);
+                return 0;
+            }
+        }
 
     }
    
@@ -1687,64 +1687,64 @@ my $out_copy = $out_dir if defined($out_dir);
 # preserve directory structure (--recursive --preserve)
 sub preserve_struct {
 
-       undef($out_dir) if defined ($out_dir);
+    undef($out_dir) if defined ($out_dir);
 
-       perror("need_outdir","")        if not defined($out_copy);
-       perror("no_outdir","$out_copy") if not -d $out_copy;
+    perror("need_outdir","")        if not defined($out_copy);
+    perror("no_outdir","$out_copy") if not -d $out_copy;
 
-       $out_copy = rel2abs($out_copy);
+    $out_copy = rel2abs($out_copy);
 
     my $find_dir = $File::Find::name;
     my ($presdir, $odir);
 
     if (-d $find_dir and $find_dir ne $topdir) {
 
-        my $out = $find_dir;
-           $out =~ s/$topdir\///g;
+        my $out =  $find_dir;
+        $out    =~ s/$topdir\///g;
 
-           $presdir = "$topdir/$out";
-           $odir    = "$out_copy/$out";
+        $presdir = "$topdir/$out";
+        $odir    = "$out_copy/$out";
 
-           $out_dir = "$odir";
+        $out_dir = "$odir";
 
         if (-d $find_dir and not -d $odir) { mkdir("$odir", 0755); }
 
-            opendir(IN, "$presdir") or perror("opening_dir","$presdir: $!");
+        opendir(IN, "$presdir") or perror("opening_dir","$presdir: $!");
             
-            undef(@file);
+        undef(@file);
 
-            foreach my $i (readdir(IN)) {
+        foreach my $i (readdir(IN)) {
 
-                 if (not -d $i and not -d "$presdir/$i") {
-                     mkdir("$odir", 0755) if not -d $odir;
-                     pnotice("creating_dir","$odir",2) if not -d $odir;
-                     push(@file, "$presdir/$i");
-                 }
+            if (not -d $i and not -d "$presdir/$i") {
+                mkdir("$odir", 0755) if not -d $odir;
+                pnotice("creating_dir","$odir",2) if not -d $odir;
+                push(@file, "$presdir/$i");
+            }
 
-            } undef($presdir); undef($odir); closedir(IN);
+        } undef($presdir); undef($odir); closedir(IN);
             
-            proc_input();
+        proc_input();
 
-        } elsif (-d $find_dir and $find_dir eq $topdir) {
+    } elsif (-d $find_dir and $find_dir eq $topdir) {
 
-                 $presdir = $topdir;
-                 $odir    = $out_copy;
-                 $out_dir = $odir;
+        $presdir = $topdir;
+        $odir    = $out_copy;
+        $out_dir = $odir;
                  
-                 undef(@file);
+        undef(@file);
 
-                 opendir(IN, "$presdir") or perror("opening_dir","$presdir: $!");
+        opendir(IN, "$presdir") or perror("opening_dir","$presdir: $!");
 
-                 foreach my $i (readdir(IN)) {
+        foreach my $i (readdir(IN)) {
 
-                      if (not -d $i and not -d "$presdir/$i") {
-                          push(@file, "$presdir/$i");
-                      }
+            if (not -d $i and not -d "$presdir/$i") {
+                push(@file, "$presdir/$i");
+            }
 
-                 } closedir(IN);
+        } closedir(IN);
                  
-                 proc_input();
-          }
+        proc_input();
+    }
 }
 
 # convert input to destination format
@@ -1753,92 +1753,92 @@ sub convert {
     my ($inf, $outf, $infmt, $iname, $oname) = @_;
 
     my $if = $infmt;
-       $if =~ tr/A-Z/a-z/;
+    $if =~ tr/A-Z/a-z/;
 
-       clear_tag_hash() if not $rip;
+    clear_tag_hash() if not $rip;
 
-       if (-e "$outf.$to" and not $overwrite) {
-           pnotice("overwrite","$outf.$to",2);
-           $total_failed++;
-           return 0;
-       }
+    if (-e "$outf.$to" and not $overwrite) {
+        pnotice("overwrite","$outf.$to",2);
+        $total_failed++;
+        return 0;
+    }
 
-       # catch ^C.  will have to be pressed repeatedly to exit the process.
-       $SIG{INT} = sub {
-                         unlink("$outf.$$.wav");
-                         kill 9, $$; 
-                       };
+    # catch ^C.  will have to be pressed repeatedly to exit the process.
+    $SIG{INT} = sub {
+        unlink("$outf.$$.wav");
+        kill 9, $$; 
+    };
        
-       # check to see if encoder/decoder exists.  if not, see if we have one 
-       # that supports the desired input/output formats.
-       check_encoder();
-       check_decoder($infmt);
+    # check to see if encoder/decoder exists.  if not, see if we have one 
+    # that supports the desired input/output formats.
+    check_encoder();
+    check_decoder($infmt);
                          
-    my $decode_string = $run{$if}{DECODER}{$decoder}{DSTR}->();
-       $decode_string =~ s/%i/\"$inf.$infmt\"/;
-       $decode_string =~ s/%o/\"$outf.$$.wav\"/;
-       $decode_string =~ s/(\$|\\)/\\$1/g;
+    my $decode_string =  $run{$if}{DECODER}{$decoder}{DSTR}->();
+    $decode_string    =~ s/%i/\"$inf.$infmt\"/;
+    $decode_string    =~ s/%o/\"$outf.$$.wav\"/;
+    $decode_string    =~ s/(\$|\\)/\\$1/g;
 
     my $nl = 0; $nl = 2 if $verbose;
           
-       pnotice("converting"," [$iname.$infmt] -> [$to] ", $nl);
-       pnotice("debug","$run{$if}{DECODER}{$decoder}{NAME} $decode_string", 2) if $dryrun;
+    pnotice("converting"," [$iname.$infmt] -> [$to] ", $nl);
+    pnotice("debug","$run{$if}{DECODER}{$decoder}{NAME} $decode_string", 2) if $dryrun;
 
-       # decode input file to temporary wav
-       system("$run{$if}{DECODER}{$decoder}{NAME} $decode_string $silent") if not $dryrun;
+    # decode input file to temporary wav
+    system("$run{$if}{DECODER}{$decoder}{NAME} $decode_string $silent") if not $dryrun;
 
-       # remove temporary wav file and die if decode fails
-       if ($? > 0) {
-           unlink("$outf.$$.wav") if -e "$outf.$$.wav";
-           pnotice("decode_failed","$?",2);
-           $total_failed++;
-           return 0;
-       }
+    # remove temporary wav file and die if decode fails
+    if ($? > 0) {
+        unlink("$outf.$$.wav") if -e "$outf.$$.wav";
+        pnotice("decode_failed","$?",2);
+        $total_failed++;
+        return 0;
+    }
        
-       # normalize wav file before encoding to output format
-       perror("no_app","normalize") if $normalize and not `which normalize 2>/dev/null`;
-       system("normalize $nopts \"$outf.$$.wav\"") if $normalize;
+    # normalize wav file before encoding to output format
+    perror("no_app","normalize") if $normalize and not `which normalize 2>/dev/null`;
+    system("normalize $nopts \"$outf.$$.wav\"") if $normalize;
 
-       # copy meta-data from input file to %tag_name 
-       read_tags("$inf.$infmt", "$if") if $run{$if}{TAGS}{READ} == 1 and not $dryrun;
+    # copy meta-data from input file to %tag_name 
+    read_tags("$inf.$infmt", "$if") if $run{$if}{TAGS}{READ} == 1 and not $dryrun;
 
-    my $encode_string = $run{$to}{ENCODER}{$encoder}{ESTR}->();
-       $encode_string =~ s/%i/\"$outf.$$.wav\"/; 
-       $encode_string =~ s/%o/\"$outf.$to\"/;
-       $encode_string =~ s/(\$|\\)/\\$1/g;
+    my $encode_string =  $run{$to}{ENCODER}{$encoder}{ESTR}->();
+    $encode_string    =~ s/%i/\"$outf.$$.wav\"/; 
+    $encode_string    =~ s/%o/\"$outf.$to\"/;
+    $encode_string    =~ s/(\$|\\)/\\$1/g;
 
     my $tag_opts = format_tags($to); # tag options for mp4/m4a/m4b/mpc/mpp/bonk/spx/wv
     
-       # read tag options from command line if present
-       get_user_tags();
+    # read tag options from command line if present
+    get_user_tags();
 
-       pnotice("debug","$run{$to}{ENCODER}{$encoder}{NAME} $tag_opts $encode_string", 2) if $dryrun;
+    pnotice("debug","$run{$to}{ENCODER}{$encoder}{NAME} $tag_opts $encode_string", 2) if $dryrun;
 
-       # encode temporary WAV to desired output format.
-       system("$run{$to}{ENCODER}{$encoder}{NAME} $tag_opts $encode_string $silent") if not $dryrun;
+    # encode temporary WAV to desired output format.
+    system("$run{$to}{ENCODER}{$encoder}{NAME} $tag_opts $encode_string $silent") if not $dryrun;
 
-       # remove partially encoded output file and temporary wav if encoding fails
-       if ($? > 0) {
-           unlink("$outf.$to")          if -e "$outf.$to";
-           unlink("$outf.$$.wav")       if -e "$outf.$$.wav";
-           pnotice("encode_failed","$?",2);
-           $total_failed++;
-           return 0;
-       }
+    # remove partially encoded output file and temporary wav if encoding fails
+    if ($? > 0) {
+        unlink("$outf.$to")          if -e "$outf.$to";
+        unlink("$outf.$$.wav")       if -e "$outf.$$.wav";
+        pnotice("encode_failed","$?",2);
+        $total_failed++;
+        return 0;
+    }
 
-       # write meta-data to output file from %tag_name hash
-       write_tags("$outf.$to", "$to") if $run{$to}{TAGS}{WRITE} == 1 and $tag_opts eq '' and not $dryrun;
+    # write meta-data to output file from %tag_name hash
+    write_tags("$outf.$to", "$to") if $run{$to}{TAGS}{WRITE} == 1 and $tag_opts eq '' and not $dryrun;
  
-       unlink("$outf.$$.wav") if not $dryrun;
-       unlink("$inf.$infmt")  if $delete and not $dryrun;
+    unlink("$outf.$$.wav") if not $dryrun;
+    unlink("$inf.$infmt")  if $delete and not $dryrun;
 
-       pnotice("removed_tmp","$outf.$$.wav","2") if $verbose;
-       pnotice("removed_src","$inf.$infmt", "2") if $delete and $verbose;
+    pnotice("removed_tmp","$outf.$$.wav","2") if $verbose;
+    pnotice("removed_src","$inf.$infmt", "2") if $delete and $verbose;
        
-       if (-e "$outf.$to") {
-           pnotice("conv_comp","",1);
-           $total_converted++;
-       }
+    if (-e "$outf.$to") {
+        pnotice("conv_comp","",1);
+        $total_converted++;
+    }
 }
 
 # if the default encoder does not exist, cycle through the supported
@@ -1872,16 +1872,16 @@ sub check_decoder {
 # make sure encoding/decoding is supported.
 sub check_input {
 
-     my ($f, $d, $s) =  @_;
+    my ($f, $d, $s) =  @_;
 
-     perror("no_encoder","$to") unless(defined($run{$to}{ENCODER}));
+    perror("no_encoder","$to") unless(defined($run{$to}{ENCODER}));
 
-     unless(defined($run{$s}{DECODER})) {
-         pnotice("no_decoder","$d/$f.$s",2) if $verbose or not $only;
-         return 1;
-     }
+    unless (defined($run{$s}{DECODER})) {
+        pnotice("no_decoder","$d/$f.$s",2) if $verbose or not $only;
+        return 1;
+    }
 
-     return 0;
+    return 0;
 }
 
 ############################################################
@@ -1894,32 +1894,32 @@ sub get_visual_opts {
 
     my ($to_fmt,$od) = @_;
 
-       # escape illegal characters in output directory name
-       $od =~ s/('|\(|\)|"|\\)/\\$1/g;
+    # escape illegal characters in output directory name
+    $od =~ s/('|\(|\)|"|\\)/\\$1/g;
 
-       $outdir    = `kdialog --getexistingdirectory $od` if $config{KDE_DIR} == 1;
-       chomp($outdir);
-       $out_dir = $outdir;
-       exit(1) if not $outdir;
+    $outdir    = `kdialog --getexistingdirectory $od` if $config{KDE_DIR} == 1;
+    chomp($outdir);
+    $out_dir = $outdir;
+    exit(1) if not $outdir;
        
-       if ($config{KDE_OPTS} == 1) {
-           foreach (keys %{$run{$to_fmt}{ENCODER}{$encoder}{PROMPT}}) {
-                   prompt_user($_);
-           }
-       }
+    if ($config{KDE_OPTS} == 1) {
+        foreach (keys %{$run{$to_fmt}{ENCODER}{$encoder}{PROMPT}}) {
+            prompt_user($_);
+        }
+    }
 }
 
 sub prompt_user {
 
     my $opt = shift;
 
-      switch ($opt) {
+    switch ($opt) {
 
-            case 'BITRATE'   { 
-                                $bitrate  = `$kdialog --default $bitrate  --combobox \"$lang{kde_bitrate}\" 56 112 128 160 192 256 320`;
-                                chomp($bitrate);
-                                exit(1) if not $bitrate;
-                             }
+        case 'BITRATE'   { 
+                          $bitrate  = `$kdialog --default $bitrate  --combobox \"$lang{kde_bitrate}\" 56 112 128 160 192 256 320`;
+                          chomp($bitrate);
+                          exit(1) if not $bitrate;
+                         }
 
             case 'FREQ'      {
                                 $freq     = `$kdialog --default $freq     --combobox \"$lang{kde_freq}\" 32000 44100 48000`;
@@ -2012,13 +2012,13 @@ sub prompt_user {
 
 # all copied tags will be stored here for furture use
 my %tag_name = (
-                 title    => undef,
-                 track    => undef,
-                 artist   => undef,
-                 album    => undef,
-                 comment  => undef,
-                 year     => undef,
-                 genre    => undef,
+                title    => undef,
+                track    => undef,
+                artist   => undef,
+                album    => undef,
+                comment  => undef,
+                year     => undef,
+                genre    => undef,
                );
 
 # override tags read from input file if any of the tagging
@@ -2045,19 +2045,19 @@ sub format_tags {
     switch ($type) {
         
         case /mp4|m4a|m4b/ { 
-        
-            if ($run{$to}{ENCODER}{$encoder}{NAME} eq "ffmpeg") {
-     
-                $tag_name{track} = 0 if not $tag_name{track};
-                $tag_name{year}  = 0 if not $tag_name{year};
-                return "-title \"$tag_name{title}\" -track \"$tag_name{track}\" -author \"$tag_name{artist}\" -album \"$tag_name{album}\" -comment \"$tag_name{comment}\" -year \"$tag_name{year}\" -genre \"$tag_name{genre}\"";
 
-            } else {
-                
-              return "--title \"$tag_name{title}\" --track \"$tag_name{track}\" --artist \"$tag_name{artist}\" --album \"$tag_name{album}\" --comment \"$tag_name{comment}\" --year \"$tag_name{year}\" --genre \"$tag_name{genre}\"";
-
-              }
-        } 
+                            if ($run{$to}{ENCODER}{$encoder}{NAME} eq "ffmpeg") {
+                                
+                                $tag_name{track} = 0 if not $tag_name{track};
+                                $tag_name{year}  = 0 if not $tag_name{year};
+                                return "-title \"$tag_name{title}\" -track \"$tag_name{track}\" -author \"$tag_name{artist}\" -album \"$tag_name{album}\" -comment \"$tag_name{comment}\" -year \"$tag_name{year}\" -genre \"$tag_name{genre}\"";
+                                
+                            } else {
+                                
+                                return "--title \"$tag_name{title}\" --track \"$tag_name{track}\" --artist \"$tag_name{artist}\" --album \"$tag_name{album}\" --comment \"$tag_name{comment}\" --year \"$tag_name{year}\" --genre \"$tag_name{genre}\"";
+                                
+                            }
+                           } 
                 
         case /mpc|mpp/ { return "--tag \"Title=$tag_name{title}\" --tag \"Track=$tag_name{track}\" --tag \"Artist=$tag_name{artist}\" --tag \"Album=$tag_name{album}\" --tag \"Comment=$tag_name{comment}\" --tag \"Year=$tag_name{year}\" --tag \"Genre=$tag_name{genre}\""; }
         case 'wv'      { return "-w \"Title=$tag_name{title}\" -w \"Track=$tag_name{track}\" -w \"Artist=$tag_name{artist}\" -w \"Album=$tag_name{album}\" -w \"Comment=$tag_name{comment}\" -w \"Year=$tag_name{year}\" -w \"Genre=$tag_name{genre}\""; }
@@ -2319,34 +2319,34 @@ sub show_taginfo {
 
     foreach my $i (@file) {
 
-     my ($file, $dir, $ext) = fileparse("$i", qr/\.[^.]*/);
+        my ($file, $dir, $ext) = fileparse("$i", qr/\.[^.]*/);
      
-         $ext  =~ s/^\.//;
+        $ext  =~ s/^\.//;
      
-     my  $from = $ext;
-         $from =~ tr/A-Z/a-z/;
+        my  $from = $ext;
+        $from =~ tr/A-Z/a-z/;
 
-     if ($run{$from}{TAGS}{READ} == 1) {
+        if ($run{$from}{TAGS}{READ} == 1) {
 
-         clear_tag_hash();
-         read_tags("$dir/$file.$ext","$from");
+            clear_tag_hash();
+            read_tags("$dir/$file.$ext","$from");
 
-         print "\n"; 
+            print "\n"; 
 
-         pnotice("tag_info","$file.$ext",2);
+            pnotice("tag_info","$file.$ext",2);
 
-         print " Artist: $tag_name{artist}\n";
-         print "  Title: $tag_name{title}\n";
-         print "  Album: $tag_name{album}\n";
-         print "  Track: $tag_name{track}\n";
-         print "Comment: $tag_name{comment}\n";
-         print "   Year: $tag_name{year}\n";
-         print "  Genre: $tag_name{genre}\n";
+            print " Artist: $tag_name{artist}\n";
+            print "  Title: $tag_name{title}\n";
+            print "  Album: $tag_name{album}\n";
+            print "  Track: $tag_name{track}\n";
+            print "Comment: $tag_name{comment}\n";
+            print "   Year: $tag_name{year}\n";
+            print "  Genre: $tag_name{genre}\n";
 
-         print "\n";
+            print "\n";
 
-     } else { pnotice("no_read_tag","$file.$ext",2); }
-   }
+        } else { pnotice("no_read_tag","$file.$ext",2); }
+    }
 }
 
 # write tags to file supplied by the user
@@ -2358,29 +2358,29 @@ sub write_user_tags {
     
     foreach (@file) {
 
-         my ($file, $dir, $ext) = fileparse("$_", qr/\.[^.]*/);
+        my ($file, $dir, $ext) = fileparse("$_", qr/\.[^.]*/);
 
-            $ext  =~ s/^\.//;
-         my $from = $ext;
-            $from =~ tr/A-Z/a-z/;
+        $ext  =~ s/^\.//;
+        my $from = $ext;
+        $from =~ tr/A-Z/a-z/;
 
-         if ($run{$from}{TAGS}{WRITE} == 1) {
+        if ($run{$from}{TAGS}{WRITE} == 1) {
 
-             clear_tag_hash();
-             read_tags("$dir/$file.$ext","$from");
+            clear_tag_hash();
+            read_tags("$dir/$file.$ext","$from");
 
-             $tag_name{title}   = $title   if $title;
-             $tag_name{track}   = $track   if $track;
-             $tag_name{artist}  = $artist  if $artist;
-             $tag_name{album}   = $album   if $album;
-             $tag_name{comment} = $comment if $comment;
-             $tag_name{year}    = $year    if $year;
-             $tag_name{genre}   = $genre   if $genre;
+            $tag_name{title}   = $title   if $title;
+            $tag_name{track}   = $track   if $track;
+            $tag_name{artist}  = $artist  if $artist;
+            $tag_name{album}   = $album   if $album;
+            $tag_name{comment} = $comment if $comment;
+            $tag_name{year}    = $year    if $year;
+            $tag_name{genre}   = $genre   if $genre;
 
-             write_tags("$dir/$file.$ext","$from");
-             print "$lang{write_tag_i} $file.$ext\n";         
+            write_tags("$dir/$file.$ext","$from");
+            print "$lang{write_tag_i} $file.$ext\n";         
 
-         } else { perror("no_write_tag","$file.$ext"); }
+        } else { perror("no_write_tag","$file.$ext"); }
     }
     print "\n";
 }
@@ -2388,14 +2388,14 @@ sub write_user_tags {
 # print out list of supported encode & decode formats
 sub show_formats {
 
-print "\n$name - $version\n\n";
-print "EXT       E   D   ENCODER         DECODER         TAG-READ   TAG-WRITE\n";
-print "----------------------------------------------------------------------\n";
+    print "\n$name - $version\n\n";
+    print "EXT       E   D   ENCODER         DECODER         TAG-READ   TAG-WRITE\n";
+    print "----------------------------------------------------------------------\n";
 
-my $enc_count = 0;
-my $dec_count = 0;
+    my $enc_count = 0;
+    my $dec_count = 0;
 
-   foreach (sort(keys(%run))) {
+    foreach (sort(keys(%run))) {
 
         my $e = "N"; $e = "Y" if defined($run{$_}{DEFAULT_ENCODER});
         my $d = "N"; $d = "Y" if defined($run{$_}{DEFAULT_DECODER});
@@ -2410,8 +2410,8 @@ my $dec_count = 0;
         ++$enc_count if $enc ne '';
         ++$dec_count if $dec ne '';
 
-   }
-   print "\n$lang{enc_fmts} $enc_count --- $lang{dec_fmts} $dec_count\n\n";
+    }
+    print "\n$lang{enc_fmts} $enc_count --- $lang{dec_fmts} $dec_count\n\n";
 }
 
 # show encoders for output format
@@ -2448,7 +2448,7 @@ sub get_total_tracks {
     close(CDINFO);
 
     my $fmt_tracks = $cdquery[-3];
-       $fmt_tracks =~ s/\s//g;
+    $fmt_tracks =~ s/\s//g;
 
     my @ttracks = split(/\./, $fmt_tracks);
 
@@ -2461,26 +2461,26 @@ my (%cd, %ripconfig, @cdtrack, $track_total);
 # setup the cddb config
 sub get_cddb_config {
 
-      $config{USE_CDDB}      = 0 && return if $nocddb;
+    $config{USE_CDDB}      = 0 && return if $nocddb;
 
-      $config{CDDB_INPUT}    = 0 if $noinput;
+    $config{CDDB_INPUT}    = 0 if $noinput;
 
-      $ripconfig{CDDB_HOST}  = $config{CDDB_HOST};
-      $ripconfig{CDDB_PORT}  = $config{CDDB_PORT};
-      $ripconfig{CDDB_MODE}  = $config{CDDB_MODE};
-      $ripconfig{DEVICE}     = $device;
-      $ripconfig{CDDB_INPUT} = $config{CDDB_INPUT};
+    $ripconfig{CDDB_HOST}  = $config{CDDB_HOST};
+    $ripconfig{CDDB_PORT}  = $config{CDDB_PORT};
+    $ripconfig{CDDB_MODE}  = $config{CDDB_MODE};
+    $ripconfig{DEVICE}     = $device;
+    $ripconfig{CDDB_INPUT} = $config{CDDB_INPUT};
 
-      %cd = get_cddb(\%ripconfig);
+    %cd = get_cddb(\%ripconfig);
 
-      if (not $cd{title}) {
-          pnotice("no_cddb","",2);
-          $config{USE_CDDB} = 0;
-      }
-      else {
-          @cdtrack     = @{$cd{track}};
-          $track_total = $cd{tno};
-      }
+    if (not $cd{title}) {
+        pnotice("no_cddb","",2);
+        $config{USE_CDDB} = 0;
+    }
+    else {
+        @cdtrack     = @{$cd{track}};
+        $track_total = $cd{tno};
+    }
 
 }
 
@@ -2495,13 +2495,13 @@ sub tag_track {
 
     my $tno = shift;
 
-       $tag_name{artist}  = $cd{artist} if $cd{artist};
-       $tag_name{title}   = $cdtrack[$tno-1] if $cdtrack[$tno-1];
-       $tag_name{genre}   = $cd{cat} if $cd{cat};
-       $tag_name{track}   = $tno;
-       $tag_name{album}   = $cd{title} if $cd{title};
-       $tag_name{year}    = $cd{year} if $cd{year};
-       $tag_name{comment} = '';
+    $tag_name{artist}  = $cd{artist} if $cd{artist};
+    $tag_name{title}   = $cdtrack[$tno-1] if $cdtrack[$tno-1];
+    $tag_name{genre}   = $cd{cat} if $cd{cat};
+    $tag_name{track}   = $tno;
+    $tag_name{album}   = $cd{title} if $cd{title};
+    $tag_name{year}    = $cd{year} if $cd{year};
+    $tag_name{comment} = '';
 
 }
 
@@ -2510,17 +2510,17 @@ sub rip_cd {
 
     my ($on, $tno) = @_;
 
-        $out_dir = "$ENV{HOME}";
-        $to =~ tr/A-Z/a-z/;
-        get_visual_opts($to,$out_dir) if $gui and not defined($first_run) and `which kdialog 2>/dev/null`;
-        $first_run = 1;
+    $out_dir = "$ENV{HOME}";
+    $to =~ tr/A-Z/a-z/;
+    get_visual_opts($to,$out_dir) if $gui and not defined($first_run) and `which kdialog 2>/dev/null`;
+    $first_run = 1;
         
-        pnotice("ripping_track","$tno",2);    
+    pnotice("ripping_track","$tno",2);    
  
-        $on =~ s/\//_/g;
+    $on =~ s/\//_/g;
 
-        print  "cdparanoia -d $device $tno $on.wav\n\n"  if $dryrun;
-        system("cdparanoia -d $device $tno \"$on.wav\"") if not $dryrun;
+    print  "cdparanoia -d $device $tno $on.wav\n\n"  if $dryrun;
+    system("cdparanoia -d $device $tno \"$on.wav\"") if not $dryrun;
 
     if ($to !~ /wav/i) {
 
@@ -2538,62 +2538,62 @@ sub rip_cd {
 # rip selected tracks or all from disc
 sub proc_cd {
 
- perror("no_app","cdparanoia") if not `which cdparanoia 2>/dev/null`;
- query_disc();
- get_cddb_config();
+    perror("no_app","cdparanoia") if not `which cdparanoia 2>/dev/null`;
+    query_disc();
+    get_cddb_config();
 
- my $total_tracks = get_total_tracks();
+    my $total_tracks = get_total_tracks();
 
     if ($rip eq "all") { 
 
         if ($config{USE_CDDB} ne 1) {
 
-            for(my $i=1;$i<=$total_tracks;$i++) {
+            for (my $i=1;$i<=$total_tracks;$i++) {
                 rip_cd($i, $i);
             }
 
         } elsif ($config{USE_CDDB} eq 1) {
 
-              my $n = 1;
+            my $n = 1;
 
-              foreach my $i (@cdtrack) {
+            foreach my $i (@cdtrack) {
 
-                      my $out_string = $nscheme;
+                my $out_string = $nscheme;
                       
-                         chomp($cdtrack[$n-1]);
+                chomp($cdtrack[$n-1]);
 
-                         $out_string =~ s/%ar/$cd{artist}/;
-                         $out_string =~ s/%ti/$cdtrack[$n-1]/;
-                         $out_string =~ s/%tr/$n/;
-                         $out_string =~ s/%ab/$cd{title}/;
-                         $out_string =~ s/%yr/$cd{year}/;
+                $out_string =~ s/%ar/$cd{artist}/;
+                $out_string =~ s/%ti/$cdtrack[$n-1]/;
+                $out_string =~ s/%tr/$n/;
+                $out_string =~ s/%ab/$cd{title}/;
+                $out_string =~ s/%yr/$cd{year}/;
 
-                         rip_cd($out_string, $n);
+                rip_cd($out_string, $n);
 
-                         ++$n;
-              }
-          }
+                ++$n;
+            }
+        }
 
     } else {
 
-            my @tracks = split(/,/, $rip);
+        my @tracks = split(/,/, $rip);
 
-               foreach my $i (@tracks) {
+        foreach my $i (@tracks) {
 
-                       next if $i > $total_tracks or $i < 1;
+            next if $i > $total_tracks or $i < 1;
 
-                       my $out_string = $nscheme;
+            my $out_string = $nscheme;
 
-                          $out_string =~ s/%ar/$cd{artist}/;
-                          $out_string =~ s/%ti/$cdtrack[$i-1]/;
-                          $out_string =~ s/%tr/$i/;
-                          $out_string =~ s/%ab/$cd{title}/;
-                          $out_string =~ s/%yr/$cd{year}/;
+            $out_string =~ s/%ar/$cd{artist}/;
+            $out_string =~ s/%ti/$cdtrack[$i-1]/;
+            $out_string =~ s/%tr/$i/;
+            $out_string =~ s/%ab/$cd{title}/;
+            $out_string =~ s/%yr/$cd{year}/;
 
-                          rip_cd($out_string, $i) if $config{USE_CDDB} == 1;
-                          rip_cd($i, $i)          if $config{USE_CDDB} == 0;
-               }
-      }
+            rip_cd($out_string, $i) if $config{USE_CDDB} == 1;
+            rip_cd($i, $i)          if $config{USE_CDDB} == 0;
+        }
+    }
 }
 
 # get/print cddb information from disc
@@ -2613,9 +2613,9 @@ sub cdinfo {
     my $n = 1;
 
     foreach (@cdtrack) {
-         print "Track $n: $_";
-         print "\n";
-         ++$n;
+        print "Track $n: $_";
+        print "\n";
+        ++$n;
     }
 
     exit(0);
@@ -2624,7 +2624,7 @@ sub cdinfo {
 # version / license information
 sub version {
 
-print "
+    print "
 $name - $version
 
 Copyright (C) 2005-2009 Philip Lyons
@@ -2640,9 +2640,9 @@ There is NO WARRANTY, to the extent permitted by law.
 # help & longhelp menu
 sub help_menu {
 
-print "\n$name - $version\n";
+    print "\n$name - $version\n";
 
-print "
+    print "
 -t, --to             $lang{to}
 -r, --recursive      $lang{recursive}
 -p, --preserve       $lang{preserve}
@@ -2655,7 +2655,7 @@ print "
 
 ";
 
-print "$lang{user_opts}
+    print "$lang{user_opts}
 
 --defopts            $lang{defopts}
 --eopts              $lang{eopts}
@@ -2716,7 +2716,7 @@ $lang{rip_usage}
 
 " if $longhelp;
 
-print "$lang{usage}\n\n";
+    print "$lang{usage}\n\n";
 
 }
 
@@ -2731,28 +2731,28 @@ sub load_module {
 sub import_module {
     my ($format_ref) = @_;
     my $format_name=$format_ref->{NAME};
-       $run{$format_name} = $format_ref;
+    $run{$format_name} = $format_ref;
 }
                
 # load all user modules
 sub load_user_modules {
-   my @imported_mods;
-   opendir(DIR, "$mod_dir") or perror("opening_dir","$mod_dir: $!");
-   foreach (readdir(DIR)) {
+    my @imported_mods;
+    opendir(DIR, "$mod_dir") or perror("opening_dir","$mod_dir: $!");
+    foreach (readdir(DIR)) {
         load_module("$mod_dir/$_") if $_ !~ /^\./;
         push(@imported_mods, $_)   if $_ !~ /^\./;
-   }
-   closedir(DIR);
-   print "$lang{imported} @imported_mods\n";
+    }
+    closedir(DIR);
+    print "$lang{imported} @imported_mods\n";
 }
 
 # place files/directories in their respective arrays
 if (@ARGV) {
-  foreach my $in (@ARGV) {
-       if    (-f $in) { push(@file,$in); }
-       elsif (-d $in) { push(@dir, $in); }
-       else { perror("no_infile","$in"); } 
-  }
+    foreach my $in (@ARGV) {
+        if    (-f $in) { push(@file,$in); }
+        elsif (-d $in) { push(@dir, $in); }
+        else { perror("no_infile","$in"); } 
+    }
 }
 
 load_user_modules() if $config{IMPORTM} == 1;
