@@ -3253,4 +3253,6 @@ Copyright (C) 2005-2009 Philip Lyons (viiron@gmail.com)
 # Local Variables:
 # cperl-indent-level: 4
 # indent-tabs-mode: nil
+# cperl-merge-trailing-else: t
+# cperl-break-one-line-blocks-when-indent: t
 # End:
