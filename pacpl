@@ -1607,9 +1607,7 @@ sub proc_input {
                 if ($keep and $if eq $to) {
                     system("cp -v \"$dir/$file.$ext\" \"$outdir/$outfile.$ext\"") if $outdir ne $dir and not -e "$outdir/$outfile.$ext";
                     next if $outdir eq $dir;
-                } 
-                   
-                else {
+                } else {
                     convert("$dir/$file","$outdir/$outfile","$ext","$file","$outfile");
                 }
                  
@@ -1707,7 +1705,9 @@ sub preserve_struct {
 
         $out_dir = "$odir";
 
-        if (-d $find_dir and not -d $odir) { mkdir("$odir", 0755); }
+        if (-d $find_dir and not -d $odir) {
+            mkdir("$odir", 0755);
+        }
 
         opendir(IN, "$presdir") or perror("opening_dir","$presdir: $!");
             
@@ -1847,11 +1847,13 @@ sub check_encoder {
 
     if (not `which $encoder 2>/dev/null`) {
         my $first_encoder = $encoder;
-        foreach (keys %{$run{$to}{ENCODER}}) { $encoder = $_ and return if `which $_ 2>/dev/null`; } 
+        foreach (keys %{$run{$to}{ENCODER}}) {
+            $encoder = $_ and return if `which $_ 2>/dev/null`;
+        } 
         perror("no_encode_app","$to") if $encoder eq $first_encoder;
-    } 
-
-    else { return 0; }
+    } else {
+        return 0;
+    }
 }
 
 # if the default decoder does not exist, cycle through the supported
@@ -1862,11 +1864,13 @@ sub check_decoder {
     
     if (not `which $decoder 2>/dev/null`) {
         my $first_decoder = $decoder;
-        foreach (keys %{$run{$from}{DECODER}}) { $decoder = $_ and return if `which $_ 2>/dev/null`; }
+        foreach (keys %{$run{$from}{DECODER}}) {
+            $decoder = $_ and return if `which $_ 2>/dev/null`;
+        }
         perror("no_decode_app","$from") if $decoder eq $first_decoder;
+    } else {
+        return 0;
     }
-   
-    else { return 0; }
 }
 
 # make sure encoding/decoding is supported.
@@ -2078,18 +2082,18 @@ sub read_tags {
     switch ($in_format) {
 
            case 'mp3'  {
-                            my $mp3tag = $tag_module->new($in_file);
-                            my @tags   = $mp3tag->autoinfo();
+                        my $mp3tag = $tag_module->new($in_file);
+                        my @tags   = $mp3tag->autoinfo();
 
-                               $tag_name{title}   = "$tags[0]" if $tags[0];
-                               $tag_name{track}   = "$tags[1]" if $tags[1];
-                               $tag_name{artist}  = "$tags[2]" if $tags[2];
-                               $tag_name{album}   = "$tags[3]" if $tags[3];
-                               $tag_name{comment} = "$tags[4]" if $tags[4];
-                               $tag_name{year}    = "$tags[5]" if $tags[5];
-                               $tag_name{genre}   = "$tags[6]" if $tags[6];
+                        $tag_name{title}   = "$tags[0]" if $tags[0];
+                        $tag_name{track}   = "$tags[1]" if $tags[1];
+                        $tag_name{artist}  = "$tags[2]" if $tags[2];
+                        $tag_name{album}   = "$tags[3]" if $tags[3];
+                        $tag_name{comment} = "$tags[4]" if $tags[4];
+                        $tag_name{year}    = "$tags[5]" if $tags[5];
+                        $tag_name{genre}   = "$tags[6]" if $tags[6];
                                
-                            return 0;
+                        return 0;
                        }
 
            case 'ogg'  {
@@ -2215,7 +2219,9 @@ sub read_tags {
                             return 0;
                        }
 
-                  else { return 1; }
+                  else {
+                      return 1; 
+                  }
     }
 }
 
@@ -2298,7 +2304,9 @@ sub write_tags {
                           return 0;
                        }
 
-        else	       { perror("no_write_tag","$out_file"); }
+        else {
+            perror("no_write_tag","$out_file");
+        }
     }
 
 }
@@ -2345,7 +2353,9 @@ sub show_taginfo {
 
             print "\n";
 
-        } else { pnotice("no_read_tag","$file.$ext",2); }
+        } else {
+            pnotice("no_read_tag","$file.$ext",2);
+        }
     }
 }
 
@@ -2380,7 +2390,9 @@ sub write_user_tags {
             write_tags("$dir/$file.$ext","$from");
             print "$lang{write_tag_i} $file.$ext\n";         
 
-        } else { perror("no_write_tag","$file.$ext"); }
+        } else {
+            perror("no_write_tag","$file.$ext"); 
+        }
     }
     print "\n";
 }
@@ -2476,8 +2488,7 @@ sub get_cddb_config {
     if (not $cd{title}) {
         pnotice("no_cddb","",2);
         $config{USE_CDDB} = 0;
-    }
-    else {
+    } else {
         @cdtrack     = @{$cd{track}};
         $track_total = $cd{tno};
     }
@@ -2544,7 +2555,7 @@ sub proc_cd {
 
     my $total_tracks = get_total_tracks();
 
-    if ($rip eq "all") { 
+    if ($rip eq "all") {
 
         if ($config{USE_CDDB} ne 1) {
 
@@ -2749,27 +2760,41 @@ sub load_user_modules {
 # place files/directories in their respective arrays
 if (@ARGV) {
     foreach my $in (@ARGV) {
-        if    (-f $in) { push(@file,$in); }
-        elsif (-d $in) { push(@dir, $in); }
-        else { perror("no_infile","$in"); } 
+        if (-f $in) {
+            push(@file,$in);
+        } elsif (-d $in) {
+            push(@dir, $in);
+        } else {
+            perror("no_infile","$in");
+        } 
     }
 }
 
 load_user_modules() if $config{IMPORTM} == 1;
 
-if ($to and @ARGV and not $rip) { proc_input(); } 
-
-elsif ($to and $rip) { proc_cd(); }
-elsif ($my_encoder and not $to) { show_encoders(); }
-elsif ($my_decoder and not $to) { show_decoders(); }
-elsif ($verinfo) { version(); }
-elsif ($longhelp) { help_menu(); }
-elsif ($formats) { show_formats(); }
-elsif ($cdinfo) { cdinfo(); }
-elsif ($taginfo and not $to) { show_taginfo(); }
-elsif ($title or $track or $artist or $album or $comment or $year or $genre) { write_user_tags(); }
-
-else { help_menu(); }
+if ($to and @ARGV and not $rip) {
+    proc_input();
+} elsif ($to and $rip) {
+    proc_cd();
+} elsif ($my_encoder and not $to) {
+    show_encoders();
+} elsif ($my_decoder and not $to) {
+    show_decoders();
+} elsif ($verinfo) {
+    version();
+} elsif ($longhelp) {
+    help_menu();
+} elsif ($formats) {
+    show_formats();
+} elsif ($cdinfo) {
+    cdinfo();
+} elsif ($taginfo and not $to) {
+    show_taginfo();
+} elsif ($title or $track or $artist or $album or $comment or $year or $genre) {
+    write_user_tags();
+} else {
+    help_menu();
+}
 
 __END__
 
@@ -3255,4 +3280,5 @@ Copyright (C) 2005-2009 Philip Lyons (viiron@gmail.com)
 # indent-tabs-mode: nil
 # cperl-merge-trailing-else: t
 # cperl-break-one-line-blocks-when-indent: t
+# cperl-fix-hanging-brace-when-indent: t
 # End:
