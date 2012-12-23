@@ -24,7 +24,18 @@ use Getopt::Long;
 use File::Basename;
 use File::Find;
 use File::Spec::Functions qw(rel2abs);
-use String::ShellQuote;
+
+use String::ShellQuote qw();
+sub shell_quote_best_effort {
+    my ($s) = @_;
+    $s =~ s{\000}{}g;
+    return String::ShellQuote::shell_quote_best_effort($s);
+}
+sub shell_quote {
+    my ($s) = @_;
+    $s =~ s{\000}{}g;
+    return String::ShellQuote::shell_quote($s);
+}
 
 # Tagging modules
 use Ogg::Vorbis::Header;
@@ -234,8 +245,8 @@ sub perror {
     print "$name - $version\n\n";
     print "$lang{error}: $lang{$key} $msg" . "\n\n";
     system(sprintf("kdialog --title %s --error %s &",
-                   shell_quote($name),
-                   shell_quote("$lang{error}: $lang{$key} $msg"))) if $gui;
+                   shell_quote_best_effort($name),
+                   shell_quote_best_effort("$lang{error}: $lang{$key} $msg"))) if $gui;
     die "$lang{seek_help}\n";
 }
 
@@ -250,8 +261,8 @@ sub pnotice {
     print "\n\n"  if $nm == 2;
       
     system(sprintf("kdialog --title %s --passivepopup %s 10 &",
-                   shell_quote($name),
-                   shell_quote("$lang{$key} $msg"))) if $gui;
+                   shell_quote_best_effort($name),
+                   shell_quote_best_effort("$lang{$key} $msg"))) if $gui;
 
     $banner = 0;
 }
@@ -1611,8 +1622,8 @@ sub proc_input {
 
                 if ($keep and $if eq $to) {
                     system(sprintf("cp -v %s %s",
-                                   shell_quote("$dir/$file.$ext"),
-                                   shell_quote("$outdir/$outfile.$ext"))) if $outdir ne $dir and not -e "$outdir/$outfile.$ext";
+                                   shell_quote_best_effort("$dir/$file.$ext"),
+                                   shell_quote_best_effort("$outdir/$outfile.$ext"))) if $outdir ne $dir and not -e "$outdir/$outfile.$ext";
                     next if $outdir eq $dir;
                 } else {
                     convert("$dir/$file","$outdir/$outfile","$ext","$file","$outfile");
@@ -1782,8 +1793,8 @@ sub convert {
     check_decoder($infmt);
                          
     my $decode_string =  $run{$if}{DECODER}{$decoder}{DSTR}->();
-    $decode_string    =~ s/%i/shell_quote("$inf.$infmt")/e;
-    $decode_string    =~ s/%o/shell_quote("$outf.$$.wav")/e;
+    $decode_string    =~ s/%i/shell_quote_best_effort("$inf.$infmt")/e;
+    $decode_string    =~ s/%o/shell_quote_best_effort("$outf.$$.wav")/e;
     
     my $nl = 0; $nl = 2 if $verbose;
           
@@ -1804,14 +1815,14 @@ sub convert {
     # normalize wav file before encoding to output format
     perror("no_app","normalize") if $normalize and not `which normalize 2>/dev/null`;
     system(sprintf("normalize $nopts %s", 
-                   shell_quote("$outf.$$.wav"))) if $normalize;
+                   shell_quote_best_effort("$outf.$$.wav"))) if $normalize;
 
     # copy meta-data from input file to %tag_name 
     read_tags("$inf.$infmt", "$if") if $run{$if}{TAGS}{READ} == 1 and not $dryrun;
 
     my $encode_string =  $run{$to}{ENCODER}{$encoder}{ESTR}->();
-    $encode_string    =~ s/%i/shell_quote("$outf.$$.wav")/e; 
-    $encode_string    =~ s/%o/shell_quote("$outf.$to")/e;
+    $encode_string    =~ s/%i/shell_quote_best_effort("$outf.$$.wav")/e; 
+    $encode_string    =~ s/%o/shell_quote_best_effort("$outf.$to")/e;
 
     my $tag_opts = format_tags($to); # tag options for mp4/m4a/m4b/mpc/mpp/bonk/spx/wv
     
@@ -1851,11 +1862,11 @@ sub convert {
 # encoders until we find one that does.
 sub check_encoder {
 
-    my $sq_encoder = shell_quote($encoder);
+    my $sq_encoder = shell_quote_best_effort($encoder);
     if (not `which $sq_encoder 2>/dev/null`) {
         my $first_encoder = $encoder;
         foreach (keys %{$run{$to}{ENCODER}}) {
-            my $sq_key = shell_quote($_);
+            my $sq_key = shell_quote_best_effort($_);
             $encoder = $_ and return if `which $sq_key 2>/dev/null`;
         } 
         perror("no_encode_app","$to") if $encoder eq $first_encoder;
@@ -1870,11 +1881,11 @@ sub check_decoder {
 
     my $from = shift;
 
-    my $sq_decoder = shell_quote($decoder);
+    my $sq_decoder = shell_quote_best_effort($decoder);
     if (not `which $sq_decoder 2>/dev/null`) {
         my $first_decoder = $decoder;
         foreach (keys %{$run{$from}{DECODER}}) {
-            my $sq_key = shell_quote($_);
+            my $sq_key = shell_quote_best_effort($_);
             $decoder = $_ and return if `which $sq_key 2>/dev/null`;
         }
         perror("no_decode_app","$from") if $decoder eq $first_decoder;
@@ -1903,13 +1914,13 @@ sub check_input {
 ############################################################
 
 my $kdialog = sprintf("kdialog --title %s",
-                      shell_quote("$name - $version"));
+                      shell_quote_best_effort("$name - $version"));
 
 sub get_visual_opts {
 
     my ($to_fmt,$od) = @_;
 
-    $od = shell_quote($od);
+    $od = shell_quote_best_effort($od);
 
     $outdir    = `kdialog --getexistingdirectory $od` if $config{KDE_DIR} == 1;
     chomp($outdir);
@@ -1930,105 +1941,105 @@ sub prompt_user {
     switch ($opt) {
 
         case 'BITRATE'   {
-                          my $sq = shell_quote($lang{kde_bitrate});
+                          my $sq = shell_quote_best_effort($lang{kde_bitrate});
                           $bitrate  = `$kdialog --default $bitrate  --combobox $sq 56 112 128 160 192 256 320`;
                           chomp($bitrate);
                           exit(1) if not $bitrate;
                          }
 
         case 'FREQ'      {
-                          my $sq = shell_quote($lang{kde_freq});
+                          my $sq = shell_quote_best_effort($lang{kde_freq});
                           $freq     = `$kdialog --default $freq     --combobox $sq 32000 44100 48000`;
                           chomp($freq);
                           exit(1) if not $freq;
                          }
 
         case 'CHANNELS'  { 
-                          my $sq = shell_quote($lang{kde_chans});
+                          my $sq = shell_quote_best_effort($lang{kde_chans});
                           $channels = `$kdialog --default $channels --combobox $sq 1 2`;
                           chomp($channels);
                           exit(1) if not $channels;
                          }
 
         case 'FCOMP'     {
-                          my $sq = shell_quote($lang{kde_fcomp});
+                          my $sq = shell_quote_best_effort($lang{kde_fcomp});
                           $fcomp    = `$kdialog --default $fcomp    --combobox $sq 0 1 2 3 4 5 6 7 8`;
                           chomp($fcomp);
                           exit(1) if not $fcomp;
                          }
 
         case 'PCOMP'     {
-                          my $sq = shell_quote($lang{kde_pcomp});
+                          my $sq = shell_quote_best_effort($lang{kde_pcomp});
                           $pcomp    = `$kdialog --default $pcomp    --combobox $sq 1 2 3 4 5`;
                           chomp($pcomp);
                           exit(1) if not $pcomp;
                          }
 
         case 'ACOMP'     {
-                          my $sq = shell_quote($lang{kde_acomp});
+                          my $sq = shell_quote_best_effort($lang{kde_acomp});
                           $acomp    = `$kdialog --default $acomp    --combobox $sq 1000 2000 3000 4000 5000`;
                           chomp($acomp);
                           exit(1) if not $acomp;
                          }
 
         case 'OGGQUAL'   {
-                          my $sq = shell_quote($lang{kde_oggqual});
+                          my $sq = shell_quote_best_effort($lang{kde_oggqual});
                           $oggqual  = `$kdialog --default $oggqual   --combobox $sq 0 1 2 3 4 5 6 7 8 9 10`;
                           chomp($oggqual);
                           exit(1) if not $oggqual;
                          }
 
         case 'SPXQUAL'   {
-                          my $sq = shell_quote($lang{kde_spxqual});
+                          my $sq = shell_quote_best_effort($lang{kde_spxqual});
                           $spxqual  = `$kdialog --default $spxqual   --combobox $sq 0 1 2 3 4 5 6 7 8 9 10`;
                           chomp($spxqual);
                           exit(1) if not $spxqual;
                          }
 
         case 'AACQUAL'   {
-                          my $sq = shell_quote($lang{kde_aacqual});
+                          my $sq = shell_quote_best_effort($lang{kde_aacqual});
                           $aacqual  = `$kdialog --default $aacqual   --combobox $sq 50 75 100 125 150`;
                           chomp($aacqual);
                           exit(1) if not $aacqual;
                          }
 
         case 'MPCQUAL'   {
-                          my $sq = shell_quote($lang{kde_mpcqual});
+                          my $sq = shell_quote_best_effort($lang{kde_mpcqual});
                           $mpcqual  = `$kdialog --default $mpcqual   --combobox $sq thumb radio standard xtreme insane braindead`;
                           chomp($mpcqual);
                           exit(1) if not $mpcqual;
                          }
 
         case 'OFMODE'    {
-                          my $sq = shell_quote($lang{kde_ofmode});
+                          my $sq = shell_quote_best_effort($lang{kde_ofmode});
                           $ofmode   = `$kdialog --default $ofmode    --combobox $sq fast normal high extra best highnew extranew bestnew`; 
                           chomp($ofmode);
                           exit(1) if not $ofmode;
                          }
 
         case 'OFOPT'     {
-                          my $sq = shell_quote($lang{kde_ofopt});
+                          my $sq = shell_quote_best_effort($lang{kde_ofopt});
                           $ofopt    = `$kdialog --default $ofopt     --combobox $sq none fast normal high best`; 
                           chomp($ofopt);
                           exit(1) if not $ofopt;
                          }
 
         case 'BRATIO'    {
-                          my $sq = shell_quote($lang{kde_bratio});
+                          my $sq = shell_quote_best_effort($lang{kde_bratio});
                           $bratio   = `$kdialog --default $bratio    --combobox $sq 1 2 3 4 5`;
                           chomp($bratio);
                           exit(1) if not $bratio;
                          }
 
         case 'BQUANL'    {
-                          my $sq = shell_quote($lang{kde_bquanl});
+                          my $sq = shell_quote_best_effort($lang{kde_bquanl});
                           $bquanl   = `$kdialog --default $bquanl    --combobox $sq 1.00 1.25 1.50 1.75 2.00`;
                           chomp($bquanl);
                           exit(1) if not $bquanl;
                          }
 
         case 'BPSIZE'    {
-                          my $sq = shell_quote($lang{kde_bpsize});
+                          my $sq = shell_quote_best_effort($lang{kde_bpsize});
                           $bpsize   = `$kdialog --default $bpsize    --combobox $sq 10 128`;
                           chomp($bpsize);
                           exit(1) if not $bpsize;
@@ -2081,63 +2092,63 @@ sub format_tags {
                                 $tag_name{year}  = 0 if not $tag_name{year};
 
                                 return sprintf("-title %s -track %s -author %s -album %s -comment %s -year %s -genre %s",
-                                               shell_quote($tag_name{title}),
-                                               shell_quote($tag_name{track}),
-                                               shell_quote($tag_name{artist}),
-                                               shell_quote($tag_name{album}),
-                                               shell_quote($tag_name{comment}),
-                                               shell_quote($tag_name{year}),
-                                               shell_quote($tag_name{genre}));
+                                               shell_quote_best_effort($tag_name{title}),
+                                               shell_quote_best_effort($tag_name{track}),
+                                               shell_quote_best_effort($tag_name{artist}),
+                                               shell_quote_best_effort($tag_name{album}),
+                                               shell_quote_best_effort($tag_name{comment}),
+                                               shell_quote_best_effort($tag_name{year}),
+                                               shell_quote_best_effort($tag_name{genre}));
                                 
                             } else {
                                 
                                 return sprintf("--title %s --track %s --artist %s --album %s --comment %s --year %s --genre %s",
-                                               shell_quote($tag_name{title}),
-                                               shell_quote($tag_name{track}),
-                                               shell_quote($tag_name{artist}),
-                                               shell_quote($tag_name{album}),
-                                               shell_quote($tag_name{comment}),
-                                               shell_quote($tag_name{year}),
-                                               shell_quote($tag_name{genre}));
+                                               shell_quote_best_effort($tag_name{title}),
+                                               shell_quote_best_effort($tag_name{track}),
+                                               shell_quote_best_effort($tag_name{artist}),
+                                               shell_quote_best_effort($tag_name{album}),
+                                               shell_quote_best_effort($tag_name{comment}),
+                                               shell_quote_best_effort($tag_name{year}),
+                                               shell_quote_best_effort($tag_name{genre}));
                                 
                             }
                            } 
                 
         case /mpc|mpp/ {
                         return sprintf("--tag %s --tag %s --tag %s --tag %s --tag %s --tag %s --tag %s",
-                                       shell_quote("Title=$tag_name{title}"),
-                                       shell_quote("Track=$tag_name{track}"),
-                                       shell_quote("Artist=$tag_name{artist}"),
-                                       shell_quote("Album=$tag_name{album}"),
-                                       shell_quote("Comment=$tag_name{comment}"),
-                                       shell_quote("Year=$tag_name{year}"),
-                                       shell_quote("Genre=$tag_name{genre}"));
+                                       shell_quote_best_effort("Title=$tag_name{title}"),
+                                       shell_quote_best_effort("Track=$tag_name{track}"),
+                                       shell_quote_best_effort("Artist=$tag_name{artist}"),
+                                       shell_quote_best_effort("Album=$tag_name{album}"),
+                                       shell_quote_best_effort("Comment=$tag_name{comment}"),
+                                       shell_quote_best_effort("Year=$tag_name{year}"),
+                                       shell_quote_best_effort("Genre=$tag_name{genre}"));
                        }
         case 'wv'      {
                         return sprintf("-w %s -w %s -w %s -w %s -w %s -w %s -w %s",
-                                       shell_quote("Title=$tag_name{title}"),
-                                       shell_quote("Track=$tag_name{track}"),
-                                       shell_quote("Artist=$tag_name{artist}"),
-                                       shell_quote("Album=$tag_name{album}"),
-                                       shell_quote("Comment=$tag_name{comment}"),
-                                       shell_quote("Year=$tag_name{year}"),
-                                       shell_quote("Genre=$tag_name{genre}"));
+                                       shell_quote_best_effort("Title=$tag_name{title}"),
+                                       shell_quote_best_effort("Track=$tag_name{track}"),
+                                       shell_quote_best_effort("Artist=$tag_name{artist}"),
+                                       shell_quote_best_effort("Album=$tag_name{album}"),
+                                       shell_quote_best_effort("Comment=$tag_name{comment}"),
+                                       shell_quote_best_effort("Year=$tag_name{year}"),
+                                       shell_quote_best_effort("Genre=$tag_name{genre}"));
                        }
         case 'bonk'    {
                         return sprintf("-t %s -a %s -c %s",
-                                       shell_quote($tag_name{title}),
-                                       shell_quote($tag_name{artist}),
-                                       shell_quote($tag_name{comment}));
+                                       shell_quote_best_effort($tag_name{title}),
+                                       shell_quote_best_effort($tag_name{artist}),
+                                       shell_quote_best_effort($tag_name{comment}));
                        }
         case 'spx'     {
                         return sprintf("--author %s --title %s --comment %s --comment %s --comment %s --comment %s --comment %s",
-                                       shell_quote($tag_name{artist}),
-                                       shell_quote($tag_name{title}),
-                                       shell_quote("date=$tag_name{year}"),
-                                       shell_quote("track=$tag_name{track}"),
-                                       shell_quote("album=$tag_name{album}"),
-                                       shell_quote("genre=$tag_name{genre}"),
-                                       shell_quote("comment=$tag_name{comment}"));
+                                       shell_quote_best_effort($tag_name{artist}),
+                                       shell_quote_best_effort($tag_name{title}),
+                                       shell_quote_best_effort("date=$tag_name{year}"),
+                                       shell_quote_best_effort("track=$tag_name{track}"),
+                                       shell_quote_best_effort("album=$tag_name{album}"),
+                                       shell_quote_best_effort("genre=$tag_name{genre}"),
+                                       shell_quote_best_effort("comment=$tag_name{comment}"));
                        }
         else           { return ''; }
     }
@@ -2197,7 +2208,7 @@ sub read_tags {
                        
         case 'spx'     {
                             my $pid  = open(SPX, sprintf("speexdec %s tmp1-$$.wav 2>&1 |",
-                                                         shell_quote($in_file))) or perror("opening_file","$in_file");
+                                                         shell_quote_best_effort($in_file))) or perror("opening_file","$in_file");
                             my @data = <SPX>;
                                @data = grep(!/^$|^#/, @data);
                             
@@ -2571,7 +2582,7 @@ sub get_cddb_config {
 # check to see if a disc is present
 sub query_disc {
     system(sprintf("cdparanoia -q -d %s -Q 1>/dev/null 2>/dev/null",
-                   shell_quote($device)));
+                   shell_quote_best_effort($device)));
     perror("no_disc","$device") if $? > 0;
 }
 
@@ -2606,7 +2617,7 @@ sub rip_cd {
 
     print  "cdparanoia -d $device $tno $on.wav\n\n"  if $dryrun;
     system(sprintf("cdparanoia -d $device $tno %s",
-                   shell_quote("$on.wav"))) if not $dryrun;
+                   shell_quote_best_effort("$on.wav"))) if not $dryrun;
     
     if ($to !~ /wav/i) {
 
