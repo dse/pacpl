@@ -28,7 +28,7 @@ ACLOCAL_M4 = ./aclocal.m4
 # Modules & Documentation
 #
 
-DOCS = README AUTHORS TODO
+DOCS = README.md AUTHORS TODO
 
 LANG_MODS = po/ca.po \
 	    po/de.po \
