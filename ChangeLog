@@ -1,0 +1,199 @@
+v4.0.5:
+
++ added support for KDE4 (konqueror/dolphin) service menus
+
+- removed all previously included mime types.
+- removed support for KDE3 (konqueror/dolphin) service menus.
+  the old pacpl.desktop can still be found in the source package
+  under plugins/d3lphin for those that still need it.
+
+* the amarok script no longer works in 2.0* due to various
+  changes.  a new one is in the works however, and will be
+  included in a future release.
+
+% fixed typo in tag string when encoding mp4/m4a using faac.
+  thanks to Steve Harrold for reporting the issue.
+% fixed FLAC encoders list in codecs.conf.
+% fixed Makefile.in to include translations from the last release.
+  thanks to Bram Schoenmakers for spotting the fowl-up
+------------------------------------------------------------------------
+
+v4.0.4:
+
++ added Romanian translation thanks to Sabadac Petru-Gabriel
++ added Dutch translation thanks to Sander Pientka
++ added Italian translation thanks to Marco Bignami
++ added flake to supported FLAC encoders
+
+* updated Russian translation
+* updated Turkish translation thanks to Osman Karagoz
+* updated mime type names to prevent conflicts
+
+% fixed mp4 encoding/tagging via ffmpeg. thanks to Neil Stewart for
+  reporting the changes in the latest ffmpeg.
+% fixed a few typos/errors in the man page.  thanks to Reuben Thomas.
+------------------------------------------------------------------------
+v4.0.3:
+
++ added encode/decode support for m4b (iPod audio book)
++ added d3lphin to the configure script
++ added option --defopts.  this allows you to turn off/remove all default
+  encoder options set by the program, and allows you to completely customize
+  them via --eopts.
+
+* updated po directory (moved to /usr/share/pacpl/locale)
+
+% fixed various inconsistencies in Makefile.in and configure.ac
+  thanks to Cristian Greco for the patches, suggestions, and 
+  Debian package.
+% fixed link for ape encoder/decoder (mac) in README file
+% fixed bug when encoding to mp3 using bladeenc.  --eopts was not being
+  read into the command.
+
+------------------------------------------------------------------------
+v4.0.2:
+
++ added ability to encode to rm
+
+* updated Polish translation
+* updated Estonian translation
+* updated Russian translation
+
+% fixed typo when trying to find normalize. thanks to FErki for spotting it.
+% fixed WMA tag read bug.  thanks to Andrew Neitsch for reporting the issue
+% fixed other minor issues
+
+------------------------------------------------------------------------
+v4.0.1:
+
++ added ability to select alternate encoders/decoders for various formats
++ added codecs.conf to set desired default encoders/decoders
++ added options --normalize & --nopts
++ added notice to print total completed/failed conversions
++ added support for audio format mmf via ffmpeg
++ added Turkish translation thanks to Cantek Cetin
++ added Estonian translation thanks to Priit Jõerüüt
++ added Catalan translation thanks to Xavi BS
++ added Russian translation thanks to Illarion Khapersky 
++ added French translation thanks to Guillaume Loyot
+
+* updated man page to include sndfile-convert in the "see also" section
+* updated application to remove partial files when encoding fails.
+* updated all translations to include new phrases (att: translators)
+* updated user modules (new syntax implemented) thanks to Stefano Sabatini
+* updated -v switch to be used for verbose, not version
+* updated the pnotice() sub to only print the banner once.  thanks to
+  Robert Krawitz for this, and many other suggestions.
+* updated mod-install.sh to force install Audio::FLAC::Header.  this may
+  or may not be necessary depending on your specific distribution and/or
+  installed libraries.
+
+% fixed typo in mod-install-kubuntu.sh
+% fixed a few inconsistencies in the code
+% fixed parenthesis/forward-slash in directory/filename bug 
+% fixed ac3 decoding (ffmpeg can only encode to ac3, use mplayer to decode)
+% fixed input file deletion bug (using --delete) when ^C was pressed.
+
+- removed inclusion of uneeded Perl module Pod::Usage
+
+------------------------------------------------------------------------
+v4.0.0:
+
++ added Chinese Simplified translation thanks to Ni Hui
++ added Spanish translation thanks to Antonio 
++ added --keep option.  this option prevents re-encoding of files matching
+  the destination format.
++ added the following formats from sndfile-convert (part of the libsndfile
+  package): caf, fap, ircam, mat, mat4, mat5, nist, paf, pvf, sd2, sf, w64
+
+* updated en.po (renamed to en_US.po)
+
+% fixed typo in extra/README.module
+% fixed a few typos in the man page
+% fixed lang sub to handle .uft8/UTF-8 extensions
+% fixed apostrophe in directory name bug.  this affected all GUI service
+  menus and plugins with kdialog using the --getexistingdirectory option.
+
+------------------------------------------------------------------------
+v4.0.0-beta3:
+
++ added Polish translation thanks to Michal Smoczyk
++ added Dolphin PACPL-Convert service menu
++ added --enable-all option to configure script.  this should aid package
+  maintainers who install in a chroot.
+
+* updated configure script to not exit when plugin apps are not found
+* updated extra directory contents are now installed along with docs
+* updated pacpl.desktop service menu to use audio/* and video/*  Suggested
+  by William Pfeffer
+
+% fixed duplication bug when modifying ogg tags
+% fixed various directory creations in the Makefile
+% fixed owner and group on all po files
+% fixed copying of WMA artist tag to use AUTHOR instead of ALBUMARTIST. thanks
+  to Matthias Meyer for reporting this issue.
+
+- removed LANG variable from pacpl.conf.  The locale is now set according to
+  the environment variable $LANG.
+
+------------------------------------------------------------------------
+v4.0.0-beta2:
+
++ added ability to rip audio tracks in Amarok via the right-click menu.
++ added mod-install in extra/ directory for Kubuntu users.
++ added German translation thanks to Andreas Lang.
+
+* updated kdialog bitrate prompt to include 320kbps
+* updated user modules to use .m extension rather than .mod
+* updated mods/ directory in /etc/pacpl (renamed to modules/)
+
+% fixed Amarok plugin to close pacpl after adding the supported out formats
+% fixed bug in taginfo to make it case-insensitive
+% fixed sub write_user_tags() to print error when tags could not be wrote
+% fixed bug in write_user_tags() to make it case-insensitive
+% fixed configure script to check for CDDB_get
+% fixed bug when converting to .fla.  Thanks to Steven Woskow for the
+  report and beta-testing.
+
+------------------------------------------------------------------------
+v4.0.0-beta1:
+
+major update.  the entire application has been re-written from scratch.
+the new layout allows languages and codecs to be added much easier than
+prior releases.
+
+- removed all --formattoformat options (eg: --mp3toflac)
+- removed pacpl-install
+- removed daemon mode (this may be re-implemented in a future release)
+- removed --playlist option
+- removed --play function
+- removed support for kexis (kxs).  if anyone was actually using this
+  format I apologize, but the programs inability to specify an output 
+  file just wouldn't work with the new system.
+
++ added support for speex
++ added support for user modules.  see extra/sample.mod
++ added ability to alter/add meta-data during conversion via tagging opts
++ added configure and makefile for installation (replaces pacpl-install)
++ added --to option. this replaced --ct and the --formattoformat options
++ added --only option. with this option, only files matching .ext will
+  get converted. (eg: pacpl --to wav --only flac /home/directory/) only
+  converts files ending in .flac to wav
++ added --dryrun option.  this was inspired/suggested by Stefano Sabatini
++ added --verbose option. useful in conjunction with --dryrun
++ added language po-like files. translators (as always) are welcome.
++ added the following video types to the video->audio conversions:
+  svcd, m4v, nsv, nuv, psp, and smk.
+
+* update all files are now converted to wav first, then to the desired
+  output format.  in the future this will allow normalization, gain, etc.
+* update slackware package now uses the new kde installation directory /usr
+* update a large portion of the amarok script has been re-written.
+
+% fixed bug with handling dollar signs ($) in file names being treated 
+  as regular expressions.  thanks to Donald Byrd for the report.
+
+% fixed bug when copying ogg tags.  only copy tags starting with the tag
+  string (artist, title, etc)...as opposed to any tag containing the string.  
+  thanks to Edward Kear for reporting this issue.
+

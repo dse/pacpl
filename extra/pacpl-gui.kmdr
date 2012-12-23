@@ -1,0 +1,1632 @@
+<!DOCTYPE UI><UI version="3.0" stdsetdef="1">
+<class>main</class>
+<author>Philip Lyons (viiron@gmail.com)</author>
+<license>GPL v3</license>
+<version>4.0.0</version>
+<widget class="Dialog">
+    <property name="name">
+        <cstring>main</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>488</width>
+            <height>361</height>
+        </rect>
+    </property>
+    <property name="maximumSize">
+        <size>
+            <width>850</width>
+            <height>650</height>
+        </size>
+    </property>
+    <property name="caption">
+        <string>Perl Audio Converter</string>
+    </property>
+    <property name="icon">
+        <pixmap>image0</pixmap>
+    </property>
+    <property name="populationText">
+        <string></string>
+    </property>
+    <property name="associations" stdset="0">
+        <stringlist>
+            <string></string>
+            <string>@outputDir.setText(@env(HOME))
+@odir.setText(@env(HOME))</string>
+            <string></string>
+        </stringlist>
+    </property>
+    <widget class="TabWidget">
+        <property name="name">
+            <cstring>conv</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>10</y>
+                <width>490</width>
+                <height>377</height>
+            </rect>
+        </property>
+        <property name="paletteForegroundColor">
+            <color>
+                <red>144</red>
+                <green>144</green>
+                <blue>144</blue>
+            </color>
+        </property>
+        <property name="paletteBackgroundColor">
+            <color>
+                <red>61</red>
+                <green>61</green>
+                <blue>61</blue>
+            </color>
+        </property>
+        <property name="acceptDrops">
+            <bool>false</bool>
+        </property>
+        <property name="tabShape">
+            <enum>Rounded</enum>
+        </property>
+        <property name="margin">
+            <number>0</number>
+        </property>
+        <property name="associations" stdset="0">
+            <stringlist>
+                <string></string>
+            </stringlist>
+        </property>
+        <widget class="QWidget">
+            <property name="name">
+                <cstring>tab</cstring>
+            </property>
+            <attribute name="title">
+                <string>Co&amp;nvert</string>
+            </attribute>
+            <widget class="QLayoutWidget">
+                <property name="name">
+                    <cstring>Layout17</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>10</x>
+                        <y>180</y>
+                        <width>331</width>
+                        <height>29</height>
+                    </rect>
+                </property>
+                <grid>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <property name="margin">
+                        <number>0</number>
+                    </property>
+                    <property name="spacing">
+                        <number>6</number>
+                    </property>
+                    <widget class="ExecButton" row="0" column="2">
+                        <property name="name">
+                            <cstring>convert</cstring>
+                        </property>
+                        <property name="text">
+                            <string>C&amp;onvert</string>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>convert files &amp; directories to output format</string>
+                        </property>
+                    </widget>
+                    <widget class="ComboBox" row="0" column="1">
+                        <item>
+                            <property name="text">
+                                <string>AAC</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>AC3</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>AIFF</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>APE</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>AU</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>AVR</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>BONK</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>CAF</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>CDR</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>FAP</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>FLA</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>FLAC</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>IRCAM</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>LA</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>LPAC</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>M4A</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>MAT</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>MAT4</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>MAT5</string>
+                            </property>
+                        </item>
+			<item>
+			    <property name="text">
+				<string>MMF</string>
+			    </property>
+			</item>
+                        <item>
+                            <property name="text">
+                                <string>MP2</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>MP3</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>MP4</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>MPC</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>MPP</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>NIST</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>OFR</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>OFS</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>OGG</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>PAC</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>PAF</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>PVF</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>RA</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>RAW</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>SD2</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>SF</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>SHN</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>SMP</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>SND</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>SPX</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>TTA</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>VOC</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>W64</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>WAV</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>WMA</string>
+                            </property>
+                        </item>
+                        <property name="name">
+                            <cstring>Format</cstring>
+                        </property>
+                        <property name="currentItem">
+                            <number>27</number>
+                        </property>
+                        <property name="associations" stdset="0">
+                            <stringlist>
+                                <string>@widgetText</string>
+                            </stringlist>
+                        </property>
+                    </widget>
+                    <widget class="ExecButton" row="0" column="3">
+                        <property name="name">
+                            <cstring>clearc</cstring>
+                        </property>
+                        <property name="text">
+                            <string>&amp;Clear</string>
+                        </property>
+                        <property name="associations" stdset="0">
+                            <stringlist>
+                                <string></string>
+                            </stringlist>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>clear konsole window</string>
+                        </property>
+                    </widget>
+                    <widget class="Label" row="0" column="0">
+                        <property name="name">
+                            <cstring>Label1</cstring>
+                        </property>
+                        <property name="text">
+                            <string>output format</string>
+                        </property>
+                    </widget>
+                </grid>
+            </widget>
+            <widget class="Konsole">
+                <property name="name">
+                    <cstring>Konsole1</cstring>
+                </property>
+                <property name="enabled">
+                    <bool>true</bool>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>10</x>
+                        <y>220</y>
+                        <width>470</width>
+                        <height>91</height>
+                    </rect>
+                </property>
+                <property name="paletteForegroundColor">
+                    <color>
+                        <red>227</red>
+                        <green>227</green>
+                        <blue>227</blue>
+                    </color>
+                </property>
+                <property name="associations" stdset="0">
+                    <stringlist>
+                        <string>@if (@String.isEmpty(@exec(which pacpl)))
+   @Message.error("Could not find pacpl in your PATH, please check your installation")
+@endif
+
+@if(@String.isEmpty(@Input))
+  @Message.error("You must specity at least one file or directory to convert")
+@endif
+
+@if(@String.isEmpty(@outputDir))
+   @Message.error("Your must specify the output directory")
+@endif
+
+OPTS=""
+
+@if (@overwrite.checked)
+OPTS="--overwrite"
+@endif
+
+@if(@preserve.checked)
+OPTS="$OPTS --preserve"
+@endif
+
+@if(@recursive.checked)
+OPTS="$OPTS --recursive"
+@endif
+
+@if(@delete.checked)
+OPTS="$OPTS --delete"
+@endif
+
+@if(@dryrun.checked)
+OPTS="$OPTS --dryrun"
+@endif
+
+@if(@promptgui.checked)
+OPTS="$OPTS --gui"
+@endif
+
+@forEach(i, @Input)
+@ #echo pacpl --to @Format $OPTS --outdir @outputDir "@i"
+pacpl --to @Format $OPTS --outdir @outputDir "@i"
+@end</string>
+                    </stringlist>
+                </property>
+            </widget>
+            <widget class="QLayoutWidget">
+                <property name="name">
+                    <cstring>Layout5</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>10</x>
+                        <y>10</y>
+                        <width>470</width>
+                        <height>60</height>
+                    </rect>
+                </property>
+                <grid>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <property name="margin">
+                        <number>0</number>
+                    </property>
+                    <property name="spacing">
+                        <number>6</number>
+                    </property>
+                    <widget class="Label" row="1" column="0">
+                        <property name="name">
+                            <cstring>Label3</cstring>
+                        </property>
+                        <property name="text">
+                            <string>destination folder</string>
+                        </property>
+                    </widget>
+                    <widget class="Label" row="0" column="0">
+                        <property name="name">
+                            <cstring>Label2</cstring>
+                        </property>
+                        <property name="text">
+                            <string>files &amp; directories</string>
+                        </property>
+                    </widget>
+                    <widget class="FileSelector" row="1" column="1">
+                        <property name="name">
+                            <cstring>outputDir</cstring>
+                        </property>
+                        <property name="associations" stdset="0">
+                            <stringlist>
+                                <string>@widgetText</string>
+                            </stringlist>
+                        </property>
+                        <property name="selectionType">
+                            <enum>Directory</enum>
+                        </property>
+                    </widget>
+                    <widget class="FileSelector" row="0" column="1">
+                        <property name="name">
+                            <cstring>Input</cstring>
+                        </property>
+                        <property name="associations" stdset="0">
+                            <stringlist>
+                                <string>@widgetText</string>
+                            </stringlist>
+                        </property>
+                        <property name="selectionOpenMultiple">
+                            <bool>true</bool>
+                        </property>
+                    </widget>
+                </grid>
+            </widget>
+            <widget class="ButtonGroup">
+                <property name="name">
+                    <cstring>ButtonGroup1</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>10</x>
+                        <y>80</y>
+                        <width>460</width>
+                        <height>91</height>
+                    </rect>
+                </property>
+                <property name="title">
+                    <string></string>
+                </property>
+                <property name="associations" stdset="0">
+                    <stringlist>
+                        <string></string>
+                        <string></string>
+                    </stringlist>
+                </property>
+                <widget class="QLayoutWidget">
+                    <property name="name">
+                        <cstring>Layout40</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>10</y>
+                            <width>438</width>
+                            <height>71</height>
+                        </rect>
+                    </property>
+                    <grid>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <property name="margin">
+                            <number>0</number>
+                        </property>
+                        <property name="spacing">
+                            <number>6</number>
+                        </property>
+                        <widget class="CheckBox" row="2" column="1">
+                            <property name="name">
+                                <cstring>promptgui</cstring>
+                            </property>
+                            <property name="text">
+                                <string>pro&amp;mpt for encoder options</string>
+                            </property>
+                            <property name="toolTip" stdset="0">
+                                <string>use kdialog to prompt for bitrate, quality, etc.</string>
+                            </property>
+                        </widget>
+                        <widget class="CheckBox" row="0" column="0">
+                            <property name="name">
+                                <cstring>preserve</cstring>
+                            </property>
+                            <property name="text">
+                                <string>preserve &amp;directroy structure</string>
+                            </property>
+                        </widget>
+                        <widget class="CheckBox" row="0" column="1">
+                            <property name="name">
+                                <cstring>recursive</cstring>
+                            </property>
+                            <property name="text">
+                                <string>recursi&amp;vely convert input folder</string>
+                            </property>
+                        </widget>
+                        <widget class="CheckBox" row="2" column="0">
+                            <property name="name">
+                                <cstring>dryrun</cstring>
+                            </property>
+                            <property name="text">
+                                <string>dr&amp;yrun (simulate conversion only)</string>
+                            </property>
+                            <property name="toolTip" stdset="0">
+                                <string>simulate.  don't actually convert files.</string>
+                            </property>
+                        </widget>
+                        <widget class="CheckBox" row="1" column="0">
+                            <property name="name">
+                                <cstring>delete</cstring>
+                            </property>
+                            <property name="text">
+                                <string>delete source file &amp;after conversion</string>
+                            </property>
+                        </widget>
+                        <widget class="CheckBox" row="1" column="1">
+                            <property name="name">
+                                <cstring>overwrite</cstring>
+                            </property>
+                            <property name="text">
+                                <string>overwrite destination file</string>
+                            </property>
+                        </widget>
+                    </grid>
+                </widget>
+            </widget>
+        </widget>
+        <widget class="QWidget">
+            <property name="name">
+                <cstring>tab</cstring>
+            </property>
+            <attribute name="title">
+                <string>R&amp;ip</string>
+            </attribute>
+            <widget class="Konsole">
+                <property name="name">
+                    <cstring>ripkonsoler</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>6</x>
+                        <y>224</y>
+                        <width>470</width>
+                        <height>81</height>
+                    </rect>
+                </property>
+                <property name="associations" stdset="0">
+                    <stringlist>
+                        <string>OPTIONS=""
+RIPOPTS=""
+
+@if(@String.isEmpty(@tracks) &amp;&amp; !@ripall.checked) 
+   @Message.error("rip all or tracks must be set in order to rip cd")
+@endif
+
+@if(@String.isEmpty(@device))
+   @Message.error("device string empty.  this option must be set")
+@endif
+
+OPTIONS="--device @device"
+
+@if(!@String.isEmpty(@odir))
+OPTIONS="$OPTIONS --outdir @odir"
+@endif
+
+@if(@promptE.checked)
+OPTIONS="$OPTIONS --gui"
+@endif
+
+@if(@dryrunr.checked)
+OPTIONS="$OPTIONS --dryrun"
+@endif
+
+@if(@overw.checked)
+OPTIONS="$OPTIONS --overwrite"
+@endif
+
+@if(@discddb.checked)
+OPTIONS="$OPTIONS --nocddb"
+@endif
+
+@if(@ripall.checked)
+   RIPOPTS="--rip all"
+@endif
+
+@if(!@String.isEmpty(@tracks))
+   RIPOPTS="--rip @tracks"
+@endif
+
+echo pacpl $RIPOPTS $OPTIONS --to @ToFmt --noinput 
+pacpl $RIPOPTS $OPTIONS --to @ToFmt --noinput
+
+</string>
+                    </stringlist>
+                </property>
+            </widget>
+            <widget class="QLayoutWidget">
+                <property name="name">
+                    <cstring>Layout10</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>10</x>
+                        <y>190</y>
+                        <width>340</width>
+                        <height>29</height>
+                    </rect>
+                </property>
+                <grid>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <property name="margin">
+                        <number>0</number>
+                    </property>
+                    <property name="spacing">
+                        <number>6</number>
+                    </property>
+                    <widget class="ExecButton" row="0" column="2">
+                        <property name="name">
+                            <cstring>rip</cstring>
+                        </property>
+                        <property name="text">
+                            <string>Rip</string>
+                        </property>
+                        <property name="associations" stdset="0">
+                            <stringlist>
+                                <string></string>
+                            </stringlist>
+                        </property>
+                    </widget>
+                    <widget class="Label" row="0" column="0">
+                        <property name="name">
+                            <cstring>Label1_3</cstring>
+                        </property>
+                        <property name="text">
+                            <string>output format</string>
+                        </property>
+                    </widget>
+                    <widget class="ExecButton" row="0" column="3">
+                        <property name="name">
+                            <cstring>clearr</cstring>
+                        </property>
+                        <property name="text">
+                            <string>&amp;Clear</string>
+                        </property>
+                        <property name="associations" stdset="0">
+                            <stringlist>
+                                <string></string>
+                            </stringlist>
+                        </property>
+                    </widget>
+                    <widget class="ComboBox" row="0" column="1">
+                        <item>
+                            <property name="text">
+                                <string>AAC</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>AC3</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>AIFF</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>APE</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>AU</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>AVR</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>BONK</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>CAF</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>CDR</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>FAP</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>FLA</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>FLAC</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>IRCAM</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>LA</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>LPAC</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>M4A</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>MAT</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>MAT4</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>MAT5</string>
+                            </property>
+                        </item>
+			<item>
+			    <property name="text">
+				<string>MMF</string>
+			    </property>
+			</item>
+                        <item>
+                            <property name="text">
+                                <string>MP2</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>MP3</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>MP4</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>MPC</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>MPP</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>NIST</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>OFR</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>OFS</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>OGG</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>PAC</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>PAF</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>PVF</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>RA</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>RAW</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>SD2</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>SF</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>SHN</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>SMP</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>SND</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>SPX</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>TTA</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>VOC</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>W64</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>WAV</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>WMA</string>
+                            </property>
+                        </item>
+                        <property name="name">
+                            <cstring>Format_2</cstring>
+                        </property>
+                        <property name="currentItem">
+                            <number>27</number>
+                        </property>
+                        <property name="associations" stdset="0">
+                            <stringlist>
+                                <string>@widgetText</string>
+                            </stringlist>
+                        </property>
+                    </widget>
+                </grid>
+            </widget>
+            <widget class="GroupBox">
+                <property name="name">
+                    <cstring>ripoptions</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>10</x>
+                        <y>100</y>
+                        <width>460</width>
+                        <height>70</height>
+                    </rect>
+                </property>
+                <property name="title">
+                    <string></string>
+                </property>
+                <widget class="QLayoutWidget">
+                    <property name="name">
+                        <cstring>Layout16</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>30</x>
+                            <y>10</y>
+                            <width>410</width>
+                            <height>46</height>
+                        </rect>
+                    </property>
+                    <grid>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <property name="margin">
+                            <number>0</number>
+                        </property>
+                        <property name="spacing">
+                            <number>6</number>
+                        </property>
+                        <widget class="CheckBox" row="0" column="2">
+                            <property name="name">
+                                <cstring>overw</cstring>
+                            </property>
+                            <property name="text">
+                                <string>o&amp;verwrite</string>
+                            </property>
+                        </widget>
+                        <widget class="CheckBox" row="0" column="1">
+                            <property name="name">
+                                <cstring>ripall</cstring>
+                            </property>
+                            <property name="text">
+                                <string>rip &amp;all</string>
+                            </property>
+                        </widget>
+                        <widget class="CheckBox" row="0" column="0">
+                            <property name="name">
+                                <cstring>discddb</cstring>
+                            </property>
+                            <property name="text">
+                                <string>&amp;disable cddb</string>
+                            </property>
+                            <property name="associations" stdset="0">
+                                <stringlist>
+                                    <string></string>
+                                    <string></string>
+                                    <string></string>
+                                </stringlist>
+                            </property>
+                        </widget>
+                        <widget class="CheckBox" row="1" column="0">
+                            <property name="name">
+                                <cstring>promptE</cstring>
+                            </property>
+                            <property name="text">
+                                <string>prompt for encoder &amp;options</string>
+                            </property>
+                        </widget>
+                        <widget class="CheckBox" row="1" column="1">
+                            <property name="name">
+                                <cstring>dryrunr</cstring>
+                            </property>
+                            <property name="text">
+                                <string>dr&amp;yrun</string>
+                            </property>
+                        </widget>
+                    </grid>
+                </widget>
+            </widget>
+            <widget class="QLayoutWidget">
+                <property name="name">
+                    <cstring>Layout18</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>10</x>
+                        <y>10</y>
+                        <width>460</width>
+                        <height>80</height>
+                    </rect>
+                </property>
+                <grid>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <property name="margin">
+                        <number>0</number>
+                    </property>
+                    <property name="spacing">
+                        <number>6</number>
+                    </property>
+                    <widget class="Label" row="1" column="0">
+                        <property name="name">
+                            <cstring>Label33</cstring>
+                        </property>
+                        <property name="text">
+                            <string>device</string>
+                        </property>
+                    </widget>
+                    <widget class="Label" row="0" column="0">
+                        <property name="name">
+                            <cstring>Label36</cstring>
+                        </property>
+                        <property name="text">
+                            <string>output directory</string>
+                        </property>
+                    </widget>
+                    <widget class="LineEdit" row="2" column="1">
+                        <property name="name">
+                            <cstring>tracks</cstring>
+                        </property>
+                        <property name="associations" stdset="0">
+                            <stringlist>
+                                <string>@widgetText</string>
+                            </stringlist>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>rip tracks separated by comma (1,3,5,6)</string>
+                        </property>
+                    </widget>
+                    <widget class="LineEdit" row="1" column="1">
+                        <property name="name">
+                            <cstring>device</cstring>
+                        </property>
+                        <property name="text">
+                            <string>/dev/cdrom</string>
+                        </property>
+                        <property name="associations" stdset="0">
+                            <stringlist>
+                                <string>@widgetText</string>
+                            </stringlist>
+                        </property>
+                    </widget>
+                    <widget class="Label" row="2" column="0">
+                        <property name="name">
+                            <cstring>Label38</cstring>
+                        </property>
+                        <property name="text">
+                            <string>rip tracks</string>
+                        </property>
+                    </widget>
+                    <widget class="FileSelector" row="0" column="1">
+                        <property name="name">
+                            <cstring>odir</cstring>
+                        </property>
+                        <property name="associations" stdset="0">
+                            <stringlist>
+                                <string>@widgetText</string>
+                            </stringlist>
+                        </property>
+                        <property name="selectionType">
+                            <enum>Directory</enum>
+                        </property>
+                    </widget>
+                </grid>
+            </widget>
+        </widget>
+        <widget class="QWidget">
+            <property name="name">
+                <cstring>tab</cstring>
+            </property>
+            <attribute name="title">
+                <string>Ta&amp;g Write</string>
+            </attribute>
+            <widget class="QLayoutWidget">
+                <property name="name">
+                    <cstring>Layout26</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>272</x>
+                        <y>1</y>
+                        <width>180</width>
+                        <height>210</height>
+                    </rect>
+                </property>
+                <grid>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <property name="margin">
+                        <number>0</number>
+                    </property>
+                    <property name="spacing">
+                        <number>6</number>
+                    </property>
+                    <widget class="ExecButton" row="0" column="0">
+                        <property name="name">
+                            <cstring>writetags</cstring>
+                        </property>
+                        <property name="text">
+                            <string>Write T&amp;ags</string>
+                        </property>
+                    </widget>
+                    <widget class="TextEdit" row="2" column="0">
+                        <property name="name">
+                            <cstring>TextEdit4</cstring>
+                        </property>
+                        <property name="text">
+                            <string>Supported Write Formats:
+
+MP3
+OGG
+FLA
+FLAC</string>
+                        </property>
+                        <property name="readOnly">
+                            <bool>true</bool>
+                        </property>
+                    </widget>
+                    <widget class="ExecButton" row="1" column="0">
+                        <property name="name">
+                            <cstring>cleart</cstring>
+                        </property>
+                        <property name="text">
+                            <string>&amp;Clear Konsole</string>
+                        </property>
+                        <property name="associations" stdset="0">
+                            <stringlist>
+                                <string></string>
+                            </stringlist>
+                        </property>
+                    </widget>
+                </grid>
+            </widget>
+            <widget class="QLayoutWidget">
+                <property name="name">
+                    <cstring>Layout41</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>1</x>
+                        <y>0</y>
+                        <width>260</width>
+                        <height>28</height>
+                    </rect>
+                </property>
+                <grid>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <property name="margin">
+                        <number>0</number>
+                    </property>
+                    <property name="spacing">
+                        <number>6</number>
+                    </property>
+                    <widget class="Label" row="0" column="0">
+                        <property name="name">
+                            <cstring>Label32</cstring>
+                        </property>
+                        <property name="text">
+                            <string>File</string>
+                        </property>
+                    </widget>
+                    <widget class="FileSelector" row="0" column="1">
+                        <property name="name">
+                            <cstring>tagFile</cstring>
+                        </property>
+                        <property name="associations" stdset="0">
+                            <stringlist>
+                                <string>@widgetText</string>
+                            </stringlist>
+                        </property>
+                    </widget>
+                </grid>
+            </widget>
+            <widget class="ButtonGroup">
+                <property name="name">
+                    <cstring>ButtonGroup2</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>0</x>
+                        <y>30</y>
+                        <width>260</width>
+                        <height>200</height>
+                    </rect>
+                </property>
+                <property name="title">
+                    <string></string>
+                </property>
+                <grid>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <property name="margin">
+                        <number>11</number>
+                    </property>
+                    <property name="spacing">
+                        <number>6</number>
+                    </property>
+                    <widget class="QLayoutWidget" row="0" column="0">
+                        <property name="name">
+                            <cstring>Layout25</cstring>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <property name="margin">
+                                <number>0</number>
+                            </property>
+                            <property name="spacing">
+                                <number>6</number>
+                            </property>
+                            <widget class="LineEdit" row="5" column="1">
+                                <property name="name">
+                                    <cstring>genre</cstring>
+                                </property>
+                                <property name="associations" stdset="0">
+                                    <stringlist>
+                                        <string>@widgetText</string>
+                                    </stringlist>
+                                </property>
+                            </widget>
+                            <widget class="LineEdit" row="1" column="1">
+                                <property name="name">
+                                    <cstring>title</cstring>
+                                </property>
+                                <property name="associations" stdset="0">
+                                    <stringlist>
+                                        <string>@widgetText</string>
+                                    </stringlist>
+                                </property>
+                            </widget>
+                            <widget class="Label" row="4" column="0">
+                                <property name="name">
+                                    <cstring>Label12_4_5</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Year</string>
+                                </property>
+                            </widget>
+                            <widget class="Label" row="2" column="0">
+                                <property name="name">
+                                    <cstring>Label12_2_3</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Track</string>
+                                </property>
+                            </widget>
+                            <widget class="LineEdit" row="2" column="1">
+                                <property name="name">
+                                    <cstring>track</cstring>
+                                </property>
+                                <property name="associations" stdset="0">
+                                    <stringlist>
+                                        <string>@widgetText</string>
+                                    </stringlist>
+                                </property>
+                            </widget>
+                            <widget class="Label" row="0" column="0">
+                                <property name="name">
+                                    <cstring>Label11_3</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Artist</string>
+                                </property>
+                            </widget>
+                            <widget class="Label" row="1" column="0">
+                                <property name="name">
+                                    <cstring>Label12_6</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Title</string>
+                                </property>
+                            </widget>
+                            <widget class="LineEdit" row="3" column="1">
+                                <property name="name">
+                                    <cstring>album</cstring>
+                                </property>
+                                <property name="populationText">
+                                    <string></string>
+                                </property>
+                                <property name="associations" stdset="0">
+                                    <stringlist>
+                                        <string>@widgetText</string>
+                                    </stringlist>
+                                </property>
+                            </widget>
+                            <widget class="Label" row="6" column="0">
+                                <property name="name">
+                                    <cstring>Label12_4_3_2</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Genre</string>
+                                </property>
+                            </widget>
+                            <widget class="LineEdit" row="4" column="1">
+                                <property name="name">
+                                    <cstring>year</cstring>
+                                </property>
+                                <property name="associations" stdset="0">
+                                    <stringlist>
+                                        <string>@widgetText</string>
+                                    </stringlist>
+                                </property>
+                            </widget>
+                            <widget class="Label" row="3" column="0">
+                                <property name="name">
+                                    <cstring>Label12_3_3</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Album</string>
+                                </property>
+                            </widget>
+                            <widget class="LineEdit" row="6" column="1">
+                                <property name="name">
+                                    <cstring>comment</cstring>
+                                </property>
+                                <property name="associations" stdset="0">
+                                    <stringlist>
+                                        <string>@widgetText</string>
+                                    </stringlist>
+                                </property>
+                            </widget>
+                            <widget class="LineEdit" row="0" column="1">
+                                <property name="name">
+                                    <cstring>artist</cstring>
+                                </property>
+                                <property name="associations" stdset="0">
+                                    <stringlist>
+                                        <string>@widgetText</string>
+                                    </stringlist>
+                                </property>
+                            </widget>
+                            <widget class="Label" row="5" column="0">
+                                <property name="name">
+                                    <cstring>Label12_4_4_2</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Comment</string>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                </grid>
+            </widget>
+            <widget class="Konsole">
+                <property name="name">
+                    <cstring>Konsole2</cstring>
+                </property>
+                <property name="enabled">
+                    <bool>true</bool>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>0</x>
+                        <y>240</y>
+                        <width>480</width>
+                        <height>80</height>
+                    </rect>
+                </property>
+                <property name="paletteForegroundColor">
+                    <color>
+                        <red>151</red>
+                        <green>151</green>
+                        <blue>151</blue>
+                    </color>
+                </property>
+                <property name="associations" stdset="0">
+                    <stringlist>
+                        <string>TAGS=""
+
+@if(!@String.isEmpty(@comment))
+TAGS="--comment \"@comment\""
+@endif
+
+@if(!@String.isEmpty(@artist))
+TAGS="$TAGS --artist \"@artist\""
+@endif
+
+@if(!@String.isEmpty(@title))
+TAGS="$TAGS --title \"@title\""
+@endif
+
+@if(!@String.isEmpty(@track))
+TAGS="$TAGS --track \"@track\""
+@endif
+
+@if(!@String.isEmpty(@genre))
+TAGS="$TAGS --genre \"@genre\""
+@endif
+
+@if(!@String.isEmpty(@year))
+TAGS="$TAGS --year \"@year\""
+@endif
+
+@if(!@String.isEmpty(@album))
+TAGS="$TAGS --album \"@album\""
+@endif
+
+echo pacpl $TAGS @tagFile
+pacpl $TAGS @tagFile</string>
+                    </stringlist>
+                </property>
+            </widget>
+        </widget>
+        <widget class="QWidget">
+            <property name="name">
+                <cstring>tab</cstring>
+            </property>
+            <attribute name="title">
+                <string>Abo&amp;ut</string>
+            </attribute>
+            <widget class="ScriptObject">
+                <property name="name">
+                    <cstring>qt_dead_widget_ScriptObject1</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>106</x>
+                        <y>64</y>
+                        <width>32</width>
+                        <height>32</height>
+                    </rect>
+                </property>
+                <property name="associations" stdset="0">
+                    <stringlist>
+                        <string></string>
+                    </stringlist>
+                </property>
+            </widget>
+            <widget class="TextEdit">
+                <property name="name">
+                    <cstring>TextEdit1</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>20</x>
+                        <y>10</y>
+                        <width>450</width>
+                        <height>300</height>
+                    </rect>
+                </property>
+                <property name="paletteBackgroundColor">
+                    <color>
+                        <red>61</red>
+                        <green>61</green>
+                        <blue>61</blue>
+                    </color>
+                </property>
+                <property name="textFormat">
+                    <enum>AutoText</enum>
+                </property>
+                <property name="text">
+                    <string> Perl Audio Converter
+
+Copyright (C) 2005-2008 Philip Lyons (viiron@gmail.com)
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+</string>
+                </property>
+                <property name="readOnly">
+                    <bool>true</bool>
+                </property>
+            </widget>
+        </widget>
+    </widget>
+</widget>
+<images>
+    <image name="image0">
+        <data format="XPM.GZ" length="3694">789c7d96476f24470c85effa1503f1b630b8937aba1b860fca394ba360f8c04ecada5d69140dff7793ef49059fdc6f05ec87aae9228ba9bf7feb9dedeff4be7d9f7b9ad9ecbaeed557f6d8fbd63cdfdfbffff9d71f7fcfcd0f26bdf8570e7bc3f9dfe6e60f66bdbab7fbe3a10d903b07e9e3017f8007a1602bc15908ebefe04908bc0bce5d60cbc15dbf1bf07de7c1781dd826e078c845629e9781872ef2183c72c1781b81c7ae117898780c1e80272ed86b7d701e020bd842b06f075c87b07e016e4260dccfa073e1beec2178d80f052b390ca6bf83c4b05f96c078c03fc0a310b8028f5d60853fc3cc057f04fe0f272ef8a3cb8979ff6fe03204de065b08ace02a04de04b721f056f0a81f02df82c721f019380bc1ff5fe0890bf729a7600b81d7c14d08fb5fc1ad8bdc06235c3cef118c0b006f806100f8049c85f07bf8332e4258c7fbc765088c7c1dd721f00cdc86f07b9ed785c02fc1d9c0457b9e13337e5cc70560ff25180ff8093c09819f1333df709f591e025f838b1018f665a58bf787fac99a10d66fc05d087c151ce54796e32f9ed0fe35300a008cfb8679acdf1570ee62fea0de26160277c1f9300486bff9380446fde4755e175c873d791b02c3bfbc0b215f57838bbe8bf6c09f6218c23aeab398b8e0afc29e220f61ff3db874719d6c2eb0a07f145508bc9098f73305d721f01eb8299a92f6207e45e782fd8a7e56f65df40ffda01cb8d85f703ed28d6c89719f8afb29115030e2514e5cf047511f651e026f24663e1f81e130d63713233e8a7a2de321a3de4b73c17fbd4dccfb42ff2a2b17fd43bf2b6b17d76f12335ef4b77371fdfa8b8dfd18fd06ed93f1bb4accfe857cb1b18bfec31fcb4260e417d28dfea15e2d0f8191ff860083dbc4f0d7304fc23db236e078e83fe26b955515e2a398375687c07562fa87fcb13604ae12f33e105feb42880ffa6f357031fe381fed95f50cffaa5108fb0fc1998bf663be56b98bf90afb90be8c3fe65b84ab62fd635e54e110eb0bf554e101a31f57b58bf6f3bc268475dad7bae80fe649d585f0fefa8b6bfaf33331fbdb4170dd77b1bf623ed54317fb09d7472ef6bfc3c4f4773f31e72bf201ed19f6db5e62aea3feeaccc578ed27a6ffb0af9eb878dfc78959dff0a78e06057bed2431e38dfb443b607ee1be23fd3fed9d26a63d987f481fe6db4a62da7f9a98f60ebeb8e1bc584accfb5c4ecc7ec1fb4300c14b5fdc301e8b89393f787e53379f8c7c68fa2ef8abb017e397f5799a98fddb12d31fdc4f3376b17ea789b9ff2131fd5d4b4c7f171233bf90df31be5ace23d8df4c5c8c0fe2d9e42ee627fa7f130d99f9be9e98f98cefcda66cca96df7f6473313e5562c617f980f4673c7712d3deb72f6e79bfe8bf8d3f2dfa9be27ba2699bb665bf42bf69ba10f6a31fb77d17f7bf24663c31fff179c5fc44bf8ecf1f9ea7f8fe68b310789698f1c33cc238657ee2fedaa22d3abe1ff58e76c578e0fe5b7f3afa8b79d0b52ec603f5d2e1093e98fdbf38c3d45c95d6da68ab9d5eea955eeb8ddeea9ddeeb03eb487fea2f7dd4279de9b3bee8abbee9bb7ee8822eea922eb3565cabfeb635d7ba6ee8a66ee9b6eee8aeeee9fee79e033dd4233dd61368ea3ad5333dd70bedeb4099c3231d6ba613cdffa3424b511131611faca591563ab9942be85a6efcef56eee45e1ee4077b87fc924779d24c66f22c2ffef72a6ff22e1fb2208bb2f4b96759566455d6645d366453b6645b96644776654ff63ff71cc8a1fff2488ee5447399face5339f3379dcb85f485df154319c958329948ee66163e92d5cf3eb3985515f7441388392353bbb42bbbb61bbb9552d6edceeebde13fb0ffdb4f0bab5fedd19e6c66cff6e2ff77bbedcdde3ff77cd8822ed8a22dd9b2add8aaadd9ba6dd8a66dd9b6edf02cbdb55ddbb37d3b701dda911ddb894ded5457ecccceed02efe9c754c7a7fc18133ba63426b34fdfdccaf97f7e9ffb171baf4b0e</data>
+    </image>
+</images>
+<connections>
+    <connection>
+        <sender>cleart</sender>
+        <signal>clicked()</signal>
+        <receiver>Konsole2</receiver>
+        <slot>clear()</slot>
+    </connection>
+    <connection>
+        <sender>ripall</sender>
+        <signal>clicked()</signal>
+        <receiver>tracks</receiver>
+        <slot>clear()</slot>
+    </connection>
+    <connection>
+        <sender>clearr</sender>
+        <signal>clicked()</signal>
+        <receiver>ripkonsoler</receiver>
+        <slot>clear()</slot>
+    </connection>
+    <connection>
+        <sender>tracks</sender>
+        <signal>completionBoxActivated(const QString&amp;)</signal>
+        <receiver>ripall</receiver>
+        <slot>toggle()</slot>
+    </connection>
+    <connection>
+        <sender>clearc</sender>
+        <signal>clicked()</signal>
+        <receiver>Konsole1</receiver>
+        <slot>clear()</slot>
+    </connection>
+    <connection>
+        <sender>convert</sender>
+        <signal>clicked()</signal>
+        <receiver>Konsole1</receiver>
+        <slot>execute()</slot>
+    </connection>
+    <connection>
+        <sender>writetags</sender>
+        <signal>clicked()</signal>
+        <receiver>Konsole2</receiver>
+        <slot>execute()</slot>
+    </connection>
+    <connection>
+        <sender>rip</sender>
+        <signal>clicked()</signal>
+        <receiver>ripkonsoler</receiver>
+        <slot>execute()</slot>
+    </connection>
+</connections>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

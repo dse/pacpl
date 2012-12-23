@@ -1,0 +1,151 @@
+############################################
+# Romana - Sabadac Petru-Gabriel (the_l0st_treasure@yahoo.com)
+############################################
+#
+# Translation Instructions:
+#
+# 1) only translate text after the = sign (translate the value not the key)
+# 2) make sure there is only one space between either side of the = sign
+# 3) be sure to include the language name, and your name/email at the top
+# 4) spell check
+# 5) please translate these instructions and include them with your lang.po
+# 
+# You can submit your translations to viiron@gmail.com
+
+##################
+# Error messages #
+##################
+
+error = eroare
+failed = esuat:
+bad_input = formatul de destinatie nu este suportat.
+multi_out = optiunea --outfile nu poate fi folosita la codarea mai multor fisiere.
+no_config = fisierul de configurare nu a fost gasit...utilizam setarile implicite.
+unk_encoder = encoderul selectat nu este valid pentru:
+unk_decoder = decoderul selectat nu este valid pentru:
+no_decoder = avertisment: urmatorul fisier nu a putut fi decodat:
+no_encoder = codificare 'la' urmatorul tip de fisiere nu este suportata:
+no_encode_app = nu am putut gasi o aplicatie potrivita pentru a codifica:
+no_decode_app = nu am putut gasi o aplicatie potrivita pentru a decodifica:
+no_app = nu am putut gasi aplicatia:
+no_outdir = directorul de iesire nu exista.
+no_infile = urmatorul nu este un fisier sau director:
+no_input = trebuie sa specifici cel putin un fisier de intrare.
+no_read_tag = nu am putut citi tag-ul pentru:
+no_write_tag = nu am putut scrie tag-ul pentru:
+no_disc = nu am putut deschide CD-ul audio:
+no_cddb = nu am putut gasi intrarea cddb.  folositi optiunea --nocddb.
+no_kdialog = kdialog nu a fost gasit.  instalati pachetul kdebase.
+need_outdir = trebuie sa specifici un director de iesire.
+encode_failed = codarea a esuat cu mesajul:
+decode_failed = decodarea a esuat cu mesajul:
+empty_dir = directorul este gol, incearca sa folosesti optiunea --recursive:
+opening_dir = nu am putut deschide directorul:
+opening_file = nu am putut deschide fisierul:
+seek_help = vezi 'pacpl --help' sau 'pacpl --longhelp' pentru o lista de optiuni.
+
+###########
+# Notices #
+###########
+
+converting = Convertim:
+conv_comp = ..executat.
+removed_tmp = sters fisierul temporar:
+removed_src = sters sursa fisierului:
+enc_fmts = formate de codare:
+dec_fmts = formate de decodare:
+tag_info = informatia tag-ului pentru:
+write_tag_i = scrie informatia tag-ului pentru:
+creating_dir = creeaza directorul:
+imported = importa module:
+debug = depaneaza:
+loaded_config = fisier de configuratie incarcat:
+ripping_track = copiem track-uri:
+total_converted = nr. total de fisiere transformate:
+overwrite = fisierul de iesire exista deja.  foloseste --overwrite pentru a inlocui fisierul existent.
+show_encoders = encoderurile pentru
+show_decoders = decoderurile pentru
+
+#######################################
+# user prompts for Konqueror & Amarok #
+#######################################
+
+kde_overwrite = suprascrie fisierul de iesire daca el exista? (1 = da, 0 = nu)
+kde_bitrate = selecteaza rata de biti
+kde_freq = rata audio simpla
+kde_chans = canale audio
+kde_fcomp = nivel de compresie FLAC
+kde_pcomp = nivel de compresie LPAC
+kde_acomp = nivel de compresie APE
+kde_oggqual = nivel de calitate Ogg Vorbis
+kde_spxqual =  nivel de calitate speex
+kde_aacqual = nivel de calitate AAC/MP4/M4A
+kde_mpcqual = nivel de calitate Musepack
+kde_ofmode = mod de compresie OptimFrog
+kde_ofopt = nivel de optimizare OptimFrog
+kde_bratio = BONK downsampling ratio
+kde_bquanl = BONK quantanization level
+kde_bpsize = aproximarea dimensiunii cu BONK
+
+##################
+# Help menu text #
+##################
+
+to = formatul de destinatie
+recursive = transforma directorul/directoarele recursiv
+preserve = conserva structura directorului
+formats = lista cu formatele suportate de codare/decodare
+only = converteste doar fisiere cu extensia
+keep = pastreaza fisierele cu extensia formatului de destinatie
+help = acest meniu de ajutor
+longhelp = lista completa de optiuni
+version = afiseaza informatii despre versiune
+usage = utilizare: pacpl --to <format> <optiuni> [fisier(e)/director(directoare)]
+eopts = utilizatorul furnizeaza optiunile encoderului
+dopts = utilizatorul furnizeaza optiunile decoderului
+nopts = utilizatorul furnizeaza optiunile de normalizare
+outfile = numele fisierului de iesire
+outdir = numele directorului de iesire
+dryrun = nu converti fisierele
+overwrited = suprascrie fisierul de destinatie
+normalize = normalizeaza fisierul wav inainte de a-l coda
+delete = sterge fisierul-sursa dupa conversie
+encoder = specifica un encoder alternativ
+decoder = specifica un decoder alternativ
+verbose = arata informatii detaliate
+user_opts = optiunile utilizatorului:
+enc_opts = optiunile encoderului:
+bitrate = rata de biti (implicit. 128)
+freq = frectenva audio (imp. 44100)
+channels = numarul de canale audio (imp. 2)
+effect = efectul sox (aiff/au/snd/raw/voc/smp/avr/cdr)
+fcomp = nivel de compresie flac/fla (imp. 2)
+pcomp = nivel de compresie lpac/pac (imp. 3)
+acomp = nivel de compresie ape (imp. 3000)
+oggqual = nivel de calitate ogg (imp. 3)
+spxqual = nivel de calitate spx (imp. 8)
+aacqual = nivel de calitate aac/mp4/m4a (imp. 100)
+mpcqual = nivel de calitate mpc/mpp (imp. radio)
+ofmode = modul ofr/ofs (imp. normal)
+ofopt = optimizare ofr/ofs (imp. rapid)
+bratio = bonk down sampling ratio (imp. 2)
+bquanl = bonk quantization level (imp. 1.0)
+bpsize = aproximare de dimensiune cu bonk (imp. 128)
+tag_opts = optiuni de tag:
+artist = seteaza informatiile despre artist
+title = seteaza titlul
+track = seteaza numarul track-ului
+year = seteaza anul/data albumului/trackului
+album = seteaza informatiile despre titlul albumului
+genre = seteaza genul
+comment = seteaza comentariile
+taginfo = arata informatiile de tag pentru fisierul selectat
+tag_usage = utilizarea tagului: pacpl <optiuni> [fisier(e)]
+rip_opts = optiuni de copiere:
+rip = copie track-urile separate prin virgula sau toate
+nocddb = dezactiveaza cddb
+noinput = dezactiveaza interactivitatea cddb
+nscheme = denumim schema
+cdinfo = arata informatia cddb pentru discul curent
+device = implicit = /dev/cdrom
+rip_usage = utilizarea lui rip: pacpl --rip [track(uri)/all] --to <formatul> <optiunile>

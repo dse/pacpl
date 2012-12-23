@@ -1,0 +1,109 @@
+#!/usr/bin/perl -w
+#
+#  Perl Audio Converter - (Amarok Plugin)
+#
+#  Copyright (C) 2005-2009 Philip Lyons
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+
+use strict;
+
+my $header = "PACPL-Convert";
+
+foreach ("dcop","pacpl") { die "$_: could not be found in your PATH." if not `$_ 2>/dev/null`; }
+
+# Setup menu entries
+sub menu {
+
+    my $menu_cmd = shift;
+    
+    open(FMTS, "pacpl --formats|") or die "could not fork: $!";
+    
+    my @line;
+    my @formats = <FMTS>;
+       @formats = grep(!/^$|^#|^encode|^Perl|^EXT|^-/, @formats);
+       
+       foreach (@formats) {
+            chomp;
+            @line = split(/\s+/,$_);
+            $line[0] =~ tr/a-z/A-Z/;
+            system("dcop amarok script $menu_cmd $header \"To $line[0]\"") if $line[1] eq "Y";
+       }
+    
+    close(FMTS);
+}
+
+# Clean up menu entries.
+sub clean_up {
+    menu("removeCustomMenuItem");
+}
+
+# Format input string and convert to selected audio type.
+sub convert {
+
+   my ($file, $format) = @_;
+
+   chomp($file);
+   
+      if ($file =~ /file:/) {
+          $file =~ s/file:\/\/\//\//;
+          $file =~ s/file:\/\/\//\//g if grep(/file:\/\/\//, $file);
+   
+          system("pacpl --to $format --gui $file");   
+      }
+
+      elsif ($file =~ /cdda:\//) {
+          
+          $file =~ s/cdda:\///g;
+          $file =~ s/^\s|\s$//g;
+          $file =~ s/\s/,/g;
+          
+          system("pacpl --rip $file --to $format --gui");
+
+      }
+}
+   
+# Main 
+sub main {
+
+  menu("addCustomMenuItem");
+  
+  while (<STDIN>) {
+
+    my  $input = $_;
+    
+    # Reinsert spaces & apostrophes
+    $input =~ s/\%20/\\ /g;
+    $input =~ s/\%27/\\'/g;
+               
+    # configuration
+    system("kdesu kwrite /etc/pacpl/pacpl.conf") if $input =~ /configure/;
+
+    if ($input =~ "customMenuClicked: $header To") {
+        $input =~ s/customMenuClicked: $header To//;
+        
+    my ($nul, $format) = split(/ /, $input);
+        
+        $input =~ s/\s$format\s//;
+        convert($input,$format);
+    }
+
+    # Remove custom menu entries
+    $SIG{TERM} = \&clean_up; 
+
+  }
+}             
+
+main();

@@ -1,0 +1,72 @@
+./configure
+make
+make install
+
+if you would like to exclude the amarok, dolphin and konqueror plugins
+you will have to specify this during configure:
+
+./configure --without-amarok --without-dolphin --without-konq 
+
+the default KDEDIR is /usr.  You can change this during installation if
+necessary by using:
+
+make KDEDIR=/opt/kde install
+
+use the following to find the correct path: kde-config --prefix
+
+perl modules note:
+
+pacpl-install has been removed.  there is however a script in the
+extra/ directory called mod-install.sh which will try to install all
+the required perl modules via CPAN.
+
+please keep in mind the following...
+
+Ogg::Vorbis::Header needs libogg and libvorbis installed
+Audio::FLAC::Header needs flac installed
+
+(actual package names will vary based on your distribution)
+
+(K)Ubuntu users need to make sure the build-essential package is installed
+before attempting to install the required perl modules or the libraries 
+mentioned above.
+
+#######################
+# MANUAL INSTALLATION #
+#######################
+
+cp pacpl /usr/bin
+
+mkdir /etc/pacpl
+mkdir /etc/pacpl/po
+mkdir /etc/pacpl/modules
+
+-- where you copy pacpl.conf all depends on your preference. --
+
+cp pacpl.conf /etc/pacpl (global)
+cp pacpl.conf ~/.pacplrc (local)
+
+cp extra/sample.m /etc/pacpl/modules
+
+cp po/* /etc/pacpl/po
+
+mkdir /usr/doc/pacpl-4.0.0 (change 4.0.0 to the actual version)
+
+cp README COPYING TODO ChangeLog AUTHORS INSTALL /usr/doc/pacpl-4.0.0
+cp -R extra/ /usr/doc/pacpl-4.0.0
+
+cd extra/
+
+./mod-install.sh (this will attempt to install all the required modules)
+
+mkdir $KDEDIR/share/apps/amarok/scripts/pacx
+cp plugins/amarok/pacx $KDEDIR/share/apps/amarok/scripts/pacx
+
+cp plugins/dolphin/pacpl.desktop $KDEDIR/share/apps/dolphin/servicemenus
+
+cd plugins/konqueror/
+cp pacpl.desktop $KDEDIR/share/apps/konqueror/servicemenus/
+cp mimes/* $KDEDIR/share/mimelnk/audio/
+
+in the above example, you'll need to replace $KDEDIR with your actual
+KDE installation directory.  on most distributions this is /usr.

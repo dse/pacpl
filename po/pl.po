@@ -1,0 +1,152 @@
+############################################
+# Polish - Michał Smoczyk (msmoczyk@wp.pl)
+############################################
+#
+# Instrukcje tłumaczenia:
+#
+# 1) tłumacz tylko tekst po znaku równości = (tłumacz tylko wartość, a nie klucz)
+# 2) upewnij się, że po obu stronach znaku równości jest tylko jedna spacja
+# 3) upewnij się, że podałeś nawzę języka i swoje dane (adres/e-mail) na górze pliku
+# 4) sprawdź pisownię
+# 5) proszę przetłumacz również te instrukcje i dołącz je do pliku lang.po
+# 
+# Wyślij swoje tłumaczenie do viiron@gmail.com
+
+#####################
+# Komunikaty błędów #
+#####################
+
+error = błąd
+failed = niepowodzenie:
+bad_input = format docelowy nie jest obsługiwany.
+multi_out = opcja --outfile nie może być użyta kiedy kodujesz wiele plików.
+no_config = nie znaleziono pliku konfiguracyjnego... użycie domyślnych ustawień.
+unk_encoder = wybrany koder nieodpowiedni dla:
+unk_decoder = wybrany dekoder nieodpowiedni dla:
+no_decoder = ostrzeżenie: następujący plik nie może być zdekodowany:
+no_encoder = kodowanie do wybranego formatu tego pliku/katalogu nie jest obługiwane:
+no_encode_app = nie można znaleźć odpowiedniego programu aby zakodować:
+no_decode_app = nie można znaleźć odpowiedniego programu aby zdekodować:
+no_app = nie można odnaleźć aplikacji:
+no_outdir = katalog wyjściowy nie istnieje.
+no_infile = nie jest to plik ani katalog:
+no_input = musisz podać co najmniej jeden plik wejściowy.
+no_read_tag = nie można odczytać taga dla:
+no_write_tag = nie można zapisać taga dla:
+no_disc = nie można otworzyć dysku audio:
+no_cddb = nie można odnaleźć wpisu cddb. użyj opcji --nocddb.
+no_kdialog = nie odnaleziono kdialog. zainstaluj pakiet kdebase.
+need_outdir = musisz podać katalog docelowy.
+encode_failed = kodowanie zakończone niepowodzeniem ze statusem:
+decode_failed = dekodowanie zakończone niepowodzeniem ze statusem:
+empty_dir = katalog jest pusty, spróbuj użyc opcji --recursive:
+opening_dir = nie można otworzyć katalogu:
+opening_file = nie można otworzyć pliku:
+seek_help = zobacz 'pacpl --help' lub 'pacpl --longhelp' w celu zapoznania się z listą opcji.
+
+##############
+# Komunikaty #
+##############
+
+converting = Konwertowanie:
+conv_comp = Konwersja zakończona.
+removed_tmp = usunięto plik tymczasowy:
+removed_src = usunięto plik źródłowy:
+enc_fmts = formaty kodowania:
+dec_fmts = formaty dekodowania:
+tag_info = informacja zawarta w tagach dla:
+write_tag_i = zapisywanie taga dla:
+creating_dir = tworzenie katalogu:
+imported = zaimportowane moduły:
+debug = debugowanie:
+loaded_config = załadowany plik konfiguracyjny:
+ripping_track = Zgrywanie ścieżki:
+total_converted = Łącznie przekonwertowanych plików:
+overwrite = plik wyjściowy istnieje. użyj opcji --overwrite aby zastąpić istniejący plik.
+show_encoders = kodery dla
+show_decoders = dekodery dla
+
+######################################
+# Zapytania dla Konquerora i Amaroka #
+######################################
+
+kde_overwrite = czy nadpisać plik wyjściowy jeśli istnieje? (1 = tak, 0 = nie)
+kde_bitrate = wybierz bitrate
+kde_freq = częstość próbkowania audio
+kde_chans = kanały audio
+kde_fcomp = poziom kompresji FLAC
+kde_pcomp = poziom kompresji LPAC
+kde_acomp = poziom kompresji APE
+kde_oggqual = poziom jakości Ogg Vorbis
+kde_spxqual = poziom jakości speex
+kde_aacqual = poziom jakości AAC/MP4/M4A
+kde_mpcqual = poziom jakości Musepack
+kde_ofmode = tryb kompresji OptimFrog
+kde_ofopt = poziom optymalizacji OptimFrog
+kde_bratio = BONK downsampling ratio
+kde_bquanl = poziom BONK quantanization
+kde_bpsize = rozmiar BONK predictor
+
+#################
+# Teksty pomocy #
+#################
+
+to = format docelowy
+recursive = konwertuj rekursywnie katalog(i)
+preserve = zachowaj strukturę katalogu
+formats = wyświetl listę obsługiwanych formatów kodowania/dekodowania
+only = konwertuj tylko pliki z poddanym rozszerzeniem
+keep = zachowaj oryginalne pliki, nie koduj ich ponownie
+help = wyświetl to menu pomocy
+longhelp = lista wszystkich opcji
+version = wyświetl informację o wersji programu
+usage = użycie: pacpl --to <format> <opcje> [plik(i)/katalog(i)]
+defopts = turn off default encoder options (0)
+eopts = opcje kodera użytkownika
+dopts = opcje dekodera użytkownika
+nopts = opcje normalizacji użytkownika
+outfile = nazwa pliku wyjściowego
+outdir = katalog docelowy
+dryrun = nie konwertuj plików
+overwrited = nadpisz plik docelowy
+normalize = zrormalizuj plik wav przed zakodowaniem
+delete = usuń plik źródłowy po konwersji
+encoder = podaj alternatywny koder
+decoder = podaj alternatywny dekoder
+verbose = pokaż szczegółowe informacje
+user_opts = opcje użytkownika:
+enc_opts = opcje kodowania:
+bitrate = bitrate (domyślnie 128)
+freq = częstotliwość audio (domyślnie 44100)
+channels = liczba kanałów audio (domyślnie 2)
+effect = efekt sox (aiff/au/snd/raw/voc/smp/avr/cdr)
+fcomp = poziom kompresji flac/fla (domyślnie 2)
+pcomp = poziom kompresji lpac/pac (domyślnie 3)
+acomp = poziom kompresji ape (domyślnie 3000)
+oggqual = poziom jakości ogg (domyślnie 3)
+spxqual = poziom jakości spx (domyślnie 8)
+aacqual = poziom jakości aac/mp4/m4a (domyślnie 100)
+mpcqual = poziom jakości mpc/mpp (domyślnie radio)
+ofmode = tryb ofr/ofs (domyślnie normal)
+ofopt = optymalizacja ofr/ofs (domyślnie fast)
+bratio = bonk down sampling ratio (domyślnie 2)
+bquanl = poziom bonk quantization (domyślnie 1.0)
+bpsize = rozmiar bonk predictor (domyślnie 128)
+tag_opts = opcje tagowania:
+artist = ustaw informację o artyście
+title = ustaw tytuł
+track = ustaw numer ścieżki
+year = ustaw rok/datę albumu lub ścieżki
+album = ustaw tytuł albumu
+genre = ustaw rodzaj
+comment = ustaw komentarz
+taginfo = pokaż informację zawartą w tagach dla wybranego pliku
+tag_usage = tagowanie: pacpl <opcje> [plik(i)]
+rip_opts = opcje zgrywania audio:
+rip = zgrywa ścieżki oddzielone przecinkiem lub wszystkie
+nocddb = wyłącz cddb
+noinput = wyłącz interaktywność cddb
+nscheme = schemat nazw
+cdinfo = pokaż informację cddb dla bieżącego dysku
+device = domyślnie = /dev/cdrom
+rip_usage = zgrywanie audio: pacpl --rip [ścieżka(i)/all] --to <format> <opcje>

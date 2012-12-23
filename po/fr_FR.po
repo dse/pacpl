@@ -1,0 +1,152 @@
+#####################################################
+# Français - Guillaume LOYOT (gui41981@hotmail.com) #
+#####################################################
+#
+# Instructions de traduction:
+#
+# 1) traduire uniquement le texte après le signe = (traduire la valeur et non la clé)
+# 2) s'assurer de ne laisser qu'un seul espace de part et d'autre du signe =
+# 3) s'assurer d'inclure le nom de la langue ainsi que votre nom/email au début de ce fichier
+# 4) vérifier la grammaire et la syntaxe
+# 5) s'il vous plait, veuillez traduire ces instructions et les inclure dans votre fichier langue.po
+# 
+# Vous pouvez soumettre vos traductions à viiron@gmail.com
+
+#####################
+# Messages d'erreur #
+#####################
+
+error = erreur
+failed = échec:
+bad_input = format de destination non supporté.
+multi_out = --outfile ne peut être utilisé lors de l'encodage multiple.
+no_config = fichier de configuration non trouvé... utilisation des paramètres par défaut.
+unk_encoder = type d'encodeur non valide pour:
+unk_decoder = type de décodeur non valide pour:
+no_decoder = Attention: ce fichier ne peut être converti:
+no_encoder = encoding 'to' cette option n'est pas supportée:
+no_encode_app = impossible de trouver l'application nécessaire à l'encodage:
+no_decode_app = impossible de trouver l'application nécessaire au décodage:
+no_app = impossible de trouver l'application:
+no_outdir = le répertoire de destination n'existe pas.
+no_infile = l'entrée suivante n'est ni un fichier ni un répertoire:
+no_input = vous devez spécifier au moins un fichier source.
+no_read_tag = lecture du tag impossible pour:
+no_write_tag = écriture du tag impossible pour:
+no_disc = impossible d'ouvrir le disque audio:
+no_cddb = impossible de trouver d'entrées cddb. Utiliser l'option --nocddb.
+no_kdialog = kdialog Introuvable. Installez le paquet kdebase.
+need_outdir = Vous devez spécifier un répertoire de destination.
+encode_failed = Erreur d'encodage avec le code de sortie: 
+decode_failed = Erreur de décodage avec le code de sortie: 
+empty_dir = répertoire vide, essayez avec l'option --recursive:
+opening_dir = impossible d'ouvrir le répertoire:
+opening_file = impossible d'ouvrir le fichier:
+seek_help = voir 'pacpl --help' ou 'pacpl --longhelp' pour une liste détaillée des options.
+
+###########
+# Notices #
+###########
+
+converting = Conversion:
+conv_comp = Conversion terminée.
+removed_tmp = suppression du fichier temporaire:
+removed_src = suppression du fichier source:
+enc_fmts = formats d'encodage:
+dec_fmts = formats de décodage:
+tag_info = informations sur les tags pour: 
+write_tag_i = écriture des tags pour:
+creating_dir = création du répertoire:
+imported = modules importés:
+debug = débogage:
+loaded_config = fichier de configuration chargé:
+ripping_track = extraction de la piste:
+total_converted = Total des fichiers convertis:
+overwrite = le fichier de sortie existe. Utilisez --overwrite pour remplacer le fichier existant.
+show_encoders = encodeurs pour
+show_decoders = décodeurs pour
+
+##################################################
+# affichages utilisateur pour Konqueror & Amarok #
+##################################################
+
+kde_overwrite = écraser le fichier de sortie si existant? (1 = oui, 0 = non)
+kde_bitrate = choisir le bitrate
+kde_freq = taux d'échantillonage audio
+kde_chans = cannaux audio channels
+kde_fcomp = niveau de compression FLAC
+kde_pcomp = niveau de compression LPAC
+kde_acomp = niveau de compression APE
+kde_oggqual = niveau de qualité Ogg Vorbis
+kde_spxqual = niveau de qualité speex
+kde_aacqual = niveau de qualité AAC/MP4/M4A
+kde_mpcqual = niveau de qualité Musepack
+kde_ofmode = mode de compression OptimFrog
+kde_ofopt = niveau d'optimisation OptimFrog
+kde_bratio = ratio d'échantillonage BONK
+kde_bquanl = niveau quantique de BONK
+kde_bpsize = taille du prédicat BONK
+
+########################
+# Texte du menu d'aide #
+########################
+
+to = format de destination
+recursive = répertoire(s) de conversion récursive
+preserve = respecte la structure des répertoires
+formats = liste les formats d'encodage/décodage supportés
+only = convertit uniquement les fichiers dont l'extension correspond
+keep = conserve les fichiers de destination dont le format correspond
+help = affiche ce menu d'aide
+longhelp = liste complète des options
+version = affiche les informations de version
+usage = utilisation: pacpl --to <format> <options> [fichier(s)/répertoire(s)]
+defopts = turn off default encoder options (0)
+eopts = options utilisateur complémentaires d'encodage
+dopts = options utilisateur complémentaires de décodage
+nopts = options utilisateur complémentaires de normalisation
+outfile = nom de fichier de sortie
+outdir = répertoire de sortie
+dryrun = ne pas convertir les fichiers
+overwrited = écraser les fichiers de destination
+normalize = normalisation wave avant encodage
+delete = suppression du fichier source après conversion
+encoder = spécifie un encodeur alternatif
+decoder = spécifie un décodeur alternatif
+verbose = affiche les informations détaillées
+user_opts = options utilisateur:
+enc_opts = options d'encodage:
+bitrate = bitrate (def. 128)
+freq = fréquence audio (def. 44100)
+channels = nombre maximum de cannaux (def. 2)
+effect = effet sox  (aiff/au/snd/raw/voc/smp/avr/cdr)
+fcomp = niveau de compression flac/fla (def. 2)
+pcomp = niveau de compression lpac/pac (def. 3)
+acomp = niveau de compression ape (def. 3000)
+oggqual = niveau de qualité ogg (def. 3)
+spxqual = niveau de qualité spx (def. 8)
+aacqual = niveau de qualité aac/mp4/m4a (def. 100)
+mpcqual = niveau de qualité mpc/mpp (def. radio)
+ofmode = mode ofr/ofs (def. normal)
+ofopt = optimisation ofr/ofs (def. fast)
+bratio = ratio d'échantillonage bonk (def. 2)
+bquanl = niveau quantique de bonk (def. 1.0)
+bpsize = taille du prédicat bonk (def. 128)
+tag_opts = options de tag:
+artist = définit les informations sur l'artiste
+title = définit le titre
+track = définit le numéro de la piste
+year = définit l'année/la date de l'album/de la piste
+album = définit le titre de l'album
+genre = définit le genre
+comment = définit les commentaires
+taginfo = affiche les informations de tags pour le(s) fichier(s) sélectionné(s)
+tag_usage = utilisation des tags: pacpl <options> [fichier(s)]
+rip_opts = options d'extraction:
+rip = extrait les pistes séparées par des virgules ou toutes (option all)
+nocddb = désactive cddb
+noinput = désactive cddb interaction
+nscheme = schéma de nommage
+cdinfo = affiche les informations cddb pour le disque courant
+device = défaut = /dev/cdrom
+rip_usage = utilisation de l'extration audio: pacpl --rip [piste(s)/all] --to <format> <options>

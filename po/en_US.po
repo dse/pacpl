@@ -1,0 +1,152 @@
+############################################
+# English - Philip Lyons (viiron@gmail.com)
+############################################
+#
+# Translation Instructions:
+#
+# 1) only translate text after the = sign (translate the value not the key)
+# 2) make sure there is only one space between either side of the = sign
+# 3) be sure to include the language name, and your name/email at the top
+# 4) spell check
+# 5) please translate these instructions and include them with your lang.po
+# 
+# You can submit your translations to viiron@gmail.com
+
+##################
+# Error messages #
+##################
+
+error = error
+failed = failed:
+bad_input = destination format not supported.
+multi_out = --outfile can not be used when encoding multiple files.
+no_config = configuration file not found...using default settings.
+unk_encoder = selected encoder not valid for:
+unk_decoder = selected decoder not valid for:
+no_decoder = warning: the following file could not be decoded:
+no_encoder = encoding 'to' the following is not supported:
+no_encode_app = could not find suitable application to encode:
+no_decode_app = could not find suitable application to decode:
+no_app = could not find application:
+no_outdir = output directory does not exist.
+no_infile = the following is not a file or directory:
+no_input = you must specify at least one input file.
+no_read_tag = could not read tag for:
+no_write_tag = could not write tag for:
+no_disc = unable to open audio disc:
+no_cddb = could not find cddb entry.  use the --nocddb option.
+no_kdialog = kdialog not found.  install kdebase package.
+need_outdir = you must specify an output directory.
+encode_failed = encode failed with exit status:
+decode_failed = decode failed with exit status:
+empty_dir = directory empty, try using the --recursive option:
+opening_dir = could not open directory:
+opening_file = could not open file:
+seek_help = see 'pacpl --help' or 'pacpl --longhelp' for a list of options.
+
+###########
+# Notices #
+###########
+
+converting = Converting:
+conv_comp = ..done.
+removed_tmp = removed temporary file:
+removed_src = removed source file:
+enc_fmts = encode formats:
+dec_fmts = decode formats:
+tag_info = tagging information for:
+write_tag_i = writing tag information for:
+creating_dir = creating directory:
+imported = imported modules:
+debug = debug:
+loaded_config = loaded configuration file:
+ripping_track = Ripping track:
+total_converted = Total files converted:
+overwrite = output file exists.  use --overwrite to replace existing file.
+show_encoders = encoders for
+show_decoders = decoders for
+
+#######################################
+# user prompts for Konqueror & Amarok #
+#######################################
+
+kde_overwrite = overwrite output file if it exists? (1 = yes, 0 = no)
+kde_bitrate = select bitrate
+kde_freq = audio sampling rate
+kde_chans = audio channels
+kde_fcomp = FLAC compression level
+kde_pcomp = LPAC compression level
+kde_acomp = APE compression level
+kde_oggqual = Ogg Vorbis quality level
+kde_spxqual = speex quality level
+kde_aacqual = AAC/MP4/M4A quality level
+kde_mpcqual = Musepack quality level
+kde_ofmode = OptimFrog compression mode
+kde_ofopt = OptimFrog optimization level
+kde_bratio = BONK downsampling ratio
+kde_bquanl = BONK quantanization level
+kde_bpsize = BONK predictor size
+
+##################
+# Help menu text #
+##################
+
+to = destination format
+recursive = recursively convert directory(s)
+preserve = preserve directory structure
+formats = list supported encode/decode formats
+only = only convert files matching extension
+keep = keep files matching destination format
+help = this help menu
+longhelp = complete list of options
+version = display version information
+usage = usage: pacpl --to <format> <options> [file(s)/directory(s)]
+defopts = turn off default encoder options (0)
+eopts = user supplied encoder options
+dopts = user supplied decoder options
+nopts = user supplied normalize options
+outfile = output file name
+outdir = output directory
+dryrun = do not convert files
+overwrited = overwrite destination file
+normalize = normalize wav file before encoding
+delete = remove source file after conversion
+encoder = specify an alternate encoder
+decoder = specify an alternate decoder
+verbose = show detailed information
+user_opts = user options:
+enc_opts = encoder options:
+bitrate = bitrate (def. 128)
+freq = audio frequency (def. 44100)
+channels = number of audio channels (def. 2)
+effect = sox effect (aiff/au/snd/raw/voc/smp/avr/cdr)
+fcomp = flac/fla compression level (def. 2)
+pcomp = lpac/pac compression level (def. 3)
+acomp = ape compression level (def. 3000)
+oggqual = ogg quality level (def. 3)
+spxqual = spx quality level (def. 8)
+aacqual = aac/mp4/m4a quality level (def. 100)
+mpcqual = mpc/mpp quality level (def. radio)
+ofmode = ofr/ofs mode (def. normal)
+ofopt = ofr/ofs optimization (def. fast)
+bratio = bonk down sampling ratio (def. 2)
+bquanl = bonk quantization level (def. 1.0)
+bpsize = bonk predictor size (def. 128)
+tag_opts = tagging options:
+artist = set artist information
+title = set title
+track = set track number
+year = set year/date of the album/track
+album = set album title information
+genre = set genre
+comment = set comments
+taginfo = show tagging information for selected file
+tag_usage = tagging usage: pacpl <options> [file(s)]
+rip_opts = ripping options:
+rip = rip tracks separated by comma or all
+nocddb = disable cddb
+noinput = disable cddb interactivity
+nscheme = naming scheme
+cdinfo = show cddb information for current disc
+device = default = /dev/cdrom
+rip_usage = rip usage: pacpl --rip [track(s)/all] --to <format> <options>

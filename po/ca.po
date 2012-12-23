@@ -1,0 +1,152 @@
+############################################
+# Català - Xavi (xavi13@gmail.com)
+############################################
+#
+# Translation Instructions:
+#
+# 1) only translate text after the = sign (translate the value not the key)
+# 2) make sure there is only one space between either side of the = sign
+# 3) be sure to include the language name, and your name/email at the top
+# 4) spell check
+# 5) please translate these instructions and include them with your lang.po
+# 
+# You can submit your translations to viiron@gmail.com
+
+##################
+# Error messages #
+##################
+
+error = error
+failed = failed:
+bad_input = format de destí no suportat.
+multi_out = --outfile no es pot utilitzar codificant múltiples fitxers.
+no_config = fitxer de configuració no trobat...utilitzant paràmetres per defecte.
+unk_encoder = selected encoder not valid for:
+unk_decoder = selected decoder not valid for:
+no_decoder = Avís: el següent fitxer no es pot decodificar:
+no_encoder = codificant 'per' el següent no està suportat:
+no_encode_app = could not find suitable application to encode:
+no_decode_app = could not find suitable application to decode:
+no_app = no puc trobar l'aplicació:
+no_outdir = el directori de sortida no existeix
+no_infile = el següent no és un fitxer o directori
+no_input = heu d'especificar almenys un fitxer d'entrada
+no_read_tag = no puc llegir etiqueta per:
+no_write_tag = no puc escriure etiqueta per:
+no_disc = no puc obrir el disc d'àudio:
+no_cddb = no puc trobar l'entrada cddb. utilitzeu la opció --nocddb.
+no_kdialog = no trobo kdialog. instal·leu el paquet kdebase.
+need_outdir = heu d'especificar un directori de sortida.
+encode_failed = codificació fallida amb codi de sortida:
+decode_failed = decodificació fallida amb codi de sortida:
+empty_dir = directori buit, proveu utilitzant la opció --recursive:
+opening_dir = no puc obrir el directori:
+opening_file = no puc obrir el fitxer:
+seek_help = vegeu 'pacpl --help' o 'pacpl --longhelp' per a la llista d'opcions.
+
+###########
+# Notices #
+###########
+
+converting = Convertint:
+conv_comp = Conversió finalitzada.
+removed_tmp = fitxer temporal esborrat:
+removed_src = fitxer original esborat:
+enc_fmts = formats de codificació:
+dec_fmts = formats de decodificació:
+tag_info = etiquetant informació per:
+write_tag_i = escribint informació d'etiqueta per:
+creating_dir = creant directori:
+imported = mòduls importats:
+debug = depuració:
+loaded_config = fitxer de configuració carregat:
+ripping_track = Extraient pista:
+total_converted = Total files converted:
+overwrite = fitxer de sortida existent.  utiltzeu --overwrite per substituir el fitxer existent.
+show_encoders = encoders for
+show_decoders = decoders for
+
+#######################################
+# user prompts for Konqueror & Amarok #
+#######################################
+
+kde_overwrite = sobreescriure fitxer de sortida si existeix? (1 = si, 0 = no)
+kde_bitrate = seleccioneu bitrate
+kde_freq = rati de mostreig d'àudio
+kde_chans = canals d'àudio
+kde_fcomp = nivell de compresió FLAC
+kde_pcomp = nivell de compresió LPAC
+kde_acomp = nivell de compresió APE
+kde_oggqual = nivell de qualitat Ogg Vorbis
+kde_spxqual = nivell de qualitat speex
+kde_aacqual = nivell de qualitat AAC/MP4/M4A
+kde_mpcqual = nivell de qualitat Musepack
+kde_ofmode = mode de compresió OptimFrog
+kde_ofopt = nivell d'optimització OptimFrog
+kde_bratio = rati de pèrdua BONK
+kde_bquanl = rati de quantificació BONK
+kde_bpsize = mida de predicció BONK
+
+##################
+# Help menu text #
+##################
+
+to = format de destí
+recursive = converteix directori(s) recursivament
+preserve = preserva l'estructura de directoris
+formats = llista els formats codificació/decodificació suportats
+only = només converteix fitxers coincidents amb l'extensió
+keep = manté fitxers coincidents amb el format de destí
+help = aquest menú d'ajut
+longhelp = llista completa d'opcions
+version = mostra informació de versió
+usage = ús: pacpl --to <format> <opcions> [fitxer(s)/directori(s)]
+defopts = turn off default encoder options (0)
+eopts = opcions de codificació proporcionades per l'usuari
+dopts = opcions de decodificació proporcionades per l'usuari
+nopts = opcions de normalització proporcionades per l'usuari
+outfile = nom de fitxer de sortida
+outdir = directori de sortida
+dryrun = no converteix fitxers
+overwrited = sobreescriu fitxer de destí
+normalize = normalitza fitxer wav abans de codificar
+delete = esborra fitxer origen després de la conversió
+encoder = specify an alternate encoder
+decoder = specify an alternate decoder
+verbose = mostra informació detallada
+user_opts = opcions d'usuari:
+enc_opts = opocions del codificador:
+bitrate = bitrate (def. 128)
+freq = freqüència d'àudio (def. 44100)
+channels = nombre de canals d'àudio (def. 2)
+effect = efecte sox (aiff/au/snd/raw/voc/smp/avr/cdr)
+fcomp = nivell de compresió flac/fla (def. 2)
+pcomp = nivell de compresió lpac/pac (def. 3)
+acomp = nivell de compresió ape (def. 3000)
+oggqual = nivell de qualitat ogg (def. 3)
+spxqual = nivell de qualitat spx (def. 8)
+aacqual = nivell de qualitat aac/mp4/m4a (def. 100)
+mpcqual = nivell de qualitat mpc/mpp (def. ràdio)
+ofmode = mode ofr/ofs (def. normal)
+ofopt = optimització ofr/ofs (def. ràpid)
+bratio = rati de pèrdua bonk (def. 2)
+bquanl = rati de quantficació bonk (def. 1.0)
+bpsize = mida de predicció bonk (def. 128)
+tag_opts = opcions d'etiquetatge:
+artist = estableix informació de l'artista
+title = estableix el títol
+track = estableix número de pista
+year = estableix any/data de l'àlbum/pista
+album = estableix informació del títol de l'àlbum
+genre = estableix el gènere
+comment = estableix comentaris
+taginfo = mostra informació de l'etiqueta del fitxer seleccionat
+tag_usage = ús de l'etiquetatge: papcl <opcions> [fitxer(s)]
+rip_opts = opcions d'extracció:
+rip = extreu pistes separades per coma o totes
+nocddb = desactiva cddb
+noinput = desactiva cddb interactivament
+nscheme = esquema de nombrat
+cdinfo = mostra informació cddb del disc actual
+device = defecte = /dev/cdrom
+rip_usage = ús de l'exractor: pacpl --rip [pista(es)/tot] --to <format> <opcions>

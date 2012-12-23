@@ -1,0 +1,152 @@
+###################################################
+# Deutsch - Andreas Lang (andreas.lang@gmail.com) #
+###################################################
+#
+# Übersetzungsanweisungen:
+#
+# 1) Nur der Text nach dem  = Zeichen (übersetz den Wert und nicht den zugehörigen Schlüssel)
+# 2) stell sicher, dass auf jeder Seite des = genau ein Leerzeichen ist
+# 3) stell sicher, dass ganz oben, die Sprache, Dateiname sowie Emailadresse stehen
+# 4) Rechtschreibprüfung
+# 5) bitte übersetz diese Anweisung und benenne es in lang.po
+# 
+# fertig, dann sende die Übersetzung an  viiron@gmail.com
+
+####################
+# Fehler Meldungen #
+####################
+
+error = Fehler
+failed = failed:
+bad_input = Zielformat wird nicht unterstützt
+multi_out = --outfile kann nicht genutzt werden, wenn mehre Dateien sind ausgewählt
+no_config = configuration file not found...using default settings.
+unk_encoder = selected encoder not valid for:
+unk_decoder = selected decoder not valid for:
+no_decoder = Warnung: die folgende Datei konnte nicht dekodiert werden
+no_encoder = Kodierung 'zu' dem Folgenden wird nicht unterstützt:
+no_encode_app = could not find suitable application to encode:
+no_decode_app = could not find suitable application to decode:
+no_app = konnte nicht die Anwendung finden:
+no_outdir = Ausgabeverzeichnis existiert nicht.
+no_infile = das Folgende ist keine Datei oder kein Verzeichnis:
+no_input = es muss mindestens eine Eingabedatei ausgewählt sein.
+no_read_tag = konnte die Bezeichnung (tag) nicht lesen von:
+no_write_tag = konnte die Bezeichnung (tag) nicht schreiben für:
+no_disc = konnte die CD nicht öffnen:
+no_cddb = konnte den cddb Eintrag nicht finden. Benutzt die --nocddb Option.
+no_kdialog = kdialog konnte nicht gefunden werden. Installiere das kdebase Paket.
+need_outdir = Das Ausgabeverzeichnis muss angegeben werden.
+encode_failed = Kodierung ist fehlgeschlagen mit dem Status:
+decode_failed = Dekodierung ist fehlgeschlagen mit dem Status:
+empty_dir = Verzeichnis ist leer, benutzt die --recursive Option:
+opening_dir = konnte nicht das Verzeichnis öffnen:
+opening_file = konnte nicht die Datei öffnen:
+seek_help = benutzt 'pacpl --help' oder 'pacpl --longhelp' für eine Auflistung der Optionen
+
+#############
+# Meldungen #
+#############
+
+converting = Konvertierung:
+conv_comp = Konvertierung fertig.
+removed_tmp = lösche temporäre Datei:
+removed_src = lösche quell Datei:
+enc_fmts = kodiere Format:
+dec_fmts = Dekodiere Format:
+tag_info = Bezeichnung für:
+write_tag_i = schreibe Bezeichnungen für:
+creating_dir = erzeuge Verzeichnis:
+imported = lade Module:
+debug = debug: 
+loaded_config = loaded configuration file:
+ripping_track = Lese Track:
+total_converted = Total files converted:
+overwrite = Ausgabedatei existiert.  Benutz --overwrite zum Überschreiben.
+show_encoders = encoders for
+show_decoders = decoders for
+
+#############################################
+# Benutzer Kommandos für Konqueror & Amarok #
+#############################################
+
+kde_overwrite = Überschreibe Ausgabedatei wenn sie existiert? (1 = Ja, 0 = Nein)
+kde_bitrate = Wähle Bitrate
+kde_freq = Audio Samplingfrequenz
+kde_chans = Audio Kanäle
+kde_fcomp = FLAC Komprimierungsgrad
+kde_pcomp = LPAC Komprimierungsgrad
+kde_acomp = APE Komprimierungsgrad
+kde_oggqual = Ogg Vorbis Qualitätsgrad
+kde_spxqual = speex Qualitätsgrad
+kde_aacqual = AAC/MP4/M4A Qualitätsgrad
+kde_mpcqual = Musepack Qualitätsgrad
+kde_ofmode = OptimFrog Kompressionsmode
+kde_ofopt = OptimFrog Optimierungsgrad
+kde_bratio = BONK Verhältnis beim Heruntersampling
+kde_bquanl = BONK Quantisierung
+kde_bpsize = BONK Einflussgröße 
+
+##############
+# Hilfe Menü #
+##############
+
+to = Zielformat
+recursive = Rekursive Konvertierung von Verzeichnis(sen)
+preserve = Einhalten der Verzeichnisstruktur
+formats = Liste von unterstützen Kodierung/Dekodierung Formaten
+only = nur konvertierte Dateianhänge stimmen überein
+keep = keep files matching destination format
+help = dieses Hilfsmenü
+longhelp = Komplette Liste der Optionen
+version = gib Informationen über die Version
+usage = benutz: pacpl --to <Format> <Optionen> [Datei(en)/Verzeichnis(se)]
+defopts = turn off default encoder options (0)
+eopts = Benutzerspezifische Kodierungsoptionen
+dopts = Benutzerspezifische Dekodierungsoptionen
+nopts = user supplied normalize options
+outfile = Ausgabe Dateiname
+outdir = Ausgabeverzeichnis
+dryrun = nicht konvertierbare Dateien
+overwrited = überschreib Ausgabedatei
+normalize = normalize wav file before encoding
+delete = lösche Quelldateien nach der Konvertierung
+encoder = specify an alternate encoder
+decoder = specify an alternate decoder
+verbose = gib detaillierte Informationen
+user_opts = Benutzeroptionen
+enc_opts = Kodierungsoptionen:
+bitrate = Bitrate (Standard 128)
+freq = Audio Samplingfreqenz (Standard 44100)
+channels = Anzahl der Audio Kanäle (Standard 2)
+effect = sox Effekt (aiff/au/snd/raw/voc/smp/avr/cdr)
+fcomp = flac/fla Komprimierungsgrad (Standard 2)
+pcomp = lpac/pac Komprimierungsgrad (Standard 3)
+acomp = ape Komprimierungsgrad (Standard 3000)
+oggqual = ogg Qualitätsgrad (Standard. 3)
+spxqual = spx Qualitätsgrad (Standard 8)
+aacqual = aac/mp4/m4a Qualitätsgrad (Standard 100)
+mpcqual = mpc/mpp Qualitätsgrad (Standard radio)
+ofmode = ofr/ofs Mode (Standard normal)
+ofopt = ofr/ofs Optimierung (Standard fast)
+bratio = bonk Verhältnis beim Heruntersampling (Standard 2)
+bquanl = bonk Quantisierung (Standard 1.0)
+bpsize = bonk Einflüssgröße (Standard 128)
+tag_opts = Bezeihnungsoptionen:
+artist = setze Musiker Informationen
+title = setze Titel
+track = setze Track Nummer
+year = setze Jahr/Tag vom Album/Track
+album = setze Album Titel Informationen
+genre = setze Genre
+comment = setze Kommentare
+taginfo = zeige Bezeichnungsinformationen für ausgewählte Datei
+tag_usage = Bezeichnung nutze: pacpl <Optionen> [Datei(en)]
+rip_opts = Optionen beim Track lesen:
+rip = Lese track, getrennt durch Komma
+nocddb = deaktiviere cddb
+noinput = deaktiviere cddb interaktiv
+nscheme = Schema für die Namensgebung
+cdinfo = zeige cddb Informationen für aktuelle CD
+device = Standard = /dev/cdrom
+rip_usage = lese: pacpl --rip [Track(s)/alle] --to <Format> <Optionen>

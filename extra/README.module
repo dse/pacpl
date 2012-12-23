@@ -1,0 +1,17 @@
+USER MODULES:
+
+The best way to incorporate you own module is to copy the sample.m
+to a new file and change the various values accordinly.  If you're
+familiar with Perl and hashes, then writing your own shouldn't be a
+problem.
+
+Wild card %i will be the input file, and wild card %o will be 
+the output file.
+
+ESTR = string used to encode the temporary .wav file
+DSTR = string used to decode to the temporary .wav file
+
+
+
+It should be noted that for the time being --dopts and --eopts will no
+longer work with imported codecs.

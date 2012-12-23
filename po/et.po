@@ -1,0 +1,156 @@
+##################################################################
+# pacpl translation for version 4.0.1 and newer
+# Estonian - Priit Jõerüüt, priit [ät] joeruut [dot] com
+# Codepage - UTF-8
+# Estonian translation copyright - Priit Jõerüüt
+# Licence - see pacpl licence
+##################################################################
+#
+# Translation Instructions:
+#
+# 1) only translate text after the = sign (translate the value not the key)
+# 2) make sure there is only one space between either side of the = sign
+# 3) be sure to include the language name, and your name/email at the top
+# 4) spell check
+# 5) please translate these instructions and include them with your lang.po
+# 
+# You can submit your translations to viiron@gmail.com
+
+##############################
+# Error messages - Veateated #
+##############################
+
+error = viga
+failed = toiming ei õnnestunud:
+bad_input = väljundvorming ei ole toetatud.
+multi_out = --outfile parameetrit (võtit) ei saa kasutada mitme faili kodeerimisel.
+no_config = Ei leidnud konfiguratsioonifaili... kasutan vaikeseadeid.
+unk_encoder = valitud kodeerija ei sobi:
+unk_decoder = valitud dekodeerija ei sobi:
+no_decoder = Hoiatus: järgnevat faili ei õnnestunud dekodeerida:
+no_encoder = Järgnevasse vormingusse kodeerimine ei ole toetatud:
+no_encode_app = ei leidnud kodeerimiseks sobilikku rakendust:
+no_decode_app = ei leidnud dekodeerimiseks sobilikku rakendust:
+no_app = Ei lednud rakendust või vajalikku teeki:
+no_outdir = väljundkataloogi ei ole olemas.
+no_infile = Ei suuda leida sellist faili või kataloogi (kindluse mõttes kasuta näiteks absoluutset failiteed):
+no_input = defineeritud peab olema vähemalt üks sisendfail.
+no_read_tag = Ei saanud lugeda järgnevat lipikut (tag):
+no_write_tag = Ei saanud kirjutada järgnevat lipikut (tag):
+no_disc = Ei leidnud CD-plaati:
+no_cddb = Ei leidnud selle plaadi kohta cddb (välise CD-andmebaasi) kirjeid.  Kasuta --nocddb parameetrit (võtit).
+no_kdialog = Ei leidnud kdialog tarkvara.  Paigalda kdebase pakk.
+need_outdir = Väljundkataloog peab olema kirjeldatud.
+encode_failed = Kodeerimine ebaõnnestus järgneva olekuteatega:
+decode_failed = Dekodeerimine ebaõnnestus järgneva olekuteatega:
+empty_dir = Kataloog oli tühi, proovi kasutada --recursive parameetrit (võtit):
+opening_dir = Ei saanud avada kataloogi:
+opening_file = Ei saanud avada faili:
+seek_help = Vaata lisateavet pacpl võimaluste kohta 'pacpl --help' või 'pacpl --longhelp' päringutega.
+
+####################
+# Notices - Teated #
+####################
+
+converting = Konverteerin:
+conv_comp = Konverteerimine lõpetatud.
+removed_tmp = Kustutasin ajutise faili:
+removed_src = Kustutasin lähtefaili:
+enc_fmts = kodeerimisvormingud:
+dec_fmts = dekodeerimisvormingud:
+tag_info = loen lipikut (tag):
+write_tag_i = Kirjutan lipikut (tag):
+creating_dir = Loon kataloogi:
+imported = Laetud moodulid:
+debug = Debug- ehk veaotsingu väljund:
+loaded_config = Laetud konfiguratsioonifail:
+ripping_track = CD pala failiks kopeerimine:
+total_converted = Konverteeritud faile kokku:
+overwrite = Väljundfail on juba olemas.  Olemasoleva faili ülekirjutamiseks kasuta --overwrite parameetrit (võtit).
+show_encoders = kodeerijad
+show_decoders = dekodeerijad
+
+###############################################################################
+# user prompts for Konqueror & Amarok - Konqueror ja Amarok liideste päringud #
+###############################################################################
+
+kde_overwrite = kas kirjutan väljundfaili üle kui fail juba olemas on? (1 = jah, 0 = ei)
+kde_bitrate = vali bitikiirus
+kde_freq = audio sämplingusagedus
+kde_chans = audiokanaleid
+kde_fcomp = FLAC kompressioonitase
+kde_pcomp = LPAC kompressioonitase
+kde_acomp = APE kompressioonitase
+kde_oggqual = Ogg Vorbis kvaliteeditase
+kde_spxqual = speex kvaliteeditase
+kde_aacqual = AAC/MP4/M4A kvaliteeditase
+kde_mpcqual = Musepack kvaliteeditase
+kde_ofmode = OptimFrog kompressioonirežiim
+kde_ofopt = OptimFrog optimiseerimistase
+kde_bratio = BONK sämplingu alandamise suhtarv
+kde_bquanl = BONK kvantisatsioonitase
+kde_bpsize = BONK ennustusarv
+
+#####################################
+# Help menu text - Abiteabe tekstid #
+#####################################
+
+to = väljundvorming
+recursive = konverteeri kataloog(e) rekursiivselt
+preserve = säilita kataloogide struktuur
+formats = loenda toetatud kodeerimis- ja dekodeerimisvormingud
+only = konverteeri vaid nimetatud laiendiga failid
+keep = jäta alles sihtvormingus failid
+help = käesolev abiteave
+longhelp = terviklik parameetrite loetelu
+version = näita tarkvara versiooni
+usage = Õige kasutus on: pacpl --to <vorming> <suvandid> [fail(id)/kataloog(id)]
+defopts = turn off default encoder options (0)
+eopts = kasutaja poolt määratud täiendavad suvandid (eelistused) kodeerimiseks
+dopts = kasutaja poolt määratud täiendavad suvandid (eelistused) dekodeerimiseks
+nopts = kasutaja määratud suvandid (eelistused) normaliseerimise jaoks
+outfile = väljundfaili nimi
+outdir = väljundkataloogi nimi
+dryrun = ära konverteri (kuiv trenn)
+overwrited = kirjuta väljundfail üle
+normalize = normaliseeri wav-fail enne kodeerimist
+delete = kustuta lähtefailid peale konveteerimist
+encoder = määratle alternatiivne kodeerija
+decoder = määratle alternatiivne dekodeerija
+verbose = näita programmi töö käigus detailset teavet tegevuse kohta
+user_opts = Kasutaja suvandid:
+enc_opts = Kodeerimisega seotud suvandid:
+bitrate = bitikiirus (vaikimisi 128)
+freq = audiosagedus (vaikimisi 44100)
+channels = audiokanalite arv (vaikimisi 2)
+effect = sox efekt (aiff/au/snd/raw/voc/smp/avr/cdr)
+fcomp = flac/fla kompressiooni tase (vaikimisi 2)
+pcomp = lpac/pac kompressiooni tase (vaikimisi 3)
+acomp = ape kompressiooni tase (vaikimisi 3000)
+oggqual = ogg vorbis kvaliteeditase (vaikimisi 3)
+spxqual = spx kvaliteeditase (vaikimisi 8)
+aacqual = aac/mp4/m4a kvaliteeditase (vaikimisi 100)
+mpcqual = mpc/mpp kvaliteeditase (vaikimisi radio)
+ofmode = ofr/ofs viis (vaikimisi normal)
+ofopt = ofr/ofs optimisatsion (vaikimisi fast)
+bratio = bonk sämplingu alandamise suhtarv (vaikimisi 2)
+bquanl = bonk kvantisatsioonitase (vaikimisi 1.0)
+bpsize = bonk ennustusarv (vaikimisi 128)
+tag_opts = Lipikute (tag) kirjutamisega seotud suvandid:
+artist = määra esitaja
+title = määra loo pealkiri
+track = määra loo number
+year = määra albumi või loo aasta või kuupäev
+album = määra albumi pealkiri või nimetus
+genre = määra žanr
+comment = määra kommentaarid või märkused
+taginfo = näita valitud faili lipikuid (tag)
+tag_usage = Lipikute (tag) kuvamise ja määramise kasutus: pacpl <suvandid> [fail(id)]
+rip_opts = CD-plaadil asuvate lugude faili(de)ks kopeerimise suvandid:
+rip = kopeeri valitud plaadi lood (komadega eraldadtd lugude numbrid) või kõik plaadi lood
+nocddb = ära luba cddb-päringuid (välise CD-andmebaasi päringuid)
+noinput = ära luba cddb (välise CD-andmebaasi) interaktiivsust 
+nscheme = reeglid mille alusel moodustada failide nimed
+cdinfo = näita selle plaadi cddb (välise CD-andmebaasi) teavet
+device = plaadimängija (vaikimisi /dev/cdrom)
+rip_usage = Lugude CD-lt failiks kopeerimise kasutus: pacpl --rip [lugu(lood)/kõik (all)] --to <vorming> <suvandid>

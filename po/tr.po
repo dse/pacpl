@@ -1,0 +1,153 @@
+############################################
+# Turkish - Cantek Cetin (circass@gmail.com) - Osman KARAGOZ (osmank3@gmail.com)
+# Codepage - UTF-8
+############################################
+#
+# Translation Instructions:
+#
+# 1) only translate text after the = sign (translate the value not the key)
+# 2) make sure there is only one space between either side of the = sign
+# 3) be sure to include the language name, and your name/email at the top
+# 4) spell check
+# 5) please translate these instructions and include them with your lang.po
+# 
+# You can submit your translations to viiron@gmail.com
+
+##################
+# Error messages #
+##################
+
+error = hata
+failed = durdu:
+bad_input = kaynak biçimi desteklenmiyor.
+multi_out = --çoklu dosya çevirimi sırasında çıktı dosyası kullanılamaz.
+no_config = ayar dosyası bulunamadı...orjinal ayarlar kullanılıyor.
+unk_encoder = bunun için seçilen kodlayıcı bulunamadı:
+unk_decoder = bunun için seçilen kod okuyucu bulunamadı:
+no_decoder = uyarı: bu dosya uygun biçimde çevirilemedi:
+no_encoder = 'to' biçimin bu biçime çevirimi desteklenmiyor:
+no_encode_app = kodlama için uygun uygulama bulunamadı:
+no_decode_app = kod okuma için uygun  uygulama bulunamadı:
+no_app = uygulama bulunamadı:
+no_outdir = çıktı dosyası yok.
+no_infile = bu bir dosya veya dizin değil:
+no_input = en az bir girdi dosyası belirlemelisiniz.
+no_read_tag = Dosya için etiket(tag) okunamadı:
+no_write_tag = Dosya için etiket(tag) yazılamadı:
+no_disc = Ses CD'si açılamadı:
+no_cddb = cddb girdisi bulunamadı.--nocddb seçeneğini kullanın.
+no_kdialog = kdialog bulunamadı. kde base paketini yükleyin.
+need_outdir = bir çıktı dizini belirtmelisiniz.
+encode_failed = çıkış durumunda kodlama durduruldu:
+decode_failed = çıkış durumunda kod okuma durduruldu:
+empty_dir = dizin boş, --recursive seçeneğini kullanmayı deneyin:
+opening_dir = dizin açılamadı:
+opening_file = dosya açılamadı:
+seek_help = seçenek listesi için 'pacpl --help' or 'pacpl --longhelp' komutlarını kullan.
+
+###########
+# Notices #
+###########
+
+converting = çeviriliyor:
+conv_comp = ..tamamlandı.
+removed_tmp = geçici dosya silindi:
+removed_src = kaynak dosya silindi:
+enc_fmts = kodlayıcı biçimleri:
+dec_fmts = kod okuyucu biçimleri:
+tag_info = dosya etiket(tag) bilgisi:
+write_tag_i = dosya için tag bilgisi yazılıyor:
+creating_dir = dizin oluşturuluyor:
+imported = eklenen modüller:
+debug = hata giderme:
+loaded_config = çağrılan ayar dosyası:
+ripping_track = Ses izleri kodlanıyor:
+total_converted = Toplam çevrilen dosya:
+overwrite = Bu isimde bir dosya var.üstüne yazmak için --overwrite komutunu kullan.
+show_encoders = kodlayıcılar
+show_decoders = kod okuyucular
+
+#######################################
+# user prompts for Konqueror & Amarok #
+#######################################
+
+kde_overwrite = çıktı dosyası varsa üstüne yaz? (1 = evet, 0 = hayır)
+kde_bitrate = bitrate seç
+kde_freq = ses örnekleme oranı
+kde_chans = ses kanalları
+kde_fcomp = FLAC sıkıştırma seviyesi
+kde_pcomp = LPAC sıkıştırma seviyesi
+kde_acomp = APE sıkıştırma seviyesi
+kde_oggqual = Ogg Vorbis kalite seviyesi
+kde_spxqual = speex kalite seviyesi
+kde_aacqual = AAC/MP4/M4A kalite seviyesi
+kde_mpcqual = Musepack kalite seviyesi
+kde_ofmode = OptimFrog sıkıştırma modu
+kde_ofopt = OptimFrog optimizasyon seviyesi
+kde_bratio = BONK aşağı örnekleme oranı
+kde_bquanl = BONK quantanization seviyesi
+kde_bpsize = BONK predictor boyutu
+
+##################
+# Help menu text #
+##################
+
+to = çıktı biçimi
+recursive = dizinleri rekursif olarak �evir
+preserve = dizin yapısını koru
+formats = desteklenen kodlama/kod okuma biçimlerini listele
+only = sadece uzantıları eşleşen dosyaları çevir
+keep = keep files matching destination format
+help = yardım
+longhelp = tüm seçenek listesi
+version = versiyon bilgisini göster
+usage = kullanım: pacpl --to <biçim> <seçenek> [dosyalar/dizinler]
+orjopts = orjinal kodlayıcı ayarlarını kapat (0)
+eopts = kullanıcı tanımlı kodlayıcı seçenekleri
+dopts = kullanıcı tanımlı kod okuyucu seçenekleri
+nopts = user supplied normalize options
+outfile = çıktı dosya adı
+outdir = çıktı dizini
+dryrun = dosyaları çevirme
+overwrited = çıktı dosyasının üstüne yaz
+normalize = wav dosyasını kodlamadan önce normalle
+delete = çevirme tamamlandığında kaynak dosyayı sil
+encoder = alternatif kodlayıcı belirle
+decoder = alternatif kod okuyucu belirle
+verbose = detaylı bilgi göster
+user_opts = kullanıcı seçenekleri:
+enc_opts = kodlayıcı seçenekleri:
+bitrate = bitrate (orj. 128)
+freq = örnek oranı (orj. 44100)
+channels = ses kanal sayısı (orj. 2)
+effect = sox efekt (aiff/au/snd/raw/voc/smp/avr/cdr)
+fcomp = flac/fla sıkıştırma seviyesi (orj. 2)
+pcomp = lpac/pac sıkıştırma seviyesi (orj. 3)
+acomp = ape sıkıştırma seviyesi (orj. 3000)
+oggqual = ogg kalite seviyesi (orj. 3)
+spxqual = spx kalite seviyesi (orj. 8)
+aacqual = aac/mp4/m4a kalite seviyesi (orj. 100)
+mpcqual = mpc/mpp kalite seviyesi (orj. radio)
+ofmode = ofr/ofs mod (orj. normal)
+ofopt = ofr/ofs optimizasyon (orj. fast)
+bratio = bonk aşağı örnekleme oranı (orj. 2)
+bquanl = bonk quantization seviyesi (orj. 1.0)
+bpsize = bonk predictor boyutu (orj. 128)
+tag_opts = etiket(tag) seçenekleri:
+artist = sanatçı bilgisi gir
+title = başlık gir
+track = parça numarası gir
+year = albüm/parça yol/tarih ini gir
+album = album başlığını gir
+genre = tipini gir
+comment = yorumları gir
+taginfo = seçili dosya için etiket(tag) bilgilerini göster
+tag_usage = etiketleme(tagging) kullanım: pacpl <seçenkler> [dosya(lar)]
+rip_opts = ses izleri kodlama seçenekleri:
+rip = virgül ile ayrılmış parçaların veya hepsinin ses izlerini kodla
+nocddb = cddb yi etkisiz kıl
+noinput = cddb interactivity i etkisiz kıl
+nscheme = isimlendirme şeması
+cdinfo = takılı disk için cddb bilgisini göster
+device = varsayılan = /dev/cdrom
+rip_usage = ses izi kodlama kullanım: pacpl --rip [parça(lar)/all] --to <biçim> <seçenekler>

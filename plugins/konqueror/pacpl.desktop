@@ -1,0 +1,247 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=audio/*;video/*;application/x-flash-video;inode/directory;
+Actions=AAC;AC3;AIF;AIFF;APE;AU;AVR;BONK;CAF;CDR;FAP;FLA;FLAC;IRCAM;LA;LPAC;M4A;M4P;MAT;MAT4;MAT5;MMF;MP2;MP3;MP4;MPC;MPP;NIST;OFR;OFS;OGG;PAC;PAF;PVF;RA;RAW;SD2;SF;SHN;SMP;SND;SPX;TTA;VOC;W64;WAV;WMA;WV;
+X-KDE-Submenu=PACPL-Convert
+
+[Desktop Action AAC]
+Name=To AAC
+Icon=sound
+Exec=pacpl --to AAC --gui %F &
+
+[Desktop Action AC3]
+Name=To AC3
+Icon=sound
+Exec=pacpl --to AC3 --gui %F &
+
+[Desktop Action AIF]
+Name=To AIF
+Icon=sound
+Exec=pacpl --to AIF --gui %F &
+
+[Desktop Action AIFF]
+Name=To AIFF
+Icon=sound
+Exec=pacpl --to AIFF --gui %F &
+
+[Desktop Action APE]
+Name=To APE
+Icon=sound
+Exec=pacpl --to APE --gui %F &
+
+[Desktop Action AU]
+Name=To AU
+Icon=sound
+Exec=pacpl --to AU --gui %F &
+
+[Desktop Action AVR]
+Name=To AVR
+Icon=sound
+Exec=pacpl --to AVR --gui %F &
+
+[Desktop Action BONK]
+Name=To BONK
+Icon=sound
+Exec=pacpl --to BONK --gui %F &
+
+[Desktop Action CAF]
+Name=To CAF
+Icon=sound
+Exec=pacpl --to CAF --gui %F &
+
+[Desktop Action CDR]
+Name=To CDR
+Icon=sound
+Exec=pacpl --to CDR --gui %F &
+
+[Desktop Action FAP]
+Name=To FAP
+Icon=sound
+Exec=pacpl --to FAP --gui %F &
+
+[Desktop Action FLA]
+Name=To FLA
+Icon=sound
+Exec=pacpl --to FLA --gui %F &
+
+[Desktop Action FLAC]
+Name=To FLAC
+Icon=sound
+Exec=pacpl --to FLAC --gui %F &
+
+[Desktop Action IRCAM]
+Name=To IRCAM
+Icon=sound
+Exec=pacpl --to IRCAM --gui %F &
+
+[Desktop Action LA]
+Name=To LA
+Icon=sound
+Exec=pacpl --to LA --gui %F &
+
+[Desktop Action LPAC]
+Name=To LPAC
+Icon=sound
+Exec=pacpl --to LPAC --gui %F &
+
+[Desktop Action M4A]
+Name=To M4A
+Icon=sound
+Exec=pacpl --to M4A --gui %F &
+
+[Desktop Action M4P]
+Name=To M4P
+Icon=sound
+Exec=pacpl --to M4P --gui %F &
+
+[Desktop Action MAT]
+Name=To MAT
+Icon=sound
+Exec=pacpl --to MAT --gui %F &
+
+[Desktop Action MAT4]
+Name=To MAT4
+Icon=sound
+Exec=pacpl --to MAT4 --gui %F &
+
+[Desktop Action MAT5]
+Name=To MAT5
+Icon=sound
+Exec=pacpl --to MAT5 --gui %F &
+
+[Desktop Action MMF]
+Name=To MMF
+Icon=sound
+Exec=pacpl --to MMF --gui %F &
+
+[Desktop Action MP2]
+Name=To MP2
+Icon=sound
+Exec=pacpl --to MP2 --gui %F &
+
+[Desktop Action MP3]
+Name=To MP3
+Icon=sound
+Exec=pacpl --to MP3 --gui %F &
+
+[Desktop Action MP4]
+Name=To MP4
+Icon=sound
+Exec=pacpl --to MP4 --gui %F &
+
+[Desktop Action MPC]
+Name=To MPC
+Icon=sound
+Exec=pacpl --to MPC --gui %F &
+
+[Desktop Action MPP]
+Name=To MPP
+Icon=sound
+Exec=pacpl --to MPP --gui %F &
+
+[Desktop Action NIST]
+Name=To NIST
+Icon=sound
+Exec=pacpl --to NIST --gui %F &
+
+[Desktop Action OFR]
+Name=To OFR
+Icon=sound
+Exec=pacpl --to OFR --gui %F &
+
+[Desktop Action OFS]
+Name=To OFS
+Icon=sound
+Exec=pacpl --to OFS --gui %F &
+
+[Desktop Action OGG]
+Name=To OGG
+Icon=sound
+Exec=pacpl --to OGG --gui %F &
+
+[Desktop Action PAC]
+Name=To PAC
+Icon=sound
+Exec=pacpl --to PAC --gui %F &
+
+[Desktop Action PAF]
+Name=To PAF
+Icon=sound
+Exec=pacpl --to PAF --gui %F &
+
+[Desktop Action PVF]
+Name=To PVF
+Icon=sound
+Exec=pacpl --to PVF --gui %F &
+
+[Desktop Action RA]
+Name=To RA
+Icon=sound
+Exec=pacpl --to RA --gui %F &
+
+[Desktop Action RAW]
+Name=To RAW
+Icon=sound
+Exec=pacpl --to RAW --gui %F &
+
+[Desktop Action SD2]
+Name=To SD2
+Icon=sound
+Exec=pacpl --to SD2 --gui %F &
+
+[Desktop Action SF]
+Name=To SF
+Icon=sound
+Exec=pacpl --to SF --gui %F &
+
+[Desktop Action SHN]
+Name=To SHN
+Icon=sound
+Exec=pacpl --to SHN --gui %F &
+
+[Desktop Action SMP]
+Name=To SMP
+Icon=sound
+Exec=pacpl --to SMP --gui %F &
+
+[Desktop Action SND]
+Name=To SND
+Icon=sound
+Exec=pacpl --to SND --gui %F &
+
+[Desktop Action SPX]
+Name=To SPX
+Icon=sound
+Exec=pacpl --to SPX --gui %F &
+
+[Desktop Action TTA]
+Name=To TTA
+Icon=sound
+Exec=pacpl --to TTA --gui %F &
+
+[Desktop Action VOC]
+Name=To VOC
+Icon=sound
+Exec=pacpl --to VOC --gui %F &
+
+[Desktop Action W64]
+Name=To W64
+Icon=sound
+Exec=pacpl --to W64 --gui %F &
+
+[Desktop Action WAV]
+Name=To WAV
+Icon=sound
+Exec=pacpl --to WAV --gui %F &
+
+[Desktop Action WMA]
+Name=To WMA
+Icon=sound
+Exec=pacpl --to WMA --gui %F &
+
+[Desktop Action WV]
+Name=To WV
+Icon=sound
+Exec=pacpl --to WV --gui %F &
+

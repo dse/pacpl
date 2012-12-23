@@ -1,0 +1,22 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+    |-----handy-ruler------------------------------------------------------|
+pacpl: Perl Audio Converter
+pacpl:
+pacpl: Perl Audio Converter is a tool for converting multiple audio types 
+pacpl: from one format to another. It supports AAC, AC3, AIFF, APE, AU,AVR, 
+pacpl: BONK, CAF, CDR, FAP, FLA, FLAC,IRCAM, LA, LPAC, MAT, MAT4, MAT5,M4A, 
+pacpl: MP2, MP3, MP4, MPC, MPP, NIST, OFR, OFS, OGG, PAC, PAF, PVF, RA,RAM, 
+pacpl: RAW, SD2, SF, SHN, SMP, SND, SPX, TTA, VOC, W64, WAV, WMA, and WV. 
+pacpl: It can also convert audio from the following video extensions:RM,RV, 
+pacpl: ASF, DivX, MPG, MKV, MPEG, AVI, MOV, OGM, QT, VCD, SVCD, M4V, NSV, 
+pacpl: NUV, PSP, SMK, VOB, FLV, and WMV. A CD ripping function with CDDB 
+pacpl: support, batch conversion, tag preservation for most supported 
+pacpl: formats, independent tag reading/writing, and extensions for Amarok, 
+pacpl: Dolphin, and Konqueror are also provided.
+pacpl:

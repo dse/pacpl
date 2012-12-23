@@ -1,0 +1,17 @@
+mod-install.sh:
+
+this script will attempt to install all the required perl modules
+for pacpl.  For some it may be necessary to actually start the CPAN shell:
+
+perl -MCPAN -e 'shell'
+
+and from there type: install Module::Name
+
+-------------------------------------------------------------------------------
+pacpl-gui.kmdr:
+
+Kommander interface for pacpl.  
+
+use: 'kmdr-executor pacpl-gui.kmdr' to run.  keep in mind that Kommander
+must be installed in order to use this interface.
+

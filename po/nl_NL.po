@@ -1,0 +1,151 @@
+############################################
+# Dutch - Sander Pientka (cumulus0007@gmail.com)
+############################################
+#
+# Translation Instructions:
+#
+# 1) only translate text after the = sign (translate the value not the key)
+# 2) make sure there is only one space between either side of the = sign
+# 3) be sure to include the language name, and your name/email at the top
+# 4) spell check
+# 5) please translate these instructions and include them with your lang.po
+# 
+# You can submit your translations to viiron@gmail.com
+
+##################
+# Error messages #
+##################
+
+error = fout
+failed = mislukt:
+bad_input = uitvoerformaat wordt niet ondersteund.
+multi_out = --outfile kan niet gebruikt worden bij het encoderen van meerdere bestanden.
+no_config = configuratiebestand niet gevonden...standaard instellingen gebruiken.
+unk_encoder = geselecteerde encoder is niet geldig voor:
+unk_decoder = geselecteerde decoder is niet geldig voor:
+no_decoder = waarschuwing: het volgende bestand kon niet gedecodeerd worden:
+no_encoder = naar het volgende encoderen wordt niet ondersteund:
+no_encode_app = kon geen geschikte toepassing vinden om te encoderen:
+no_decode_app = kon geen geschikte toepassing vinden om te decoderen:
+no_app = kon toepassing niet vinden:
+no_outdir = uitvoerlocatie bestaat niet.
+no_infile = het volgende is niet een bestand of map:
+no_input = ten minste één invoerbestand is vereist.
+no_read_tag = kon tag niet lezen van:
+no_write_tag = kon tag niet schrijven naar:
+no_disc = kan audioschijf niet openen:
+no_cddb = kon cddb-waarde niet vinden. gebruik de optie --nocddb.
+no_kdialog = kon kdialog niet vinden. installeer het pakket kdebase.
+need_outdir = een uitvoerlocatie is vereist.
+encode_failed = encoderen mislukte met afsluitstatus:
+decode_failed = decoderen mislukte met afsluitstatus::
+empty_dir = locatie is leeg, probeer de optie --recursive option:
+opening_dir = kon locatie niet openen:
+opening_file = kon bestand niet openen:
+seek_help = zie 'pacpl --help' of 'pacpl --longhelp' voor een lijst met opties.
+
+###########
+# Notices #
+###########
+
+converting = Omzetten:
+conv_comp = ..klaar.
+removed_tmp = tijdelijk bestand verwijderd:
+removed_src = bronbestand verwijderd:
+enc_fmts = encodingsformaten:
+dec_fmts = encodingsformaten:
+tag_info = informatie taggen voor:
+write_tag_i = taginformatie schrijven voor:
+creating_dir = map maken:
+imported = geïmporteerde modules:
+debug = debug:
+loaded_config = configuratiebestand geladen:
+ripping_track = track rippen:
+total_converted = Totaal aantal tracks omgezet:
+overwrite = uitvoerbestand bestaat al. gebruik --overwrite om het bestaande bestand te vervangen.
+show_encoders = encoders voor
+show_decoders = decoders voor
+
+#######################################
+# user prompts for Konqueror & Amarok #
+#######################################
+
+kde_overwrite = uitvoerbestand overschrijven als het al bestaat? (1 = ja, 0 = nee)
+kde_bitrate = selecteer bitrate
+kde_freq = audio sampling rate
+kde_chans = audiokanalen
+kde_fcomp = FLAC-compressieniveau
+kde_pcomp = LPAC-compressieniveau
+kde_acomp = APE-compressieniveau
+kde_oggqual = Ogg Vorbis-kwaliteitsniveau
+kde_spxqual = speex-kwaliteitsniveau
+kde_aacqual = AAC/MP4/M4A-kwaliteitsniveau
+kde_mpcqual = Musepack-kwaliteitsniveau
+kde_ofmode = OptimFrog-compressiemodus
+kde_ofopt = OptimFrog-optimalisatieniveau
+kde_bratio = BONK-downsamplingverhouding
+kde_bquanl = BONK-kwantisatieniveau
+kde_bpsize = BONK-predictorgrootte
+
+##################
+# Help menu text #
+##################
+
+to = bestemmingsformaat
+recursive = mappen recursief omzetten
+preserve = mappenstructuur behouden
+formats = ondersteunde en/decodingformaten weergeven
+only = Alleen bestanden omzetten die overeenkomen met extensie
+keep = laat bestanden het bestemmingsformaat aanhouden
+help = dit hulpmenu
+longhelp = complete lijst van opties
+version = versie-informatie weergeven
+usage = gebruik: pacpl --to <formaat> <opties> [bestand(en)/map(pen)]
+eopts = encoderopties van gebruiker
+dopts = decoderopties van gebruiker
+nopts = normalisatieopties van gebruiker
+outfile = output file name
+outdir = output directory 
+dryrun = bestanden niet daadwerkelijk omzetten
+overwrited = bestemmingsbestand overschrijven
+normalize = wav-bestand normaliseren na omzetten
+delete = bronbestand verwijderen na omzetten
+encoder = een alternatieve encoder opegeven
+decoder = een alternatieve decoder opegeven
+verbose = uitgebreide informatie weergeven
+user_opts = gebruikersopties:
+enc_opts = encoderopties:
+bitrate = bitrate (standaard: 128)
+freq = audiofrequentie (standaard: 44100)
+channels = aantal audiokanelen (standaard: 2)
+effect = sox-effect (aiff/au/snd/raw/voc/smp/avr/cdr)
+fcomp = flac/fla-compressieniveau (standaard: 2)
+pcomp = lpac/pac-compressieniveau (standaard: 3)
+acomp = ape-compressieniveau (standaard: 3000)
+oggqual = ogg-kwaliteitsniveau (standaard: 3)
+spxqual = spx-kwaliteitsniveau (standaard: 8)
+aacqual = aac/mp4/m4a-kwaliteitsniveau (standaard: 100)
+mpcqual = mpc/mpp-kwaliteitsniveau (standaard: radio)
+ofmode = ofr/ofs-modus (standaard: normaal)
+ofopt = ofr/ofs-optimalisatie (standaard: snel)
+bratio = bonk-downsamplingverhouding (standaard: 2)
+bquanl = bonk-quantisatieverhouding (standaard: 1.0)
+bpsize = bonk-predictorgrootte (standaard: 128)
+tag_opts = tagopties:
+artist = artiestinformatie instellen
+title = titel instellen
+track = tracknummer instellen
+year = jaar/datum van track/album instellen
+album = albumtitelinformatie instellen
+genre = genre instellen
+comment = commentaar instellen
+taginfo = taginformatie voor geselecteerd bestand weergeven
+tag_usage = taggebruik: pacpl <opties> [bestand(en)]
+rip_opts = ripopties:
+rip = rip tracks separated by comma or all
+nocddb = cddb uitschakelen
+noinput = cddb-interactiviteit uitschakelen
+nscheme = benoemingsschema
+cdinfo = cddb-informatie van huidige schijf weergeven
+device = standaard: = /dev/cdrom
+rip_usage = ripgebruik: pacpl --rip [track(s)/alles] --to <formaat> <opties>

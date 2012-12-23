@@ -1,0 +1,151 @@
+############################################
+# Italian - Mastermind-X (mastermind.x11@gmail.com)
+############################################
+#
+# Translation Instructions:
+#
+# 1) only translate text after the = sign (translate the value not the key)
+# 2) make sure there is only one space between either side of the = sign
+# 3) be sure to include the language name, and your name/email at the top
+# 4) spell check
+# 5) please translate these instructions and include them with your lang.po
+# 
+# You can submit your translations to viiron@gmail.com
+
+##################
+# Error messages #
+##################
+
+error = errore
+failed = fallito:
+bad_input = formato di destinazione non supportato.
+multi_out = --outfile non può essere usato nella codifica di file multipli.
+no_config = file di configurazione non trovato ...uso le impostazioni di default.
+unk_encoder = l'encoder selezionato non è valido per:
+unk_decoder = l'decoder selezionato non è valido per:
+no_decoder = attenzione: il seguente file non può essere decodificato:
+no_encoder = l'encoding nel seguente formato non è supportato:
+no_encode_app = impossibile trovare un applicazione adatta alla codifica:
+no_decode_app = impossibile trovare un applicazione adatta alla decodifica:
+no_app = impossibile trovare l'applicazione:
+no_outdir = la cartella di output non esiste.
+no_infile = il seguente non è ne un file ne una cartella:
+no_input = devi specificare almeno un file di input.
+no_read_tag = impossibile leggere il tag per:
+no_write_tag = impossibile scrivere il tag per:
+no_disc = impossibile aprire il cd audio:
+no_cddb = impossibile trovare la voce cddb.  usa l'opzione --nocddb.
+no_kdialog = kdialog non trovato.  installa il pacchetto kdebase.
+need_outdir = devi specificare una cartella di output.
+encode_failed = codifica fallita con exit status:
+decode_failed = decodifica fallita con exit status:
+empty_dir = cartella vuota, prova usando l'opzione --recursive:
+opening_dir = impossibile aprire la cartella:
+opening_file = impossibile aprire il file:
+seek_help = vedi 'pacpl --help' o 'pacpl --longhelp' per una lista di opzioni.
+
+###########
+# Notices #
+###########
+
+converting = Convertendo:
+conv_comp = ..fatto.
+removed_tmp = rimossi i file temporanei:
+removed_src = rimossi i file sorgente:
+enc_fmts = formati di codifica:
+dec_fmts = formati di decodifica:
+tag_info = informazioni di tagging per:
+write_tag_i = scrittura delle informazioni di tag per:
+creating_dir = creando la cartella:
+imported = moduli importati:
+debug = debug:
+loaded_config = file di configurazione caricato:
+ripping_track = Acquisendo la traccia:
+total_converted = Totale die files convertiti:
+overwrite = il file di output esiste.  usa --overwrite per sovrascrivere il file esistente.
+show_encoders = encoders per
+show_decoders = decoders per
+
+#######################################
+# user prompts for Konqueror & Amarok #
+#######################################
+
+kde_overwrite = sovrascrivi il file di output se esiste? (1 = si, 0 = no)
+kde_bitrate = seleziona il bitrate
+kde_freq = frequenza di campionamento
+kde_chans = canali audio
+kde_fcomp = FLAC: livello di compressione
+kde_pcomp = LPAC: livello di compressione
+kde_acomp = APE: livello di compressione
+kde_oggqual = Ogg Vorbis: livello di qualità
+kde_spxqual = speex: livello di qualità
+kde_aacqual = AAC/MP4/M4A: livello di qualità
+kde_mpcqual = Musepack: livello di qualità
+kde_ofmode = OptimFrog: modalità di compressione
+kde_ofopt = OptimFrog: livello di ottimizzazione
+kde_bratio = BONK: rateo di downsapling
+kde_bquanl = BONK: livello di quantizzazione
+kde_bpsize = BONK: dimensione del predittore
+
+##################
+# Help menu text #
+##################
+
+to = formato di destinazione
+recursive = converti ricorsivamente le cartelle
+preserve = preserva la struttura delle cartelle
+formats = lista dei formati di codifica/decodifica supportati
+only = converti solo i file con l'estensione corrispondente
+keep = mantieni i files con formato corrispondente a quello di destinazione
+help = questo help menu
+longhelp = lista completa delle opzioni
+version = mostra informazioni di versione
+usage = Uso: pacpl --to <format> <options> [files/cartelle]
+eopts = opzioni di codifica fornite dall'utente
+dopts = opzioni di decodifica fornite dall'utente
+nopts = opzioni di normalizzazione fornite dall'utente
+outfile = nome del file di output
+outdir = cartella di output
+dryrun = non convertire i files
+overwrited = sovrascrivi i file di destinazione
+normalize = normalizza il file wav prima della codifica
+delete = elimina il file sorgente dopo la conversione
+encoder = specifica un encoder alternativo
+decoder = specifica un decoder alternativo
+verbose = mostra informazioni dettagliate
+user_opts = opzioni utente:
+enc_opts = opzioni di codifica:
+bitrate = bitrate (def. 128)
+freq = frequenza audio (def. 44100)
+channels = numero di canali audio (def. 2)
+effect = effetti sox (aiff/au/snd/raw/voc/smp/avr/cdr)
+fcomp = livello di compressione flac/fla (def. 2)
+pcomp = livello di compressione lpac/pac (def. 3)
+acomp = livello di compressione ape (def. 3000)
+oggqual = livello di qualità ogg (def. 3)
+spxqual = livello di qualità spx (def. 8)
+aacqual = livello di qualità aac/mp4/m4a (def. 100)
+mpcqual = livello di qualità mpc/mpp (def. radio)
+ofmode = modalità di compressione ofr/ofs (def. normal)
+ofopt = livello di ottimizzazione ofr/ofs (def. fast)
+bratio = rateo di downsampling bonk (def. 2)
+bquanl = livello di quantizzazione bonk (def. 1.0)
+bpsize = Dimensione del predittore bonk (def. 128)
+tag_opts = opzioni di tagging:
+artist = imposta informazioni artista
+title = imposta titolo
+track = imposta numero traccia
+year = imposta anno/data del album/traccia
+album = imposta informazioni titolo dell'album
+genre = imposta genere
+comment = imposta commenti
+taginfo = mostra informazioni di tagging del file selezionato
+tag_usage = uso del tagging: pacpl <options> [file(s)]
+rip_opts = opzioni di acquisizione:
+rip = rip tracks separated by comma or all
+nocddb = disabilita cddb
+noinput = disabilita interazione cddb
+nscheme = schema di rinominazione
+cdinfo = mostra le informazioni cddb per il seguente disco
+device = default = /dev/cdrom
+rip_usage = uso in acquisizione: pacpl --rip [traccia(e)/all] --to <format> <options>
