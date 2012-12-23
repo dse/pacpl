@@ -1611,7 +1611,7 @@ sub proc_input {
 
                 if ($keep and $if eq $to) {
                     system(sprintf("cp -v %s %s",
-                                   shell_quote("$dir/$file.$ext")
+                                   shell_quote("$dir/$file.$ext"),
                                    shell_quote("$outdir/$outfile.$ext"))) if $outdir ne $dir and not -e "$outdir/$outfile.$ext";
                     next if $outdir eq $dir;
                 } else {
