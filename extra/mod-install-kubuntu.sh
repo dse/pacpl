@@ -24,5 +24,6 @@ sudo apt-get install libogg-vorbis-header-perl \
                      libaudio-wma-perl \
                      libmp3-tag-perl \
                      libmp4-info-perl \
-                     libaudio-flac-header-perl
+                     libaudio-flac-header-perl \
+	             libstring-shellquote-perl
 
