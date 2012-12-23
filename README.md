@@ -1,7 +1,10 @@
 pacpl
 =====
 
-This is my fork of pacpl, to fix some bugs.
+This is my fork of the GPL 3 licensed pacpl.
+
+I've created this primarily to make it more robust when dealing with
+wacky filename hijinks.
 
 Original README
 ===============
