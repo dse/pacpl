@@ -24,6 +24,7 @@ use Getopt::Long;
 use File::Basename;
 use File::Find;
 use File::Spec::Functions qw(rel2abs);
+use String::ShellQuote;
 
 # Tagging modules
 use Ogg::Vorbis::Header;
@@ -232,7 +233,9 @@ sub perror {
     my ($key, $msg) = @_;
     print "$name - $version\n\n";
     print "$lang{error}: $lang{$key} $msg" . "\n\n";
-    system("kdialog --title \"$name\" --error \"$lang{error}: $lang{$key} $msg\" &") if $gui;
+    system(sprintf("kdialog --title %s --error %s &",
+                   shell_quote($name),
+                   shell_quote("$lang{error}: $lang{$key} $msg"))) if $gui;
     die "$lang{seek_help}\n";
 }
 
@@ -246,7 +249,9 @@ sub pnotice {
     print "\n"    if $nm == 1;
     print "\n\n"  if $nm == 2;
       
-    system("kdialog --title \"$name\" --passivepopup \"$lang{$key} $msg\" 10 &") if $gui;
+    system(sprintf("kdialog --title %s --passivepopup %s 10 &",
+                   shell_quote($name),
+                   shell_quote("$lang{$key} $msg"))) if $gui;
 
     $banner = 0;
 }
@@ -1605,7 +1610,9 @@ sub proc_input {
                 $outfile = "$file" if not $out_name;
 
                 if ($keep and $if eq $to) {
-                    system("cp -v \"$dir/$file.$ext\" \"$outdir/$outfile.$ext\"") if $outdir ne $dir and not -e "$outdir/$outfile.$ext";
+                    system(sprintf("cp -v %s %s",
+                                   shell_quote("$dir/$file.$ext")
+                                   shell_quote("$outdir/$outfile.$ext"))) if $outdir ne $dir and not -e "$outdir/$outfile.$ext";
                     next if $outdir eq $dir;
                 } else {
                     convert("$dir/$file","$outdir/$outfile","$ext","$file","$outfile");
@@ -1775,10 +1782,9 @@ sub convert {
     check_decoder($infmt);
                          
     my $decode_string =  $run{$if}{DECODER}{$decoder}{DSTR}->();
-    $decode_string    =~ s/%i/\"$inf.$infmt\"/;
-    $decode_string    =~ s/%o/\"$outf.$$.wav\"/;
-    $decode_string    =~ s/(\$|\\)/\\$1/g;
-
+    $decode_string    =~ s/%i/shell_quote("$inf.$infmt")/e;
+    $decode_string    =~ s/%o/shell_quote("$outf.$$.wav")/e;
+    
     my $nl = 0; $nl = 2 if $verbose;
           
     pnotice("converting"," [$iname.$infmt] -> [$to] ", $nl);
@@ -1797,15 +1803,15 @@ sub convert {
        
     # normalize wav file before encoding to output format
     perror("no_app","normalize") if $normalize and not `which normalize 2>/dev/null`;
-    system("normalize $nopts \"$outf.$$.wav\"") if $normalize;
+    system(sprintf("normalize $nopts %s", 
+                   shell_quote("$outf.$$.wav"))) if $normalize;
 
     # copy meta-data from input file to %tag_name 
     read_tags("$inf.$infmt", "$if") if $run{$if}{TAGS}{READ} == 1 and not $dryrun;
 
     my $encode_string =  $run{$to}{ENCODER}{$encoder}{ESTR}->();
-    $encode_string    =~ s/%i/\"$outf.$$.wav\"/; 
-    $encode_string    =~ s/%o/\"$outf.$to\"/;
-    $encode_string    =~ s/(\$|\\)/\\$1/g;
+    $encode_string    =~ s/%i/shell_quote("$outf.$$.wav")/e; 
+    $encode_string    =~ s/%o/shell_quote("$outf.$to")/e;
 
     my $tag_opts = format_tags($to); # tag options for mp4/m4a/m4b/mpc/mpp/bonk/spx/wv
     
@@ -1892,7 +1898,8 @@ sub check_input {
 # kdialog options for Konqueror, Dolphin, & Amarok plugins #
 ############################################################
 
-my $kdialog = "kdialog --title \"$name - $version\"";
+my $kdialog = sprintf("kdialog --title %s",
+                      shell_quote("$name - $version"));
 
 sub get_visual_opts {
 
@@ -1925,92 +1932,92 @@ sub prompt_user {
                           exit(1) if not $bitrate;
                          }
 
-            case 'FREQ'      {
-                                $freq     = `$kdialog --default $freq     --combobox \"$lang{kde_freq}\" 32000 44100 48000`;
-                                chomp($freq);
-                                exit(1) if not $freq;
-                             }
+        case 'FREQ'      {
+                          $freq     = `$kdialog --default $freq     --combobox \"$lang{kde_freq}\" 32000 44100 48000`;
+                          chomp($freq);
+                          exit(1) if not $freq;
+                         }
 
-            case 'CHANNELS'  { 
-                                $channels = `$kdialog --default $channels --combobox \"$lang{kde_chans}\" 1 2`;
-                                chomp($channels);
-                                exit(1) if not $channels;
-                             }
+        case 'CHANNELS'  { 
+                          $channels = `$kdialog --default $channels --combobox \"$lang{kde_chans}\" 1 2`;
+                          chomp($channels);
+                          exit(1) if not $channels;
+                         }
 
-            case 'FCOMP'     {
-                                $fcomp    = `$kdialog --default $fcomp    --combobox \"$lang{kde_fcomp}\" 0 1 2 3 4 5 6 7 8`;
-                                chomp($fcomp);
-                                exit(1) if not $fcomp;
-                             }
+        case 'FCOMP'     {
+                          $fcomp    = `$kdialog --default $fcomp    --combobox \"$lang{kde_fcomp}\" 0 1 2 3 4 5 6 7 8`;
+                          chomp($fcomp);
+                          exit(1) if not $fcomp;
+                         }
 
-            case 'PCOMP'     {
-                                $pcomp    = `$kdialog --default $pcomp    --combobox \"$lang{kde_pcomp}\" 1 2 3 4 5`;
-                                chomp($pcomp);
-                                exit(1) if not $pcomp;
-                             }
+        case 'PCOMP'     {
+                          $pcomp    = `$kdialog --default $pcomp    --combobox \"$lang{kde_pcomp}\" 1 2 3 4 5`;
+                          chomp($pcomp);
+                          exit(1) if not $pcomp;
+                         }
 
-            case 'ACOMP'     {
-                                $acomp    = `$kdialog --default $acomp    --combobox \"$lang{kde_acomp}\" 1000 2000 3000 4000 5000`;
-                                chomp($acomp);
-                                exit(1) if not $acomp;
-                             }
+        case 'ACOMP'     {
+                          $acomp    = `$kdialog --default $acomp    --combobox \"$lang{kde_acomp}\" 1000 2000 3000 4000 5000`;
+                          chomp($acomp);
+                          exit(1) if not $acomp;
+                         }
 
-            case 'OGGQUAL'   {
-                               $oggqual  = `$kdialog --default $oggqual   --combobox \"$lang{kde_oggqual}\" 0 1 2 3 4 5 6 7 8 9 10`;
-                               chomp($oggqual);
-                               exit(1) if not $oggqual;
-                             }
-                             
-            case 'SPXQUAL'   {
-                               $spxqual  = `$kdialog --default $spxqual   --combobox \"$lang{kde_spxqual}\" 0 1 2 3 4 5 6 7 8 9 10`;
-                               chomp($spxqual);
-                               exit(1) if not $spxqual;
-                             }
+        case 'OGGQUAL'   {
+                          $oggqual  = `$kdialog --default $oggqual   --combobox \"$lang{kde_oggqual}\" 0 1 2 3 4 5 6 7 8 9 10`;
+                          chomp($oggqual);
+                          exit(1) if not $oggqual;
+                         }
 
-            case 'AACQUAL'   {
-                               $aacqual  = `$kdialog --default $aacqual   --combobox \"$lang{kde_aacqual}\" 50 75 100 125 150`;
-                               chomp($aacqual);
-                               exit(1) if not $aacqual;
-                             }
+        case 'SPXQUAL'   {
+                          $spxqual  = `$kdialog --default $spxqual   --combobox \"$lang{kde_spxqual}\" 0 1 2 3 4 5 6 7 8 9 10`;
+                          chomp($spxqual);
+                          exit(1) if not $spxqual;
+                         }
 
-            case 'MPCQUAL'   {
-                               $mpcqual  = `$kdialog --default $mpcqual   --combobox \"$lang{kde_mpcqual}\" thumb radio standard xtreme insane braindead`;
-                               chomp($mpcqual);
-                               exit(1) if not $mpcqual;
-                             }
+        case 'AACQUAL'   {
+                          $aacqual  = `$kdialog --default $aacqual   --combobox \"$lang{kde_aacqual}\" 50 75 100 125 150`;
+                          chomp($aacqual);
+                          exit(1) if not $aacqual;
+                         }
 
-            case 'OFMODE'    {
-                               $ofmode   = `$kdialog --default $ofmode    --combobox \"$lang{kde_ofmode}\" fast normal high extra best highnew extranew bestnew`; 
-                               chomp($ofmode);
-                               exit(1) if not $ofmode;
-                             }
+        case 'MPCQUAL'   {
+                          $mpcqual  = `$kdialog --default $mpcqual   --combobox \"$lang{kde_mpcqual}\" thumb radio standard xtreme insane braindead`;
+                          chomp($mpcqual);
+                          exit(1) if not $mpcqual;
+                         }
 
-            case 'OFOPT'     {
-                               $ofopt    = `$kdialog --default $ofopt     --combobox \"$lang{kde_ofopt}\" none fast normal high best`; 
-                               chomp($ofopt);
-                               exit(1) if not $ofopt;
-                             }
+        case 'OFMODE'    {
+                          $ofmode   = `$kdialog --default $ofmode    --combobox \"$lang{kde_ofmode}\" fast normal high extra best highnew extranew bestnew`; 
+                          chomp($ofmode);
+                          exit(1) if not $ofmode;
+                         }
 
-            case 'BRATIO'    {
-                               $bratio   = `$kdialog --default $bratio    --combobox \"$lang{kde_bratio}\" 1 2 3 4 5`;
-                               chomp($bratio);
-                               exit(1) if not $bratio;
-                             }
+        case 'OFOPT'     {
+                          $ofopt    = `$kdialog --default $ofopt     --combobox \"$lang{kde_ofopt}\" none fast normal high best`; 
+                          chomp($ofopt);
+                          exit(1) if not $ofopt;
+                         }
 
-            case 'BQUANL'    {
-                               $bquanl   = `$kdialog --default $bquanl    --combobox \"$lang{kde_bquanl}\" 1.00 1.25 1.50 1.75 2.00`;
-                               chomp($bquanl);
-                               exit(1) if not $bquanl;
-                             }
+        case 'BRATIO'    {
+                          $bratio   = `$kdialog --default $bratio    --combobox \"$lang{kde_bratio}\" 1 2 3 4 5`;
+                          chomp($bratio);
+                          exit(1) if not $bratio;
+                         }
 
-            case 'BPSIZE'    {
-                               $bpsize   = `$kdialog --default $bpsize    --combobox \"$lang{kde_bpsize}\" 10 128`;
-                               chomp($bpsize);
-                               exit(1) if not $bpsize;
-                             }
+        case 'BQUANL'    {
+                          $bquanl   = `$kdialog --default $bquanl    --combobox \"$lang{kde_bquanl}\" 1.00 1.25 1.50 1.75 2.00`;
+                          chomp($bquanl);
+                          exit(1) if not $bquanl;
+                         }
 
-                        else { return 0; }
-      }
+        case 'BPSIZE'    {
+                          $bpsize   = `$kdialog --default $bpsize    --combobox \"$lang{kde_bpsize}\" 10 128`;
+                          chomp($bpsize);
+                          exit(1) if not $bpsize;
+                         }
+
+                    else { return 0; }
+    }
 
 }
 
@@ -2054,19 +2061,66 @@ sub format_tags {
                                 
                                 $tag_name{track} = 0 if not $tag_name{track};
                                 $tag_name{year}  = 0 if not $tag_name{year};
-                                return "-title \"$tag_name{title}\" -track \"$tag_name{track}\" -author \"$tag_name{artist}\" -album \"$tag_name{album}\" -comment \"$tag_name{comment}\" -year \"$tag_name{year}\" -genre \"$tag_name{genre}\"";
+
+                                return sprintf("-title %s -track %s -author %s -album %s -comment %s -year %s -genre %s",
+                                               shell_quote($tag_name{title}),
+                                               shell_quote($tag_name{track}),
+                                               shell_quote($tag_name{artist}),
+                                               shell_quote($tag_name{album}),
+                                               shell_quote($tag_name{comment}),
+                                               shell_quote($tag_name{year}),
+                                               shell_quote($tag_name{genre}));
                                 
                             } else {
                                 
-                                return "--title \"$tag_name{title}\" --track \"$tag_name{track}\" --artist \"$tag_name{artist}\" --album \"$tag_name{album}\" --comment \"$tag_name{comment}\" --year \"$tag_name{year}\" --genre \"$tag_name{genre}\"";
+                                return sprintf("--title %s --track %s --artist %s --album %s --comment %s --year %s --genre %s",
+                                               shell_quote($tag_name{title}),
+                                               shell_quote($tag_name{track}),
+                                               shell_quote($tag_name{artist}),
+                                               shell_quote($tag_name{album}),
+                                               shell_quote($tag_name{comment}),
+                                               shell_quote($tag_name{year}),
+                                               shell_quote($tag_name{genre}));
                                 
                             }
                            } 
                 
-        case /mpc|mpp/ { return "--tag \"Title=$tag_name{title}\" --tag \"Track=$tag_name{track}\" --tag \"Artist=$tag_name{artist}\" --tag \"Album=$tag_name{album}\" --tag \"Comment=$tag_name{comment}\" --tag \"Year=$tag_name{year}\" --tag \"Genre=$tag_name{genre}\""; }
-        case 'wv'      { return "-w \"Title=$tag_name{title}\" -w \"Track=$tag_name{track}\" -w \"Artist=$tag_name{artist}\" -w \"Album=$tag_name{album}\" -w \"Comment=$tag_name{comment}\" -w \"Year=$tag_name{year}\" -w \"Genre=$tag_name{genre}\""; }
-        case 'bonk'    { return "-t \"$tag_name{title}\" -a \"$tag_name{artist}\" -c \"$tag_name{comment}\""; }
-        case 'spx'     { return "--author \"$tag_name{artist}\" --title \"$tag_name{title}\" --comment \"date=$tag_name{year}\" --comment \"track=$tag_name{track}\" --comment \"album=$tag_name{album}\" --comment \"genre=$tag_name{genre}\" --comment \"comment=$tag_name{comment}\""; }
+        case /mpc|mpp/ {
+                        return sprintf("--tag %s --tag %s --tag %s --tag %s --tag %s --tag %s --tag %s",
+                                       shell_quote("Title=$tag_name{title}"),
+                                       shell_quote("Track=$tag_name{track}"),
+                                       shell_quote("Artist=$tag_name{artist}"),
+                                       shell_quote("Album=$tag_name{album}"),
+                                       shell_quote("Comment=$tag_name{comment}"),
+                                       shell_quote("Year=$tag_name{year}"),
+                                       shell_quote("Genre=$tag_name{genre}"));
+                       }
+        case 'wv'      {
+                        return sprintf("-w %s -w %s -w %s -w %s -w %s -w %s -w %s",
+                                       shell_quote("Title=$tag_name{title}"),
+                                       shell_quote("Track=$tag_name{track}"),
+                                       shell_quote("Artist=$tag_name{artist}"),
+                                       shell_quote("Album=$tag_name{album}"),
+                                       shell_quote("Comment=$tag_name{comment}"),
+                                       shell_quote("Year=$tag_name{year}"),
+                                       shell_quote("Genre=$tag_name{genre}"));
+                       }
+        case 'bonk'    {
+                        return sprintf("-t %s -a %s -c %s",
+                                       shell_quote($tag_name{title}),
+                                       shell_quote($tag_name{artist}),
+                                       shell_quote($tag_name{comment}));
+                       }
+        case 'spx'     {
+                        return sprintf("--author %s --title %s --comment %s --comment %s --comment %s --comment %s --comment %s",
+                                       shell_quote($tag_name{artist}),
+                                       shell_quote($tag_name{title}),
+                                       shell_quote("date=$tag_name{year}"),
+                                       shell_quote("track=$tag_name{track}"),
+                                       shell_quote("album=$tag_name{album}"),
+                                       shell_quote("genre=$tag_name{genre}"),
+                                       shell_quote("comment=$tag_name{comment}"));
+                       }
         else           { return ''; }
     }
 }
@@ -2124,7 +2178,8 @@ sub read_tags {
                        }
                        
         case 'spx'     {
-                            my $pid  = open(SPX, "speexdec \"$in_file\" tmp1-$$.wav 2>&1 |") or perror("opening_file","$in_file");
+                            my $pid  = open(SPX, sprintf("speexdec %s tmp1-$$.wav 2>&1 |",
+                                                         shell_quote($in_file))) or perror("opening_file","$in_file");
                             my @data = <SPX>;
                                @data = grep(!/^$|^#/, @data);
                             
@@ -2497,7 +2552,8 @@ sub get_cddb_config {
 
 # check to see if a disc is present
 sub query_disc {
-    system("cdparanoia -q -d $device -Q 1>/dev/null 2>/dev/null");
+    system(sprintf("cdparanoia -q -d %s -Q 1>/dev/null 2>/dev/null",
+                   shell_quote($device)));
     perror("no_disc","$device") if $? > 0;
 }
 
@@ -2531,8 +2587,9 @@ sub rip_cd {
     $on =~ s/\//_/g;
 
     print  "cdparanoia -d $device $tno $on.wav\n\n"  if $dryrun;
-    system("cdparanoia -d $device $tno \"$on.wav\"") if not $dryrun;
-
+    system(sprintf("cdparanoia -d $device $tno %s",
+                   shell_quote("$on.wav"))) if not $dryrun;
+    
     if ($to !~ /wav/i) {
 
         push(@file, "$on.wav");
