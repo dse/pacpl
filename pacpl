@@ -3247,3 +3247,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 =head1 AUTHOR
 
 Copyright (C) 2005-2009 Philip Lyons (viiron@gmail.com)
+
+=cut
+
+# Local Variables:
+# cperl-indent-level: 4
+# indent-tabs-mode: nil
+# End:
