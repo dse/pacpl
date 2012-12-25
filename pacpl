@@ -26,6 +26,9 @@ use File::Find;
 use File::Spec::Functions qw(rel2abs);
 
 use String::ShellQuote qw();
+# custom wrappers around String::ShellQoute's functions, which deal
+# with null characters sometimes found in metadata (at least that I've
+# seen.)
 sub shell_quote_best_effort {
     my ($s) = @_;
     $s =~ s{\000}{}g;
