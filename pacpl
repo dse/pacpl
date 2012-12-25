@@ -413,11 +413,11 @@ my $opts;
         ram => {
                 
                 DEFAULT_ENCODER => undef,
-                DEFAULT_DECODER => "ffmpeg", # FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
+                DEFAULT_DECODER => "avconv",
                 
                 DECODER => {
-                            ffmpeg => {
-                                       NAME => "ffmpeg",
+                            avconv => {
+                                       NAME => "avconv",
                                        DSTR => sub { "$dopts -y -i %i %o" },
                                        PROMPT => { NONE => 0 },
                                       },
@@ -432,12 +432,12 @@ my $opts;
 
         ac3 => {
 
-                DEFAULT_ENCODER => "ffmpeg", # FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
+                DEFAULT_ENCODER => "avconv",
                 DEFAULT_DECODER => "mplayer",
                 
                 ENCODER => {
-                            ffmpeg => {
-                                       NAME => "ffmpeg",
+                            avconv => {
+                                       NAME => "avconv",
                                        ESTR => sub { 
                                            $opts = "-ab $bitrate -ar $freq -ac $channels" if $defopts == 1;
                                            $opts = '' if $defopts == 0;
@@ -468,12 +468,12 @@ my $opts;
                
         rm => {
         
-               DEFAULT_ENCODER => 'ffmpeg', # FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
+               DEFAULT_ENCODER => 'avconv',
                DEFAULT_DECODER => 'mplayer',
                  
                ENCODER => {
-                           ffmpeg => {
-                                      NAME => 'ffmpeg',
+                           avconv => {
+                                      NAME => 'avconv',
                                       ESTR => sub { 
                                           $opts = "-ar $freq -ac $channels" if $defopts == 1;
                                           $opts = '' if $defopts == 0;
@@ -553,9 +553,8 @@ my $opts;
                                         PROMPT => { BITRATE => 1 },
                                        },
 
-                            # FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
-                            ffmpeg => {
-                                       NAME => "ffmpeg",
+                            avconv => {
+                                       NAME => "avconv",
                                        ESTR => sub { 
                                            $opts = "-ab $bitrate.k -ar $freq -ac $channels" if $defopts == 1;
                                            $opts = '' if $defopts == 0;
@@ -590,9 +589,8 @@ my $opts;
                                      DSTR => sub { "$dopts --decode %i %o" },
                                     },
                              
-                            # FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
-                            ffmpeg => {
-                                       NAME => "ffmpeg",
+                            avconv => {
+                                       NAME => "avconv",
                                        DSTR => sub { "$dopts -y -i %i %o" },
                                       },
 
@@ -634,9 +632,8 @@ my $opts;
                                                  },
                                       },
 
-                            # FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
-                            ffmpeg => {
-                                       NAME => "ffmpeg",
+                            avconv => {
+                                       NAME => "avconv",
                                        ESTR => sub { 
                                            $opts = "-ab $bitrate.k -ar $freq -ac $channels" if $defopts == 1;
                                            $opts = '' if $defopts == 0;
@@ -671,9 +668,8 @@ my $opts;
                                        DSTR => sub { "$dopts %i --output %o" },
                                       },
 
-                            # FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
-                            ffmpeg => {
-                                       NAME => "ffmpeg",
+                            avconv => {
+                                       NAME => "avconv",
                                        DSTR => sub { "$dopts -y -i %i %o" },
                                       },
 
@@ -752,9 +748,8 @@ my $opts;
                                        PROMPT => { FCOMP => 1 },
                                       },
                                     
-                             # FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
-                             ffmpeg => {
-                                        NAME => "ffmpeg",
+                             avconv => {
+                                        NAME => "avconv",
                                         ESTR => sub { 
                                             $opts = "-ab $bitrate.k -ar $freq -ac $channels" if $defopts == 1;
                                             $opts = '' if $defopts == 0;
@@ -775,9 +770,8 @@ my $opts;
                                       DSTR => sub { "$dopts -f -d %i -o %o" },
                                      },
                                     
-                             # FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
-                             ffmpeg => {
-                                        NAME => "ffmpeg",
+                             avconv => {
+                                        NAME => "avconv",
                                         DSTR => sub { "$dopts -y -i %i %o" },
                                        },
 
@@ -944,9 +938,8 @@ my $opts;
                                       PROMPT => { AACQUAL => 1 },
                                      },
                                       
-                             # FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
-                             ffmpeg => {
-                                        NAME => "ffmpeg",
+                             avconv => {
+                                        NAME => "avconv",
                                         ESTR => sub { 
                                             $opts = "-ab $bitrate.k -ar $freq -ac $channels" if $defopts == 1;
                                             $opts = '' if $defopts == 0;
@@ -967,9 +960,8 @@ my $opts;
                                       DSTR => sub { "$dopts -o %i %o" },
                                      },
                               
-                             # FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
-                             ffmpeg => {
-                                        NAME => "ffmpeg",
+                             avconv => {
+                                        NAME => "avconv",
                                         DSTR => sub { "$dopts -y -i %i %o" },
                                        },
 
@@ -1003,9 +995,8 @@ my $opts;
                                       PROMPT => { AACQUAL => 1 },
                                      },
 
-                             # FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
-                             ffmpeg => {
-                                        NAME => "ffmpeg",
+                             avconv => {
+                                        NAME => "avconv",
                                         ESTR => sub { 
                                             $opts = "-ab $bitrate.k -ar $freq -ac $channels" if $defopts == 1;
                                             $opts = '' if $defopts == 0;
@@ -1027,9 +1018,8 @@ my $opts;
                                       DSTR => sub { "$dopts -o %o %i" },
                                      },
 
-                             # FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
-                             ffmpeg => { 
-                                        NAME => "ffmpeg",
+                             avconv => { 
+                                        NAME => "avconv",
                                         DSTR => sub { "$dopts -y -i %i %o" },
                                        },
 
@@ -1063,9 +1053,8 @@ my $opts;
                                       PROMPT => { AACQUAL => 1 },
                                      },
 
-                             # FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
-                             ffmpeg => {
-                                        NAME => "ffmpeg",
+                             avconv => {
+                                        NAME => "avconv",
                                         ESTR => sub { 
                                             $opts = "-ab $bitrate.k -ar $freq -ac $channels" if $defopts == 1;
                                             $opts = '' if $defopts == 0;
@@ -1087,9 +1076,8 @@ my $opts;
                                       DSTR => sub { "$dopts -o %o %i" },
                                      },
                                        
-                             # FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
-                             ffmpeg => {
-                                        NAME => "ffmpeg", 
+                             avconv => {
+                                        NAME => "avconv", 
                                         DSTR => sub { "$dopts -y -i %i %o" },
                                        },
 
@@ -1382,9 +1370,8 @@ my $opts;
                                         DSTR => sub { "$dopts -d %i -o %o" },
                                        },
 
-                             # FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
-                             ffmpeg => {
-                                        NAME => "ffmpeg",
+                             avconv => {
+                                        NAME => "avconv",
                                         DSTR => sub { "$dopts -y -i %i %o" },
                                        },
 
@@ -1445,9 +1432,8 @@ my $opts;
                                           DSTR => sub { "$dopts -y %i -o %o" },
                                          },
 
-                             # FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
-                             ffmpeg => {
-                                        NAME => "ffmpeg",
+                             avconv => {
+                                        NAME => "avconv",
                                         DSTR => sub { "$dopts -y -i %i %o" },
                                        },
 
@@ -1492,25 +1478,24 @@ my $opts;
        );
 
 
-# FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
-# supported ffmpeg formats
-my @ffmpeg_codecs = ( "ra", "wma", "mp2", "mmf" );
+# supported avconv formats
+my @avconv_codecs = ( "ra", "wma", "mp2", "mmf" );
 
-foreach (@ffmpeg_codecs) {
+foreach (@avconv_codecs) {
 
-    $run{$_}{DEFAULT_ENCODER}        = "ffmpeg";
-    $run{$_}{DEFAULT_DECODER}        = "ffmpeg";
-    $run{$_}{ENCODER}{ffmpeg}{NAME}  = "ffmpeg";
-    $run{$_}{DECODER}{ffmpeg}{NAME}  = "ffmpeg";
-    $run{$_}{ENCODER}{ffmpeg}{ESTR}  = sub { "$eopts -y -i %i -ab $bitrate.k -ar $freq -ac $channels %o" };
-    $run{$_}{DECODER}{ffmpeg}{DSTR}  = sub { "$dopts -y -i %i %o" };
+    $run{$_}{DEFAULT_ENCODER}        = "avconv";
+    $run{$_}{DEFAULT_DECODER}        = "avconv";
+    $run{$_}{ENCODER}{avconv}{NAME}  = "avconv";
+    $run{$_}{DECODER}{avconv}{NAME}  = "avconv";
+    $run{$_}{ENCODER}{avconv}{ESTR}  = sub { "$eopts -y -i %i -ab $bitrate.k -ar $freq -ac $channels %o" };
+    $run{$_}{DECODER}{avconv}{DSTR}  = sub { "$dopts -y -i %i %o" };
     $run{$_}{TAGS}{READ}             = 0;
     $run{$_}{TAGS}{WRITE}            = 0;
     $run{$_}{TAGS}{MODULE}           = undef;
 
-    $run{$_}{ENCODER}{ffmpeg}{PROMPT}{BITRATE}  = 1;
-    $run{$_}{ENCODER}{ffmpeg}{PROMPT}{FREQ}     = 1;
-    $run{$_}{ENCODER}{ffmpeg}{PROMPT}{CHANNELS} = 1;
+    $run{$_}{ENCODER}{avconv}{PROMPT}{BITRATE}  = 1;
+    $run{$_}{ENCODER}{avconv}{PROMPT}{FREQ}     = 1;
+    $run{$_}{ENCODER}{avconv}{PROMPT}{CHANNELS} = 1;
 
 }
 
@@ -1529,14 +1514,12 @@ my @movie_codecs = (
 
 foreach (@movie_codecs) {
 
-    # FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
-
     $run{$_}{DEFAULT_ENCODER}        = undef;
     $run{$_}{DEFAULT_DECODER}        = "mplayer";
     $run{$_}{DECODER}{mplayer}{NAME} = "mplayer";
-    $run{$_}{DECODER}{ffmpeg}{NAME}  = "ffmpeg";
+    $run{$_}{DECODER}{avconv}{NAME}  = "avconv";
     $run{$_}{DECODER}{mplayer}{DSTR} = sub { "-vc dummy -vo null -nortc -ao pcm:file=%o %i" };
-    $run{$_}{DECODER}{ffmpeg}{DSTR}  = sub { "$dopts -i %i %o"; };
+    $run{$_}{DECODER}{avconv}{DSTR}  = sub { "$dopts -i %i %o"; };
     $run{$_}{TAGS}{READ}             = 0;
     $run{$_}{TAGS}{WRITE}            = 0;
     $run{$_}{TAGS}{MODULE}           = undef;
@@ -2103,8 +2086,7 @@ sub format_tags {
         
         case /mp4|m4a|m4b/ { 
 
-                            # FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD
-                            if ($run{$to}{ENCODER}{$encoder}{NAME} eq "ffmpeg") {
+                            if ($run{$to}{ENCODER}{$encoder}{NAME} eq "avconv") {
                                 
                                 $tag_name{track} = 0 if not $tag_name{track};
                                 $tag_name{year}  = 0 if not $tag_name{year};
@@ -3344,14 +3326,9 @@ show cddb information for current disc.
 
 =over 4
 
-=cut
-
-# FIXME: FFMPEG IS DEPRECATED; USE AVCONV INSTEAD.
-# MENTIONED IN LIST BELOW.
-
 =pod
 
-=item B<sox>(1) B<ffmpeg>(1) B<lame>(1) B<oggenc>(1) B<oggdec>(1)
+=item B<sox>(1) B<avconv>(1) B<lame>(1) B<oggenc>(1) B<oggdec>(1)
 
 =item B<flac>(1) B<shorten>(1) B<faac>(1) B<faad>(1) B<mppenc>(1)
 
